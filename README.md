@@ -5,7 +5,7 @@ A Tool to print bitmap labels and read weigth from loacell on a Mettler Toledo U
 ## Setup
 A small setup is required on a clean Windows version on a UC retail scale. The load cell can only be accessed via 'COM2' if the Kontron board is opened using 'jida.dll'. After opening, the board must be 'reopened' every 30 seconds to continue using the serial port on the Kontron board.
 
-### Scale
+### Loadcell
 Copy `jida.dll` to `C:/Windows/system32/`
 
 ### Printer
@@ -23,6 +23,8 @@ Select Device `Mettler UCP00001H432` (Label Printer)
 
 
 ## Launch App
+To use the test app .NET6 Desktop runtime is required. 
+https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-desktop-6.0.27-windows-x86-installer
 
 The programm in directory `TestApp` should work on the scale when setup is done.
 
