@@ -15,11 +15,11 @@ Download Zadig https://zadig.akeo.ie/
 
 Run zadig and select **Options** -> **List All Devices**
 
-![Zadig setup 1](https://github.com/Lg0enga/MettlerToledoUcTestTools/assets/Zadig_Setup_01.png)
+![Zadig setup 1](https://github.com/Lg0enga/MettlerToledoUcTestTools/blob/main/assets/Zadig_Setup_01.png)
 
 Select Device `Mettler UCP00001H432` (Label Printer)
 
-![Zadig setup 2](https://github.com/Lg0enga/MettlerToledoUcTestTools/assets/Zadig_Setup_02.png)
+![Zadig setup 2](https://github.com/Lg0enga/MettlerToledoUcTestTools/blob/main/assets/Zadig_Setup_02.png)
 
 
 ## Launch App
@@ -29,7 +29,7 @@ The programm in directory `TestApp` should work on the scale when setup is done.
 > [!IMPORTANT]
 > The app must be opened with administrator rights
 
-![UC_test_tool](https://github.com/Lg0enga/MettlerToledoUcTestTools/assets/UC_test_tool.png)
+![UC_test_tool](https://github.com/Lg0enga/MettlerToledoUcTestTools/blob/main/assets/UC_test_tool.png)
 
 ## Todo
 - Printer settings
@@ -50,9 +50,9 @@ The programm in directory `TestApp` should work on the scale when setup is done.
 
 ## Documentation
 
-[Jida](https://github.com/Lg0enga/MettlerToledoUcTestTools/Docs/jida32.pdf)
+[Jida](https://github.com/Lg0enga/MettlerToledoUcTestTools/blob/main/docs/jida32.pdf)
 
-[Scale commands](https://github.com/Lg0enga/MettlerToledoUcTestTools/Docs/mmt.pdf)
+[Scale commands](https://github.com/Lg0enga/MettlerToledoUcTestTools/blob/main/docs/mmt.pdf)
 
 ## Support
 
