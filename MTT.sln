@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MettlerToledoLoadCellTool", ".\MettlerToledoLoadCellTool\MettlerToledoLoadCellTool.csproj", "{0FEE2F92-C42C-4E37-A1E4-89CE49FDF4A3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTT", "src\MTT.csproj", "{0FEE2F92-C42C-4E37-A1E4-89CE49FDF4A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
