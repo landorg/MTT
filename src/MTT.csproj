@@ -113,6 +113,9 @@
     <Reference Include="LibUsbDotNet.LibUsbDotNet, Version=2.2.0.0, Culture=neutral, PublicKeyToken=c677239abe1e02a9, processorArchitecture=MSIL">
       <HintPath>..\LibUsbDotNet.LibUsbDotNet.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -127,19 +130,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BitmapConverter.cs" />
-    <Compile Include="MettlerScaleReader.cs">
+    <Compile Include="DB.cs" />
+    <Compile Include="MTT.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MettlerScaleReader.Designer.cs">
-      <DependentUpon>MettlerScaleReader.cs</DependentUpon>
+    <Compile Include="MTT.Designer.cs">
+      <DependentUpon>MTT.cs</DependentUpon>
     </Compile>
     <Compile Include="JidaWrapper.cs" />
+    <Compile Include="Product.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UcLoadcell.cs" />
     <Compile Include="Utils.cs" />
-    <EmbeddedResource Include="MettlerScaleReader.resx">
-      <DependentUpon>MettlerScaleReader.cs</DependentUpon>
+    <EmbeddedResource Include="MTT.resx">
+      <DependentUpon>MTT.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -151,9 +156,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="copy.ps1" />
     <None Include="packages.config" />
-    <None Include="Properties\DataSources\MettlerToledoLoadCellTool.UcLoadcell.datasource" />
-    <None Include="Properties\DataSources\MettlerToledoLoadCellTool.UcLoadcell1.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -183,6 +187,9 @@
     <Content Include="Jida.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,13 +1,16 @@
 ﻿using LibUsbDotNet;
 using LibUsbDotNet.Main;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.IO.Ports;
 using System.Windows.Forms;
 
-namespace MettlerToledoLoadCellTool
+using Newtonsoft.Json;
+
+namespace MTT
 {
-    public partial class MettlerScaleReader : Form
+    public partial class MTT : Form
     {
         private SerialPort _serialPort = new SerialPort("COM2", 9600, Parity.Even, 7, StopBits.Two);
 
@@ -17,7 +20,7 @@ namespace MettlerToledoLoadCellTool
         private UcLoadcell _ucLoadcell;
         private UsbDevice _evoLinePrinter;
 
-        public MettlerScaleReader()
+        public MTT()
         {
             InitializeComponent();
         }
@@ -301,8 +304,10 @@ namespace MettlerToledoLoadCellTool
             }
         }
 
-        private void MettlerScaleReader_Load(object sender, EventArgs e)
+        private void MTT_Load(object sender, EventArgs e)
         {
+            DB.load();
+            //hereeee
 
         }
 
@@ -324,6 +329,21 @@ namespace MettlerToledoLoadCellTool
         private void button2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void itemBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addItemButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        public void logToBox(string message, string level = "info")
+        {
+            eventBox.Items.Insert(0, $"[{level}] {message}");
         }
     }
 }

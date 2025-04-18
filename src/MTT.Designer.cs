@@ -1,7 +1,7 @@
-﻿namespace MettlerToledoLoadCellTool
+﻿namespace MTT
 {
 
-    partial class MettlerScaleReader
+    partial class MTT
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem(new string[] {
             "a",
             "b"}, -1);
             this.eventBox = new System.Windows.Forms.ListBox();
@@ -52,7 +52,7 @@
             this.delButton = new System.Windows.Forms.Button();
             this.sumButton = new System.Windows.Forms.Button();
             this.recieptView = new System.Windows.Forms.ListView();
-            this.button1 = new System.Windows.Forms.Button();
+            this.addItemButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.itemBox = new System.Windows.Forms.ListBox();
             this.tabEdit = new System.Windows.Forms.TabPage();
@@ -61,8 +61,8 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.listView1 = new System.Windows.Forms.ListView();
-            this.colProduct = new System.Windows.Forms.ColumnHeader();
-            this.colPrice = new System.Windows.Forms.ColumnHeader();
+            this.colProduct = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabDebug = new System.Windows.Forms.TabPage();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.ucLoadcellBindingSource)).BeginInit();
@@ -79,7 +79,6 @@
             this.eventBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.eventBox.DataSource = this.ucLoadcellBindingSource;
             this.eventBox.FormattingEnabled = true;
             this.eventBox.Location = new System.Drawing.Point(2, 137);
             this.eventBox.Margin = new System.Windows.Forms.Padding(2);
@@ -249,7 +248,7 @@
             this.tabControl1.Controls.Add(this.tabDebug);
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.ItemSize = new System.Drawing.Size(100, 50);
-            this.tabControl1.Location = new System.Drawing.Point(55, 58);
+            this.tabControl1.Location = new System.Drawing.Point(50, 64);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.Padding = new System.Drawing.Point(40, 3);
             this.tabControl1.SelectedIndex = 0;
@@ -261,7 +260,7 @@
             this.tabScale.Controls.Add(this.delButton);
             this.tabScale.Controls.Add(this.sumButton);
             this.tabScale.Controls.Add(this.recieptView);
-            this.tabScale.Controls.Add(this.button1);
+            this.tabScale.Controls.Add(this.addItemButton);
             this.tabScale.Controls.Add(this.label1);
             this.tabScale.Controls.Add(this.itemBox);
             this.tabScale.Location = new System.Drawing.Point(4, 54);
@@ -292,20 +291,22 @@
             // 
             // recieptView
             // 
+            this.recieptView.HideSelection = false;
             this.recieptView.Location = new System.Drawing.Point(6, 6);
             this.recieptView.Name = "recieptView";
             this.recieptView.Size = new System.Drawing.Size(400, 352);
             this.recieptView.TabIndex = 3;
             this.recieptView.UseCompatibleStateImageBehavior = false;
             // 
-            // button1
+            // addItemButton
             // 
-            this.button1.Location = new System.Drawing.Point(612, 364);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(174, 84);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.addItemButton.Location = new System.Drawing.Point(612, 364);
+            this.addItemButton.Name = "addItemButton";
+            this.addItemButton.Size = new System.Drawing.Size(174, 84);
+            this.addItemButton.TabIndex = 2;
+            this.addItemButton.Text = "hinzufügen";
+            this.addItemButton.UseVisualStyleBackColor = true;
+            this.addItemButton.Click += new System.EventHandler(this.addItemButton_Click);
             // 
             // label1
             // 
@@ -325,6 +326,7 @@
             this.itemBox.Name = "itemBox";
             this.itemBox.Size = new System.Drawing.Size(374, 352);
             this.itemBox.TabIndex = 0;
+            this.itemBox.SelectedIndexChanged += new System.EventHandler(this.itemBox_SelectedIndexChanged);
             // 
             // tabEdit
             // 
@@ -382,8 +384,9 @@
             this.colProduct,
             this.colPrice});
             this.listView1.GridLines = true;
+            this.listView1.HideSelection = false;
             this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
+            listViewItem6});
             this.listView1.Location = new System.Drawing.Point(3, 3);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(424, 531);
@@ -422,7 +425,7 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // MettlerScaleReader
+            // MTT
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -431,11 +434,11 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.18F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "MettlerScaleReader";
+            this.Name = "MTT";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Mettler Toledo UC Loadcell test tool";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.MettlerScaleReader_Load);
+            this.Load += new System.EventHandler(this.MTT_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ucLoadcellBindingSource)).EndInit();
             this.loadcellGroupBox.ResumeLayout(false);
             this.loadcellGroupBox.PerformLayout();
@@ -473,7 +476,7 @@
         private System.Windows.Forms.Button delButton;
         private System.Windows.Forms.Button sumButton;
         private System.Windows.Forms.ListView recieptView;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button addItemButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox itemBox;
         private System.Windows.Forms.ListView listView1;

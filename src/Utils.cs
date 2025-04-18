@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text;
 
-namespace MettlerToledoLoadCellTool
+namespace MTT
 {
     public static class Utils
     {

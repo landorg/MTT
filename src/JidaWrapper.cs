@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace MettlerToledoLoadCellTool
+namespace MTT
 {   
     /// <summary>
     /// The native methods of the JIDA API.

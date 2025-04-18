@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MettlerToledoLoadCellTool
+namespace MTT
 {
     public class UcLoadcell
     {

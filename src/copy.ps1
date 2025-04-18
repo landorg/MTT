@@ -1,0 +1,1 @@
+Copy-Item -Path C:\MTT\* -Recurse -Destination \\UC_0182_0031\c\MTT -Verbose -Force

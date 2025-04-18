@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MettlerToledoLoadCellTool
+namespace MTT
 {
 
     internal static class Program
@@ -17,7 +17,7 @@ namespace MettlerToledoLoadCellTool
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MettlerScaleReader());
+            Application.Run(new MTT());
         }
     }
 }
