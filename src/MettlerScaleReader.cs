@@ -300,5 +300,30 @@ namespace MettlerToledoLoadCellTool
                 eventBox.Items.Add(ex.Message);
             }
         }
+
+        private void MettlerScaleReader_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void printerGroupBox_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void loadcellGroupBox_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
