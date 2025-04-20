@@ -8,6 +8,7 @@ using System.Windows.Forms;
 
 using Newtonsoft.Json;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Drawing;
 
 namespace MTT
 {
@@ -237,7 +238,10 @@ namespace MTT
                 var evoEndpointReader = _evoLinePrinter.OpenEndpointReader(ReadEndpointID.Ep02);
 
                 // Create label
-                var bitmap = BitmapConverter.CreatTestBitmap(weightLabel.Text, 600);
+                var bitmap = BitmapConverter.CreatTestBitmap(weightLabel.Text, 680);
+                //var bitmap = BitmapConverter.DrawReciept();
+                
+                bitmap.Save("C:/MTT/debug.bmp");
                 bitmap = BitmapConverter.BitmapTo1Bpp2(bitmap);
                 var command = BitmapConverter.Convert(bitmap);
 
@@ -274,7 +278,7 @@ namespace MTT
                 errorCode = evoEndpointWriter.Write(new byte[] { 
                         0x08, 0x1b, 0x57, // command code
                         0x34, 0x33, 0x32, // width 432
-                        0x30, 0x36, 0x30, 0x30 // length 600
+                        0x30, 0x36, 0x38, 0x30 // length 680
                 }, timeout, out lenght);
                 
 

@@ -30,7 +30,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
             "Tomaten",
             "2.5"}, -1);
             this.eventBox = new System.Windows.Forms.ListBox();
@@ -83,7 +83,7 @@
             this.eventBox.Location = new System.Drawing.Point(2, 137);
             this.eventBox.Margin = new System.Windows.Forms.Padding(2);
             this.eventBox.Name = "eventBox";
-            this.eventBox.Size = new System.Drawing.Size(785, 394);
+            this.eventBox.Size = new System.Drawing.Size(784, 394);
             this.eventBox.TabIndex = 0;
             // 
             // loadcellGroupBox
@@ -252,7 +252,7 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.Padding = new System.Drawing.Point(40, 3);
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(800, 600);
+            this.tabControl1.Size = new System.Drawing.Size(799, 600);
             this.tabControl1.TabIndex = 22;
             // 
             // tabScale
@@ -266,7 +266,7 @@
             this.tabScale.Location = new System.Drawing.Point(4, 54);
             this.tabScale.Name = "tabScale";
             this.tabScale.Padding = new System.Windows.Forms.Padding(3);
-            this.tabScale.Size = new System.Drawing.Size(792, 542);
+            this.tabScale.Size = new System.Drawing.Size(791, 542);
             this.tabScale.TabIndex = 0;
             this.tabScale.Text = "Wiegen";
             this.tabScale.UseVisualStyleBackColor = true;
@@ -337,16 +337,16 @@
             this.tabEdit.Controls.Add(this.dbList);
             this.tabEdit.Location = new System.Drawing.Point(4, 54);
             this.tabEdit.Name = "tabEdit";
-            this.tabEdit.Size = new System.Drawing.Size(792, 542);
+            this.tabEdit.Size = new System.Drawing.Size(791, 542);
             this.tabEdit.TabIndex = 2;
             this.tabEdit.Text = "Bearbeiten";
             this.tabEdit.UseVisualStyleBackColor = true;
             // 
             // removeButton
             // 
-            this.removeButton.Location = new System.Drawing.Point(636, 54);
+            this.removeButton.Location = new System.Drawing.Point(635, 54);
             this.removeButton.Name = "removeButton";
-            this.removeButton.Size = new System.Drawing.Size(156, 43);
+            this.removeButton.Size = new System.Drawing.Size(149, 43);
             this.removeButton.TabIndex = 4;
             this.removeButton.Text = "entfernen";
             this.removeButton.UseVisualStyleBackColor = true;
@@ -356,7 +356,7 @@
             // 
             this.addButton.Location = new System.Drawing.Point(433, 54);
             this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(156, 43);
+            this.addButton.Size = new System.Drawing.Size(201, 43);
             this.addButton.TabIndex = 4;
             this.addButton.Text = "hinzufügen";
             this.addButton.UseVisualStyleBackColor = true;
@@ -365,7 +365,7 @@
             // textBox2
             // 
             this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F);
-            this.textBox2.Location = new System.Drawing.Point(643, 3);
+            this.textBox2.Location = new System.Drawing.Point(635, 3);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(149, 45);
             this.textBox2.TabIndex = 3;
@@ -388,7 +388,7 @@
             this.dbList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.dbList.HideSelection = false;
             this.dbList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
+            listViewItem3});
             this.dbList.Location = new System.Drawing.Point(3, 3);
             this.dbList.MultiSelect = false;
             this.dbList.Name = "dbList";
@@ -418,7 +418,7 @@
             this.tabDebug.Name = "tabDebug";
             this.tabDebug.Padding = new System.Windows.Forms.Padding(3);
             this.tabDebug.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tabDebug.Size = new System.Drawing.Size(792, 542);
+            this.tabDebug.Size = new System.Drawing.Size(791, 542);
             this.tabDebug.TabIndex = 1;
             this.tabDebug.Text = "Test";
             this.tabDebug.UseVisualStyleBackColor = true;
@@ -438,9 +438,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MTT";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "Mettler Toledo UC Loadcell test tool";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "MTT";
             this.Load += new System.EventHandler(this.MTT_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ucLoadcellBindingSource)).EndInit();
             this.loadcellGroupBox.ResumeLayout(false);
