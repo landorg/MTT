@@ -9,12 +9,13 @@ namespace MTT
 {
     public static class BitmapConverter
     {
-        public static Bitmap CreatTestBitmap(string weight)
+        public static Bitmap CreatTestBitmap(string weight, int length)
         {
+            int width = 432;
             BarcodeLib.Barcode b = new BarcodeLib.Barcode();
             Image img = b.Encode(BarcodeLib.TYPE.EAN13, "872312898734", Color.Black, Color.White, 290, 80);
 
-            Bitmap objBmpImage = new Bitmap(432, 400);
+            Bitmap objBmpImage = new Bitmap(width, length);
 
             // Create the Font object for the image text drawing.
             Font titleFont = new Font("Arial", 28, FontStyle.Bold, GraphicsUnit.Pixel);
@@ -28,7 +29,10 @@ namespace MTT
             objGraphics.SmoothingMode = SmoothingMode.AntiAlias;
             objGraphics.TextRenderingHint = TextRenderingHint.AntiAlias;
 
-            objGraphics.DrawRectangle(new Pen(new SolidBrush(Color.Black), 1), new Rectangle(0, 0, 432, 400));
+            int k = 10;
+            objGraphics.DrawRectangle(
+                new Pen(new SolidBrush(Color.Black), 1),
+                new Rectangle(0 + k, 0 + k, width - k*2, length - k*2));
 
             objGraphics.DrawString("TEST LABEL", defaultFont, new SolidBrush(Color.Black), 150, 10);
 

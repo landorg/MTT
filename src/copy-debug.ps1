@@ -1,0 +1,1 @@
+Copy-Item -Path C:\MTT\src\bin\Debug -Recurse -Destination \\UC_0182_0031\c\MTT\src\bin\Debug -Verbose -Force

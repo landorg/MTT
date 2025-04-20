@@ -30,9 +30,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem(new string[] {
-            "a",
-            "b"}, -1);
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            "Tomaten",
+            "2.5"}, -1);
             this.eventBox = new System.Windows.Forms.ListBox();
             this.ucLoadcellBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.loadcellGroupBox = new System.Windows.Forms.GroupBox();
@@ -60,7 +60,7 @@
             this.addButton = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.dbList = new System.Windows.Forms.ListView();
             this.colProduct = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabDebug = new System.Windows.Forms.TabPage();
@@ -248,7 +248,7 @@
             this.tabControl1.Controls.Add(this.tabDebug);
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.ItemSize = new System.Drawing.Size(100, 50);
-            this.tabControl1.Location = new System.Drawing.Point(50, 64);
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.Padding = new System.Drawing.Point(40, 3);
             this.tabControl1.SelectedIndex = 0;
@@ -334,7 +334,7 @@
             this.tabEdit.Controls.Add(this.addButton);
             this.tabEdit.Controls.Add(this.textBox2);
             this.tabEdit.Controls.Add(this.textBox1);
-            this.tabEdit.Controls.Add(this.listView1);
+            this.tabEdit.Controls.Add(this.dbList);
             this.tabEdit.Location = new System.Drawing.Point(4, 54);
             this.tabEdit.Name = "tabEdit";
             this.tabEdit.Size = new System.Drawing.Size(792, 542);
@@ -378,22 +378,25 @@
             this.textBox1.Size = new System.Drawing.Size(201, 45);
             this.textBox1.TabIndex = 2;
             // 
-            // listView1
+            // dbList
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.dbList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colProduct,
             this.colPrice});
-            this.listView1.GridLines = true;
-            this.listView1.HideSelection = false;
-            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem6});
-            this.listView1.Location = new System.Drawing.Point(3, 3);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(424, 531);
-            this.listView1.TabIndex = 1;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
-            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.dbList.FullRowSelect = true;
+            this.dbList.GridLines = true;
+            this.dbList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.dbList.HideSelection = false;
+            this.dbList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1});
+            this.dbList.Location = new System.Drawing.Point(3, 3);
+            this.dbList.MultiSelect = false;
+            this.dbList.Name = "dbList";
+            this.dbList.Size = new System.Drawing.Size(424, 531);
+            this.dbList.TabIndex = 1;
+            this.dbList.UseCompatibleStateImageBehavior = false;
+            this.dbList.View = System.Windows.Forms.View.Details;
+            this.dbList.SelectedIndexChanged += new System.EventHandler(this.dbList_SelectedIndexChanged);
             // 
             // colProduct
             // 
@@ -479,7 +482,7 @@
         private System.Windows.Forms.Button addItemButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox itemBox;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView dbList;
         private System.Windows.Forms.ColumnHeader colProduct;
         private System.Windows.Forms.ColumnHeader colPrice;
         private System.Windows.Forms.TextBox textBox2;

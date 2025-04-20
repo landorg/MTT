@@ -7,6 +7,7 @@ using System.IO.Ports;
 using System.Windows.Forms;
 
 using Newtonsoft.Json;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace MTT
 {
@@ -236,7 +237,7 @@ namespace MTT
                 var evoEndpointReader = _evoLinePrinter.OpenEndpointReader(ReadEndpointID.Ep02);
 
                 // Create label
-                var bitmap = BitmapConverter.CreatTestBitmap(weightLabel.Text);
+                var bitmap = BitmapConverter.CreatTestBitmap(weightLabel.Text, 600);
                 bitmap = BitmapConverter.BitmapTo1Bpp2(bitmap);
                 var command = BitmapConverter.Convert(bitmap);
 
@@ -270,8 +271,13 @@ namespace MTT
                 errorCode = evoEndpointWriter.Write(new byte[] { 0x07, 0x1b, 0xbe }, timeout, out lenght);
                 evoEndpointReader.Read(data, timeout, out lenght);
                 eventBox.Items.Add($"Write status: {errorCode} + {Utils.ByteArrayToString(data)}");
-                errorCode = evoEndpointWriter.Write(new byte[] { 0x08, 0x1b, 0x57, 0x34, 0x33, 0x32, 0x30, 0x34, 0x30, 0x30 }, timeout, out lenght);
+                errorCode = evoEndpointWriter.Write(new byte[] { 
+                        0x08, 0x1b, 0x57, // command code
+                        0x34, 0x33, 0x32, // width 432
+                        0x30, 0x36, 0x30, 0x30 // length 600
+                }, timeout, out lenght);
                 
+
                 evoEndpointReader.Read(data, timeout, out lenght);
                 eventBox.Items.Add($"Write status: {errorCode} + {Utils.ByteArrayToString(data)}");
 
@@ -321,8 +327,22 @@ namespace MTT
 
         }
 
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        private void dbList_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //dbList.SelectedItems
+            // TODO
+
+            //ListView.SelectedListViewItemCollection breakfast =
+            //    this.ListView1.SelectedItems;
+
+            //double price = 0.0;
+            //foreach (ListViewItem item in breakfast)
+            //{
+            //    price += Double.Parse(item.SubItems[1].Text);
+            //}
+
+            //// Output the price to TextBox1.
+            //TextBox1.Text = price.ToString();
 
         }
 
