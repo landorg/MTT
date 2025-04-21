@@ -64,7 +64,7 @@ namespace MTT
             objGraphics.DrawString("h: "+length.ToString(), defaultFont, new SolidBrush(Color.Black), 150, 10);
 
             objGraphics.DrawString("Gewicht", defaultFont, new SolidBrush(Color.Black), 50, 150);
-            objGraphics.DrawString(weight, titleFont, new SolidBrush(Color.Black), 210, 150);
+            objGraphics.DrawString("10 kg", titleFont, new SolidBrush(Color.Black), 210, 150);
             
             objGraphics.DrawImage(img, 80, 280);
             objGraphics.Flush();
@@ -127,7 +127,7 @@ namespace MTT
             objGraphics.DrawString("h: " + length.ToString(), defaultFont, new SolidBrush(Color.Black), 150, 10);
 
             objGraphics.DrawString("Gewicht", defaultFont, new SolidBrush(Color.Black), 50, 150);
-            objGraphics.DrawString(weight, titleFont, new SolidBrush(Color.Black), 210, 150);
+            objGraphics.DrawString("10 kg", titleFont, new SolidBrush(Color.Black), 210, 150);
 
             objGraphics.DrawImage(img, 80, 280);
             objGraphics.Flush();

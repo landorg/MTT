@@ -12,7 +12,27 @@ namespace MTT
 
         private const String filename = "C:/MTT/products.json";
 
-        public static List<Product> products = new List<Product>();
+        public static HashSet<Product> products = new HashSet<Product>();
+
+        public static void remove(string productName)
+        {
+            products.Remove(new Product(productName, 0));
+
+            MTT mtt = (MTT)Application.OpenForms["MTT"];
+
+            mtt.refreshDbList();
+            DB.save();
+        }
+
+        public static void add(Product product)
+        {
+            products.Add(product);
+
+            MTT mtt = (MTT)Application.OpenForms["MTT"];
+
+            mtt.refreshDbList();
+            DB.save();
+        }
 
         public static void save()
         {
@@ -27,7 +47,7 @@ namespace MTT
         public static void load()
         {
 
-            MTT mtt = (MTT)Application.OpenForms["MTT"];
+            //MTT mtt = (MTT)Application.OpenForms["MTT"];
 
             if (!System.IO.File.Exists(filename))
             {
@@ -36,9 +56,10 @@ namespace MTT
 
             StreamReader sr = new StreamReader(filename);
             string jsonString = sr.ReadToEnd();
-            products = JsonConvert.DeserializeObject<List<Product>>(jsonString);
+            products = JsonConvert.DeserializeObject<HashSet<Product>>(jsonString);
+            sr.Close();
 
             //eventBox.Items.Insert(0, productsList.ToString());
         }
-    }
+   }
 }
