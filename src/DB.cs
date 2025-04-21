@@ -26,7 +26,11 @@ namespace MTT
 
         public static void add(Product product)
         {
-            products.Add(product);
+            if (!products.Add(product))
+            {
+                products.Remove(product);
+                products.Add(product);
+            }
 
             MTT mtt = (MTT)Application.OpenForms["MTT"];
 
