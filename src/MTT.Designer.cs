@@ -30,15 +30,17 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
             "Tomaten",
             "2.5"}, -1);
             this.eventBox = new System.Windows.Forms.ListBox();
             this.ucLoadcellBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.loadcellGroupBox = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.closeScaleBtn = new System.Windows.Forms.Button();
-            this.tarraScaleBtn = new System.Windows.Forms.Button();
-            this.nullScaleBtn = new System.Windows.Forms.Button();
+            this.tarraButton = new System.Windows.Forms.Button();
+            this.nullButton = new System.Windows.Forms.Button();
             this.openScaleBtn = new System.Windows.Forms.Button();
             this.tarraWeightLabel = new System.Windows.Forms.Label();
             this.weightLabel = new System.Windows.Forms.Label();
@@ -49,12 +51,27 @@
             this.openPrinterBtn = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabScale = new System.Windows.Forms.TabPage();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tarraButton2 = new System.Windows.Forms.Button();
+            this.nullButton2 = new System.Windows.Forms.Button();
+            this.statusPritnerLabel = new System.Windows.Forms.Label();
+            this.statusScaleLabel = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.recieptList = new System.Windows.Forms.ListView();
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.kg = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.dbList2 = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.delButton = new System.Windows.Forms.Button();
             this.sumButton = new System.Windows.Forms.Button();
-            this.recieptView = new System.Windows.Forms.ListView();
             this.addItemButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.itemBox = new System.Windows.Forms.ListBox();
+            this.weightLabel2 = new System.Windows.Forms.Label();
             this.tabEdit = new System.Windows.Forms.TabPage();
             this.label2 = new System.Windows.Forms.Label();
             this.removeButton = new System.Windows.Forms.Button();
@@ -66,6 +83,9 @@
             this.colPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabDebug = new System.Windows.Forms.TabPage();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.label9 = new System.Windows.Forms.Label();
+            this.tarraLabel2 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ucLoadcellBindingSource)).BeginInit();
             this.loadcellGroupBox.SuspendLayout();
             this.printerGroupBox.SuspendLayout();
@@ -84,14 +104,16 @@
             this.eventBox.Location = new System.Drawing.Point(2, 137);
             this.eventBox.Margin = new System.Windows.Forms.Padding(2);
             this.eventBox.Name = "eventBox";
-            this.eventBox.Size = new System.Drawing.Size(784, 394);
+            this.eventBox.Size = new System.Drawing.Size(787, 394);
             this.eventBox.TabIndex = 0;
             // 
             // loadcellGroupBox
             // 
+            this.loadcellGroupBox.Controls.Add(this.label7);
+            this.loadcellGroupBox.Controls.Add(this.label6);
             this.loadcellGroupBox.Controls.Add(this.closeScaleBtn);
-            this.loadcellGroupBox.Controls.Add(this.tarraScaleBtn);
-            this.loadcellGroupBox.Controls.Add(this.nullScaleBtn);
+            this.loadcellGroupBox.Controls.Add(this.tarraButton);
+            this.loadcellGroupBox.Controls.Add(this.nullButton);
             this.loadcellGroupBox.Controls.Add(this.openScaleBtn);
             this.loadcellGroupBox.Controls.Add(this.tarraWeightLabel);
             this.loadcellGroupBox.Controls.Add(this.weightLabel);
@@ -105,9 +127,30 @@
             this.loadcellGroupBox.Text = "UC loadcell";
             this.loadcellGroupBox.Enter += new System.EventHandler(this.loadcellGroupBox_Enter);
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(281, 64);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(32, 24);
+            this.label7.TabIndex = 23;
+            this.label7.Text = "kg";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(281, 28);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(32, 24);
+            this.label6.TabIndex = 22;
+            this.label6.Text = "kg";
+            // 
             // closeScaleBtn
             // 
-            this.closeScaleBtn.Enabled = false;
             this.closeScaleBtn.Location = new System.Drawing.Point(4, 56);
             this.closeScaleBtn.Margin = new System.Windows.Forms.Padding(2);
             this.closeScaleBtn.Name = "closeScaleBtn";
@@ -117,29 +160,27 @@
             this.closeScaleBtn.UseVisualStyleBackColor = true;
             this.closeScaleBtn.Click += new System.EventHandler(this.closeScaleBtn_click);
             // 
-            // tarraScaleBtn
+            // tarraButton
             // 
-            this.tarraScaleBtn.Enabled = false;
-            this.tarraScaleBtn.Location = new System.Drawing.Point(97, 56);
-            this.tarraScaleBtn.Margin = new System.Windows.Forms.Padding(2);
-            this.tarraScaleBtn.Name = "tarraScaleBtn";
-            this.tarraScaleBtn.Size = new System.Drawing.Size(89, 32);
-            this.tarraScaleBtn.TabIndex = 20;
-            this.tarraScaleBtn.Text = "Tarra";
-            this.tarraScaleBtn.UseVisualStyleBackColor = true;
-            this.tarraScaleBtn.Click += new System.EventHandler(this.tarraScaleBtn_Click_1);
+            this.tarraButton.Location = new System.Drawing.Point(97, 56);
+            this.tarraButton.Margin = new System.Windows.Forms.Padding(2);
+            this.tarraButton.Name = "tarraButton";
+            this.tarraButton.Size = new System.Drawing.Size(89, 32);
+            this.tarraButton.TabIndex = 20;
+            this.tarraButton.Text = "Tarra";
+            this.tarraButton.UseVisualStyleBackColor = true;
+            this.tarraButton.Click += new System.EventHandler(this.tarraButton_Click);
             // 
-            // nullScaleBtn
+            // nullButton
             // 
-            this.nullScaleBtn.Enabled = false;
-            this.nullScaleBtn.Location = new System.Drawing.Point(97, 20);
-            this.nullScaleBtn.Margin = new System.Windows.Forms.Padding(2);
-            this.nullScaleBtn.Name = "nullScaleBtn";
-            this.nullScaleBtn.Size = new System.Drawing.Size(89, 32);
-            this.nullScaleBtn.TabIndex = 19;
-            this.nullScaleBtn.Text = "Null scale";
-            this.nullScaleBtn.UseVisualStyleBackColor = true;
-            this.nullScaleBtn.Click += new System.EventHandler(this.nullScaleBtn_Click_1);
+            this.nullButton.Location = new System.Drawing.Point(97, 20);
+            this.nullButton.Margin = new System.Windows.Forms.Padding(2);
+            this.nullButton.Name = "nullButton";
+            this.nullButton.Size = new System.Drawing.Size(89, 32);
+            this.nullButton.TabIndex = 19;
+            this.nullButton.Text = "Null scale";
+            this.nullButton.UseVisualStyleBackColor = true;
+            this.nullButton.Click += new System.EventHandler(this.nullButton_Click);
             // 
             // openScaleBtn
             // 
@@ -253,24 +294,191 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.Padding = new System.Drawing.Point(40, 3);
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(799, 600);
+            this.tabControl1.Size = new System.Drawing.Size(802, 600);
             this.tabControl1.TabIndex = 22;
             // 
             // tabScale
             // 
+            this.tabScale.Controls.Add(this.label10);
+            this.tabScale.Controls.Add(this.tarraLabel2);
+            this.tabScale.Controls.Add(this.label9);
+            this.tabScale.Controls.Add(this.label8);
+            this.tabScale.Controls.Add(this.label5);
+            this.tabScale.Controls.Add(this.label1);
+            this.tabScale.Controls.Add(this.tarraButton2);
+            this.tabScale.Controls.Add(this.nullButton2);
+            this.tabScale.Controls.Add(this.statusPritnerLabel);
+            this.tabScale.Controls.Add(this.statusScaleLabel);
+            this.tabScale.Controls.Add(this.label4);
+            this.tabScale.Controls.Add(this.label3);
+            this.tabScale.Controls.Add(this.recieptList);
+            this.tabScale.Controls.Add(this.dbList2);
             this.tabScale.Controls.Add(this.delButton);
             this.tabScale.Controls.Add(this.sumButton);
-            this.tabScale.Controls.Add(this.recieptView);
             this.tabScale.Controls.Add(this.addItemButton);
-            this.tabScale.Controls.Add(this.label1);
-            this.tabScale.Controls.Add(this.itemBox);
+            this.tabScale.Controls.Add(this.weightLabel2);
             this.tabScale.Location = new System.Drawing.Point(4, 54);
             this.tabScale.Name = "tabScale";
             this.tabScale.Padding = new System.Windows.Forms.Padding(3);
-            this.tabScale.Size = new System.Drawing.Size(791, 542);
+            this.tabScale.Size = new System.Drawing.Size(794, 542);
             this.tabScale.TabIndex = 0;
             this.tabScale.Text = "Wiegen";
             this.tabScale.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F);
+            this.label8.Location = new System.Drawing.Point(412, 371);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(46, 44);
+            this.label8.TabIndex = 27;
+            this.label8.Text = "N";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F);
+            this.label5.Location = new System.Drawing.Point(551, 468);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(40, 44);
+            this.label5.TabIndex = 26;
+            this.label5.Text = "€";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F);
+            this.label1.Location = new System.Drawing.Point(551, 371);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(59, 44);
+            this.label1.TabIndex = 25;
+            this.label1.Text = "kg";
+            // 
+            // tarraButton2
+            // 
+            this.tarraButton2.Location = new System.Drawing.Point(674, 485);
+            this.tarraButton2.Margin = new System.Windows.Forms.Padding(2);
+            this.tarraButton2.Name = "tarraButton2";
+            this.tarraButton2.Size = new System.Drawing.Size(89, 50);
+            this.tarraButton2.TabIndex = 24;
+            this.tarraButton2.Text = "Tarra";
+            this.tarraButton2.UseVisualStyleBackColor = true;
+            this.tarraButton2.Click += new System.EventHandler(this.tarraButton2_Click);
+            // 
+            // nullButton2
+            // 
+            this.nullButton2.Location = new System.Drawing.Point(612, 485);
+            this.nullButton2.Margin = new System.Windows.Forms.Padding(2);
+            this.nullButton2.Name = "nullButton2";
+            this.nullButton2.Size = new System.Drawing.Size(58, 50);
+            this.nullButton2.TabIndex = 23;
+            this.nullButton2.Text = "0";
+            this.nullButton2.UseVisualStyleBackColor = true;
+            this.nullButton2.Click += new System.EventHandler(this.nullButton2_Click);
+            // 
+            // statusPritnerLabel
+            // 
+            this.statusPritnerLabel.AutoSize = true;
+            this.statusPritnerLabel.Location = new System.Drawing.Point(53, 510);
+            this.statusPritnerLabel.Name = "statusPritnerLabel";
+            this.statusPritnerLabel.Size = new System.Drawing.Size(30, 29);
+            this.statusPritnerLabel.TabIndex = 11;
+            this.statusPritnerLabel.Text = "🖶";
+            // 
+            // statusScaleLabel
+            // 
+            this.statusScaleLabel.AutoSize = true;
+            this.statusScaleLabel.Location = new System.Drawing.Point(8, 508);
+            this.statusScaleLabel.Name = "statusScaleLabel";
+            this.statusScaleLabel.Size = new System.Drawing.Size(39, 29);
+            this.statusScaleLabel.TabIndex = 10;
+            this.statusScaleLabel.Text = "⚖";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F);
+            this.label4.Location = new System.Drawing.Point(461, 468);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(93, 44);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "0.00";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(165, 46);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(122, 29);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Rechnung";
+            // 
+            // recieptList
+            // 
+            this.recieptList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader3,
+            this.columnHeader4,
+            this.kg,
+            this.columnHeader6});
+            this.recieptList.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.recieptList.FullRowSelect = true;
+            this.recieptList.GridLines = true;
+            this.recieptList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.recieptList.HideSelection = false;
+            this.recieptList.Location = new System.Drawing.Point(8, 78);
+            this.recieptList.MultiSelect = false;
+            this.recieptList.Name = "recieptList";
+            this.recieptList.Size = new System.Drawing.Size(427, 280);
+            this.recieptList.TabIndex = 7;
+            this.recieptList.UseCompatibleStateImageBehavior = false;
+            this.recieptList.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Produkt";
+            this.columnHeader3.Width = 190;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "€/kg";
+            // 
+            // kg
+            // 
+            this.kg.Text = "kg";
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "Gesamt";
+            this.columnHeader6.Width = 100;
+            // 
+            // dbList2
+            // 
+            this.dbList2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2});
+            this.dbList2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.dbList2.FullRowSelect = true;
+            this.dbList2.GridLines = true;
+            this.dbList2.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.dbList2.HideSelection = false;
+            this.dbList2.Location = new System.Drawing.Point(441, 6);
+            this.dbList2.MultiSelect = false;
+            this.dbList2.Name = "dbList2";
+            this.dbList2.Size = new System.Drawing.Size(357, 352);
+            this.dbList2.TabIndex = 6;
+            this.dbList2.UseCompatibleStateImageBehavior = false;
+            this.dbList2.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Produkt";
+            this.columnHeader1.Width = 230;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Preis €/kg";
+            this.columnHeader2.Width = 160;
             // 
             // delButton
             // 
@@ -290,44 +498,25 @@
             this.sumButton.Text = "Abrechnen";
             this.sumButton.UseVisualStyleBackColor = true;
             // 
-            // recieptView
-            // 
-            this.recieptView.HideSelection = false;
-            this.recieptView.Location = new System.Drawing.Point(6, 6);
-            this.recieptView.Name = "recieptView";
-            this.recieptView.Size = new System.Drawing.Size(400, 352);
-            this.recieptView.TabIndex = 3;
-            this.recieptView.UseCompatibleStateImageBehavior = false;
-            // 
             // addItemButton
             // 
             this.addItemButton.Location = new System.Drawing.Point(612, 364);
             this.addItemButton.Name = "addItemButton";
-            this.addItemButton.Size = new System.Drawing.Size(174, 84);
+            this.addItemButton.Size = new System.Drawing.Size(174, 45);
             this.addItemButton.TabIndex = 2;
             this.addItemButton.Text = "hinzufügen";
             this.addItemButton.UseVisualStyleBackColor = true;
             this.addItemButton.Click += new System.EventHandler(this.addItemButton_Click);
             // 
-            // label1
+            // weightLabel2
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 35F);
-            this.label1.Location = new System.Drawing.Point(412, 374);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(176, 54);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "0.00 kg";
-            // 
-            // itemBox
-            // 
-            this.itemBox.FormattingEnabled = true;
-            this.itemBox.ItemHeight = 29;
-            this.itemBox.Location = new System.Drawing.Point(412, 6);
-            this.itemBox.Name = "itemBox";
-            this.itemBox.Size = new System.Drawing.Size(374, 352);
-            this.itemBox.TabIndex = 0;
-            this.itemBox.SelectedIndexChanged += new System.EventHandler(this.itemBox_SelectedIndexChanged);
+            this.weightLabel2.AutoSize = true;
+            this.weightLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F);
+            this.weightLabel2.Location = new System.Drawing.Point(461, 371);
+            this.weightLabel2.Name = "weightLabel2";
+            this.weightLabel2.Size = new System.Drawing.Size(93, 44);
+            this.weightLabel2.TabIndex = 1;
+            this.weightLabel2.Text = "0.00";
             // 
             // tabEdit
             // 
@@ -339,7 +528,7 @@
             this.tabEdit.Controls.Add(this.dbList);
             this.tabEdit.Location = new System.Drawing.Point(4, 54);
             this.tabEdit.Name = "tabEdit";
-            this.tabEdit.Size = new System.Drawing.Size(791, 542);
+            this.tabEdit.Size = new System.Drawing.Size(794, 542);
             this.tabEdit.TabIndex = 2;
             this.tabEdit.Text = "Bearbeiten";
             this.tabEdit.UseVisualStyleBackColor = true;
@@ -389,7 +578,6 @@
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(177, 45);
             this.txtName.TabIndex = 2;
-            this.txtName.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // dbList
             // 
@@ -401,7 +589,7 @@
             this.dbList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.dbList.HideSelection = false;
             this.dbList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
+            listViewItem2});
             this.dbList.Location = new System.Drawing.Point(3, 3);
             this.dbList.MultiSelect = false;
             this.dbList.Name = "dbList";
@@ -418,7 +606,7 @@
             // 
             // colPrice
             // 
-            this.colPrice.Text = "Preis";
+            this.colPrice.Text = "Preis €/kg";
             this.colPrice.Width = 160;
             // 
             // tabDebug
@@ -431,7 +619,7 @@
             this.tabDebug.Name = "tabDebug";
             this.tabDebug.Padding = new System.Windows.Forms.Padding(3);
             this.tabDebug.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tabDebug.Size = new System.Drawing.Size(791, 542);
+            this.tabDebug.Size = new System.Drawing.Size(794, 542);
             this.tabDebug.TabIndex = 1;
             this.tabDebug.Text = "Test";
             this.tabDebug.UseVisualStyleBackColor = true;
@@ -440,6 +628,36 @@
             // 
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F);
+            this.label9.Location = new System.Drawing.Point(412, 415);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(42, 44);
+            this.label9.TabIndex = 28;
+            this.label9.Text = "T";
+            // 
+            // tarraLabel2
+            // 
+            this.tarraLabel2.AutoSize = true;
+            this.tarraLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F);
+            this.tarraLabel2.Location = new System.Drawing.Point(461, 415);
+            this.tarraLabel2.Name = "tarraLabel2";
+            this.tarraLabel2.Size = new System.Drawing.Size(93, 44);
+            this.tarraLabel2.TabIndex = 29;
+            this.tarraLabel2.Text = "0.00";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F);
+            this.label10.Location = new System.Drawing.Point(551, 415);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(59, 44);
+            this.label10.TabIndex = 30;
+            this.label10.Text = "kg";
             // 
             // MTT
             // 
@@ -453,6 +671,7 @@
             this.Name = "MTT";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MTT";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MTT_FormClosing);
             this.Load += new System.EventHandler(this.MTT_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ucLoadcellBindingSource)).EndInit();
             this.loadcellGroupBox.ResumeLayout(false);
@@ -473,8 +692,8 @@
         private System.Windows.Forms.ListBox eventBox;
         private System.Windows.Forms.GroupBox loadcellGroupBox;
         private System.Windows.Forms.Button closeScaleBtn;
-        private System.Windows.Forms.Button tarraScaleBtn;
-        private System.Windows.Forms.Button nullScaleBtn;
+        private System.Windows.Forms.Button tarraButton;
+        private System.Windows.Forms.Button nullButton;
         private System.Windows.Forms.Button openScaleBtn;
         private System.Windows.Forms.Label tarraWeightLabel;
         private System.Windows.Forms.Label weightLabel;
@@ -490,10 +709,8 @@
         private System.Windows.Forms.TabPage tabEdit;
         private System.Windows.Forms.Button delButton;
         private System.Windows.Forms.Button sumButton;
-        private System.Windows.Forms.ListView recieptView;
         private System.Windows.Forms.Button addItemButton;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListBox itemBox;
+        private System.Windows.Forms.Label weightLabel2;
         private System.Windows.Forms.ListView dbList;
         private System.Windows.Forms.ColumnHeader colProduct;
         private System.Windows.Forms.ColumnHeader colPrice;
@@ -503,6 +720,28 @@
         private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.Button removeButton;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ListView dbList2;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ListView recieptList;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader kg;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label statusScaleLabel;
+        private System.Windows.Forms.Button tarraButton2;
+        private System.Windows.Forms.Button nullButton2;
+        private System.Windows.Forms.Label statusPritnerLabel;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label tarraLabel2;
     }
 
 }
