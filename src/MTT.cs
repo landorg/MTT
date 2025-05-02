@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Drawing;
+using System.Diagnostics;
 
 namespace MTT
 {
@@ -324,12 +325,14 @@ namespace MTT
         internal void refreshDbList()
         {
             dbList.Items.Clear();
+            dbList2.Items.Clear();
             int i = 0;
             foreach (Product p in DB.products)
             {
                 ListViewItem item = new ListViewItem(p.Name, i);
                 item.SubItems.Add(p.Price.ToString());
                 dbList.Items.Add(item);
+                dbList2.Items.Add((ListViewItem)item.Clone());
                 i++;
             }
         }
@@ -425,6 +428,30 @@ namespace MTT
         private void tarraButton2_Click(object sender, EventArgs e)
         {
             ScaleCell.setTarra();
+        }
+
+        int pid;
+
+        private void kbButton_Click(object sender, EventArgs e)
+        {
+            Process pKb = null;
+            try
+            {
+                pKb = System.Diagnostics.Process.GetProcessById(pid);
+                pKb.Kill();
+
+            } catch (Exception err) {
+                pKb = new Process();
+                pKb.StartInfo.FileName = @"C:\Windows\System32\osk.exe";
+                pKb.Start();
+                //var onScreenKeyboardProcess = new ProcessStartInfo("C:\\Windows\\System32\\osk.exe")
+                //{
+                //    UseShellExecute = true
+                //};
+                //pKb = Process.Start(onScreenKeyboardProcess);
+                pid = pKb.Id;
+
+            }
         }
     }
 }
