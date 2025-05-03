@@ -22,8 +22,8 @@ namespace MTT
         private static UsbDevice _evoLinePrinter;
 
         public static bool enabled = false; 
-        public static float nettWeight = -1; 
-        public static float tarraWeight = -1; 
+        public static float netWeight = -1; 
+        public static float tareWeight = -1; 
 
         public static void init()
         {
@@ -95,14 +95,13 @@ namespace MTT
                 //eventBox.Items.Insert(0, "Close serial scale port");
 
                 //mtt.nullScaleBtn.Enabled = false;
-                //mtt.tarraScaleBtn.Enabled = false;
+                //mtt.tareScaleBtn.Enabled = false;
                 //mtt.closeScaleBtn.Enabled = false;
 
             }
             catch(Exception ex)
             {
                 mtt.logToBox($"Error when closing scale: {ex.Message}");
-                //eventBox.Items.Insert(0, $"Error when closing scale: {ex.Message}");
             }
         }
 
@@ -133,34 +132,34 @@ namespace MTT
                 //int address = (byte) data.Substring(0, 1);
                 string command = data.Substring(0, 3);
                 //mtt.logToBox($"Command: {command}");
-                if (command == "SXI")
+                if (command == "SXI" || command == "SXD")
                 {
                     mtt.logToBox("instable");
                     return;
                 }
-                string nettWeightString = data.Substring(21, 16).Trim();
-                mtt.logToBox($"nettWeightString: {nettWeightString}");
-                string tarraWeightString = data.Substring(38, 16).Trim();
-                mtt.logToBox($"tarraWeightString: {tarraWeightString}");
+                string netWeightString = data.Substring(21, 16).Trim();
+                //mtt.logToBox($"netWeightString: {netWeightString}");
+                string tareWeightString = data.Substring(38, 16).Trim();
+                //mtt.logToBox($"tareWeightString: {tareWeightString}");
 
 
-                if (nettWeightString[0]!='N' || tarraWeightString[0]!='T')
+                if (netWeightString[0]!='N' || tareWeightString[0]!='T')
                 {
                     throw new Exception("Parse error");
                 }
 
-                nettWeightString = System.Text.RegularExpressions.Regex.Split(nettWeightString, @"\s+")[1];
-                tarraWeightString = System.Text.RegularExpressions.Regex.Split(tarraWeightString, @"\s+")[1];
+                netWeightString = System.Text.RegularExpressions.Regex.Split(netWeightString, @"\s+")[1];
+                tareWeightString = System.Text.RegularExpressions.Regex.Split(tareWeightString, @"\s+")[1];
 
                 //object weights = new object[]
                 //{
                 //};
 
-                nettWeight = float.Parse(NormalizeDecimal(nettWeightString));
-                tarraWeight = float.Parse(NormalizeDecimal(tarraWeightString));
-                Weights w = new Weights(nettWeight, tarraWeight);
+                netWeight = float.Parse(NormalizeDecimal(netWeightString));
+                tareWeight = float.Parse(NormalizeDecimal(tareWeightString));
+                Weights w = new Weights(netWeight, tareWeight);
 
-                //mtt.logToBox(data.Trim());
+                mtt.logToBox(data.Trim());
                 mtt.SetWeights(w);
                 //mtt.BeginInvoke(new SetTextDeleg(mtt.si_DataReceived), new object[] { data });
             }
@@ -171,25 +170,6 @@ namespace MTT
 
         }
 
-        //private delegate void SetTextDeleg(string text);
-
-        //private void si_DataReceived(string data) {
-        //    try
-        //    {
-        //        string nettWeight = data.Substring(21, 16);
-        //        string tarraWeight = data.Substring(38, 16);
-        //        mtt.weightLabel.Text = nettWeight;
-        //        mtt.weightLabel2.Text = nettWeight;
-        //        mtt.tarraWeightLabel.Text = tarraWeight;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        eventBox.Items.Insert(0, "Error: parsing weight to string");
-        //        eventBox.Items.Insert(0, ex.Message);
-        //    }
-        //    eventBox.Items.Insert(0, data.Trim()); 
-        //}
-    
         private static void timer_Tick(object sender, EventArgs e)
         {
             byte[] bytestosend = { 0x06, 0x53, 0x58, 0x49, 0x0d, 0x0a };
@@ -201,11 +181,11 @@ namespace MTT
             _ucLoadcell.ReOpenBoardCommunication();
         }
 
-        internal static void setTarra()
+        internal static void setTare()
         {
             byte[] bytestosend = { 0x06, 0x54, 0x0d, 0x0a };
             _serialPort.Write(bytestosend, 0, bytestosend.Length);
-            mtt.logToBox("Tarra scale");
+            mtt.logToBox("Tare scale");
         }
     }
 }

@@ -30,7 +30,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
             "Tomaten",
             "2.5"}, -1);
             this.eventBox = new System.Windows.Forms.ListBox();
@@ -39,7 +39,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.closeScaleBtn = new System.Windows.Forms.Button();
-            this.tarraButton = new System.Windows.Forms.Button();
+            this.tareButton = new System.Windows.Forms.Button();
             this.nullButton = new System.Windows.Forms.Button();
             this.openScaleBtn = new System.Windows.Forms.Button();
             this.tareLabel2 = new System.Windows.Forms.Label();
@@ -57,7 +57,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.tarraButton2 = new System.Windows.Forms.Button();
+            this.tareButton2 = new System.Windows.Forms.Button();
             this.nullButton2 = new System.Windows.Forms.Button();
             this.statusPritnerLabel = new System.Windows.Forms.Label();
             this.statusScaleLabel = new System.Windows.Forms.Label();
@@ -116,7 +116,7 @@
             this.loadcellGroupBox.Controls.Add(this.label7);
             this.loadcellGroupBox.Controls.Add(this.label6);
             this.loadcellGroupBox.Controls.Add(this.closeScaleBtn);
-            this.loadcellGroupBox.Controls.Add(this.tarraButton);
+            this.loadcellGroupBox.Controls.Add(this.tareButton);
             this.loadcellGroupBox.Controls.Add(this.nullButton);
             this.loadcellGroupBox.Controls.Add(this.openScaleBtn);
             this.loadcellGroupBox.Controls.Add(this.label12);
@@ -166,16 +166,16 @@
             this.closeScaleBtn.UseVisualStyleBackColor = true;
             this.closeScaleBtn.Click += new System.EventHandler(this.closeScaleBtn_click);
             // 
-            // tarraButton
+            // tareButton
             // 
-            this.tarraButton.Location = new System.Drawing.Point(97, 56);
-            this.tarraButton.Margin = new System.Windows.Forms.Padding(2);
-            this.tarraButton.Name = "tarraButton";
-            this.tarraButton.Size = new System.Drawing.Size(89, 32);
-            this.tarraButton.TabIndex = 20;
-            this.tarraButton.Text = "Tarra";
-            this.tarraButton.UseVisualStyleBackColor = true;
-            this.tarraButton.Click += new System.EventHandler(this.tarraButton_Click);
+            this.tareButton.Location = new System.Drawing.Point(97, 56);
+            this.tareButton.Margin = new System.Windows.Forms.Padding(2);
+            this.tareButton.Name = "tareButton";
+            this.tareButton.Size = new System.Drawing.Size(89, 32);
+            this.tareButton.TabIndex = 20;
+            this.tareButton.Text = "Tara";
+            this.tareButton.UseVisualStyleBackColor = true;
+            this.tareButton.Click += new System.EventHandler(this.tareButton_Click);
             // 
             // nullButton
             // 
@@ -311,7 +311,7 @@
             this.tabScale.Controls.Add(this.label8);
             this.tabScale.Controls.Add(this.label5);
             this.tabScale.Controls.Add(this.label1);
-            this.tabScale.Controls.Add(this.tarraButton2);
+            this.tabScale.Controls.Add(this.tareButton2);
             this.tabScale.Controls.Add(this.nullButton2);
             this.tabScale.Controls.Add(this.statusPritnerLabel);
             this.tabScale.Controls.Add(this.statusScaleLabel);
@@ -391,16 +391,16 @@
             this.label1.TabIndex = 25;
             this.label1.Text = "kg";
             // 
-            // tarraButton2
+            // tareButton2
             // 
-            this.tarraButton2.Location = new System.Drawing.Point(696, 485);
-            this.tarraButton2.Margin = new System.Windows.Forms.Padding(2);
-            this.tarraButton2.Name = "tarraButton2";
-            this.tarraButton2.Size = new System.Drawing.Size(89, 50);
-            this.tarraButton2.TabIndex = 24;
-            this.tarraButton2.Text = "Tarra";
-            this.tarraButton2.UseVisualStyleBackColor = true;
-            this.tarraButton2.Click += new System.EventHandler(this.tarraButton2_Click);
+            this.tareButton2.Location = new System.Drawing.Point(696, 485);
+            this.tareButton2.Margin = new System.Windows.Forms.Padding(2);
+            this.tareButton2.Name = "tareButton2";
+            this.tareButton2.Size = new System.Drawing.Size(89, 50);
+            this.tareButton2.TabIndex = 24;
+            this.tareButton2.Text = "Tara";
+            this.tareButton2.UseVisualStyleBackColor = true;
+            this.tareButton2.Click += new System.EventHandler(this.tareButton2_Click);
             // 
             // nullButton2
             // 
@@ -648,7 +648,7 @@
             this.dbList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.dbList.HideSelection = false;
             this.dbList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
+            listViewItem3});
             this.dbList.Location = new System.Drawing.Point(3, 3);
             this.dbList.MultiSelect = false;
             this.dbList.Name = "dbList";
@@ -743,7 +743,7 @@
         private System.Windows.Forms.ListBox eventBox;
         private System.Windows.Forms.GroupBox loadcellGroupBox;
         private System.Windows.Forms.Button closeScaleBtn;
-        private System.Windows.Forms.Button tarraButton;
+        private System.Windows.Forms.Button tareButton;
         private System.Windows.Forms.Button nullButton;
         private System.Windows.Forms.Button openScaleBtn;
         private System.Windows.Forms.Label tareLabel2;
@@ -782,7 +782,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label statusScaleLabel;
-        private System.Windows.Forms.Button tarraButton2;
+        private System.Windows.Forms.Button tareButton2;
         private System.Windows.Forms.Button nullButton2;
         private System.Windows.Forms.Label statusPritnerLabel;
         private System.Windows.Forms.Label label7;

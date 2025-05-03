@@ -302,12 +302,27 @@ namespace MTT
                 {
                     // This code now runs on the UI thread
                     eventBox.Items.Insert(0, log);
+
+                    if (eventBox.Items.Count > 2000)
+                    {
+                        for (int i = 2000; i < eventBox.Items.Count; i++)
+                        {
+                            eventBox.Items.Remove(eventBox.Items[i]);
+                        }
+                    }
                 }));
             }
             else
             {
                 // We are already on the UI thread, update directly
                 eventBox.Items.Insert(0, log);
+                if (eventBox.Items.Count > 2000)
+                {
+                    for (int i = 2000; i < eventBox.Items.Count; i++)
+                    {
+                        eventBox.Items.Remove(eventBox.Items[i]);
+                    }
+                }
             }
         }
 
@@ -321,14 +336,21 @@ namespace MTT
             ScaleCell.nullIt();
         }
 
-        private void tarraButton_Click(object sender, EventArgs e)
+        private void tareButton_Click(object sender, EventArgs e)
         {
-            ScaleCell.setTarra();
+            ScaleCell.setTare();
         }
 
-        private void tarraButton2_Click(object sender, EventArgs e)
+
+        private void eventBoxChange(object sender, EventArgs e)
         {
-            ScaleCell.setTarra();
+            throw new NotImplementedException();
+        }
+
+
+        private void tareButton2_Click(object sender, EventArgs e)
+        {
+            ScaleCell.setTare();
         }
 
         int pid;
