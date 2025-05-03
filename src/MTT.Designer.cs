@@ -30,7 +30,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
             "Tomaten",
             "2.5"}, -1);
             this.eventBox = new System.Windows.Forms.ListBox();
@@ -42,8 +42,8 @@
             this.tarraButton = new System.Windows.Forms.Button();
             this.nullButton = new System.Windows.Forms.Button();
             this.openScaleBtn = new System.Windows.Forms.Button();
-            this.tarraWeightLabel = new System.Windows.Forms.Label();
-            this.weightLabel = new System.Windows.Forms.Label();
+            this.tareLabel2 = new System.Windows.Forms.Label();
+            this.netLabel2 = new System.Windows.Forms.Label();
             this.printerGroupBox = new System.Windows.Forms.GroupBox();
             this.feedLabelBtn = new System.Windows.Forms.Button();
             this.printTestLabelBtn = new System.Windows.Forms.Button();
@@ -52,7 +52,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabScale = new System.Windows.Forms.TabPage();
             this.label10 = new System.Windows.Forms.Label();
-            this.tarraLabel2 = new System.Windows.Forms.Label();
+            this.tareLabel1 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -74,8 +74,9 @@
             this.delButton = new System.Windows.Forms.Button();
             this.sumButton = new System.Windows.Forms.Button();
             this.addItemButton = new System.Windows.Forms.Button();
-            this.weightLabel2 = new System.Windows.Forms.Label();
+            this.netLabel1 = new System.Windows.Forms.Label();
             this.tabEdit = new System.Windows.Forms.TabPage();
+            this.exitButton = new System.Windows.Forms.Button();
             this.kbButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.removeButton = new System.Windows.Forms.Button();
@@ -87,6 +88,8 @@
             this.colPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabDebug = new System.Windows.Forms.TabPage();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ucLoadcellBindingSource)).BeginInit();
             this.loadcellGroupBox.SuspendLayout();
             this.printerGroupBox.SuspendLayout();
@@ -116,8 +119,10 @@
             this.loadcellGroupBox.Controls.Add(this.tarraButton);
             this.loadcellGroupBox.Controls.Add(this.nullButton);
             this.loadcellGroupBox.Controls.Add(this.openScaleBtn);
-            this.loadcellGroupBox.Controls.Add(this.tarraWeightLabel);
-            this.loadcellGroupBox.Controls.Add(this.weightLabel);
+            this.loadcellGroupBox.Controls.Add(this.label12);
+            this.loadcellGroupBox.Controls.Add(this.label11);
+            this.loadcellGroupBox.Controls.Add(this.tareLabel2);
+            this.loadcellGroupBox.Controls.Add(this.netLabel2);
             this.loadcellGroupBox.Location = new System.Drawing.Point(216, 5);
             this.loadcellGroupBox.Margin = new System.Windows.Forms.Padding(2);
             this.loadcellGroupBox.Name = "loadcellGroupBox";
@@ -132,7 +137,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(281, 64);
+            this.label7.Location = new System.Drawing.Point(322, 64);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(32, 24);
@@ -143,7 +148,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(281, 28);
+            this.label6.Location = new System.Drawing.Point(322, 28);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(32, 24);
@@ -194,27 +199,27 @@
             this.openScaleBtn.UseVisualStyleBackColor = true;
             this.openScaleBtn.Click += new System.EventHandler(this.openScaleBtn_Click);
             // 
-            // tarraWeightLabel
+            // tareLabel2
             // 
-            this.tarraWeightLabel.AutoSize = true;
-            this.tarraWeightLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tarraWeightLabel.Location = new System.Drawing.Point(232, 59);
-            this.tarraWeightLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.tarraWeightLabel.Name = "tarraWeightLabel";
-            this.tarraWeightLabel.Size = new System.Drawing.Size(17, 24);
-            this.tarraWeightLabel.TabIndex = 17;
-            this.tarraWeightLabel.Text = "-";
+            this.tareLabel2.AutoSize = true;
+            this.tareLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tareLabel2.Location = new System.Drawing.Point(260, 64);
+            this.tareLabel2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.tareLabel2.Name = "tareLabel2";
+            this.tareLabel2.Size = new System.Drawing.Size(17, 24);
+            this.tareLabel2.TabIndex = 17;
+            this.tareLabel2.Text = "-";
             // 
-            // weightLabel
+            // netLabel2
             // 
-            this.weightLabel.AutoSize = true;
-            this.weightLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.weightLabel.Location = new System.Drawing.Point(232, 23);
-            this.weightLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.weightLabel.Name = "weightLabel";
-            this.weightLabel.Size = new System.Drawing.Size(17, 24);
-            this.weightLabel.TabIndex = 16;
-            this.weightLabel.Text = "-";
+            this.netLabel2.AutoSize = true;
+            this.netLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.netLabel2.Location = new System.Drawing.Point(260, 28);
+            this.netLabel2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.netLabel2.Name = "netLabel2";
+            this.netLabel2.Size = new System.Drawing.Size(17, 24);
+            this.netLabel2.TabIndex = 16;
+            this.netLabel2.Text = "-";
             // 
             // printerGroupBox
             // 
@@ -301,7 +306,7 @@
             // tabScale
             // 
             this.tabScale.Controls.Add(this.label10);
-            this.tabScale.Controls.Add(this.tarraLabel2);
+            this.tabScale.Controls.Add(this.tareLabel1);
             this.tabScale.Controls.Add(this.label9);
             this.tabScale.Controls.Add(this.label8);
             this.tabScale.Controls.Add(this.label5);
@@ -317,7 +322,7 @@
             this.tabScale.Controls.Add(this.delButton);
             this.tabScale.Controls.Add(this.sumButton);
             this.tabScale.Controls.Add(this.addItemButton);
-            this.tabScale.Controls.Add(this.weightLabel2);
+            this.tabScale.Controls.Add(this.netLabel1);
             this.tabScale.Location = new System.Drawing.Point(4, 54);
             this.tabScale.Name = "tabScale";
             this.tabScale.Padding = new System.Windows.Forms.Padding(3);
@@ -336,21 +341,21 @@
             this.label10.TabIndex = 30;
             this.label10.Text = "kg";
             // 
-            // tarraLabel2
+            // tareLabel1
             // 
-            this.tarraLabel2.AutoSize = true;
-            this.tarraLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F);
-            this.tarraLabel2.Location = new System.Drawing.Point(461, 415);
-            this.tarraLabel2.Name = "tarraLabel2";
-            this.tarraLabel2.Size = new System.Drawing.Size(93, 44);
-            this.tarraLabel2.TabIndex = 29;
-            this.tarraLabel2.Text = "0.00";
+            this.tareLabel1.AutoSize = true;
+            this.tareLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F);
+            this.tareLabel1.Location = new System.Drawing.Point(446, 415);
+            this.tareLabel1.Name = "tareLabel1";
+            this.tareLabel1.Size = new System.Drawing.Size(114, 44);
+            this.tareLabel1.TabIndex = 29;
+            this.tareLabel1.Text = "0,000";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F);
-            this.label9.Location = new System.Drawing.Point(412, 415);
+            this.label9.Location = new System.Drawing.Point(398, 415);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(42, 44);
             this.label9.TabIndex = 28;
@@ -360,7 +365,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F);
-            this.label8.Location = new System.Drawing.Point(412, 371);
+            this.label8.Location = new System.Drawing.Point(398, 371);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(46, 44);
             this.label8.TabIndex = 27;
@@ -430,11 +435,11 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F);
-            this.label4.Location = new System.Drawing.Point(461, 468);
+            this.label4.Location = new System.Drawing.Point(446, 468);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(93, 44);
+            this.label4.Size = new System.Drawing.Size(114, 44);
             this.label4.TabIndex = 9;
-            this.label4.Text = "0.00";
+            this.label4.Text = "0,000";
             // 
             // label3
             // 
@@ -524,7 +529,7 @@
             // 
             this.sumButton.Location = new System.Drawing.Point(156, 371);
             this.sumButton.Name = "sumButton";
-            this.sumButton.Size = new System.Drawing.Size(250, 77);
+            this.sumButton.Size = new System.Drawing.Size(222, 77);
             this.sumButton.TabIndex = 4;
             this.sumButton.Text = "Abrechnen";
             this.sumButton.UseVisualStyleBackColor = true;
@@ -539,18 +544,19 @@
             this.addItemButton.UseVisualStyleBackColor = true;
             this.addItemButton.Click += new System.EventHandler(this.addItemButton_Click);
             // 
-            // weightLabel2
+            // netLabel1
             // 
-            this.weightLabel2.AutoSize = true;
-            this.weightLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F);
-            this.weightLabel2.Location = new System.Drawing.Point(461, 371);
-            this.weightLabel2.Name = "weightLabel2";
-            this.weightLabel2.Size = new System.Drawing.Size(93, 44);
-            this.weightLabel2.TabIndex = 1;
-            this.weightLabel2.Text = "0.00";
+            this.netLabel1.AutoSize = true;
+            this.netLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F);
+            this.netLabel1.Location = new System.Drawing.Point(446, 371);
+            this.netLabel1.Name = "netLabel1";
+            this.netLabel1.Size = new System.Drawing.Size(114, 44);
+            this.netLabel1.TabIndex = 1;
+            this.netLabel1.Text = "0,000";
             // 
             // tabEdit
             // 
+            this.tabEdit.Controls.Add(this.exitButton);
             this.tabEdit.Controls.Add(this.kbButton);
             this.tabEdit.Controls.Add(this.label2);
             this.tabEdit.Controls.Add(this.removeButton);
@@ -564,6 +570,17 @@
             this.tabEdit.TabIndex = 2;
             this.tabEdit.Text = "Bearbeiten";
             this.tabEdit.UseVisualStyleBackColor = true;
+            // 
+            // exitButton
+            // 
+            this.exitButton.BackColor = System.Drawing.Color.LightCoral;
+            this.exitButton.Location = new System.Drawing.Point(725, 480);
+            this.exitButton.Name = "exitButton";
+            this.exitButton.Size = new System.Drawing.Size(66, 62);
+            this.exitButton.TabIndex = 7;
+            this.exitButton.Text = "x";
+            this.exitButton.UseVisualStyleBackColor = false;
+            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
             // 
             // kbButton
             // 
@@ -631,7 +648,7 @@
             this.dbList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.dbList.HideSelection = false;
             this.dbList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3});
+            listViewItem1});
             this.dbList.Location = new System.Drawing.Point(3, 3);
             this.dbList.MultiSelect = false;
             this.dbList.Name = "dbList";
@@ -671,6 +688,28 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(239, 28);
+            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(25, 24);
+            this.label11.TabIndex = 16;
+            this.label11.Text = "N";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(239, 64);
+            this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(23, 24);
+            this.label12.TabIndex = 17;
+            this.label12.Text = "T";
+            // 
             // MTT
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -707,8 +746,8 @@
         private System.Windows.Forms.Button tarraButton;
         private System.Windows.Forms.Button nullButton;
         private System.Windows.Forms.Button openScaleBtn;
-        private System.Windows.Forms.Label tarraWeightLabel;
-        private System.Windows.Forms.Label weightLabel;
+        private System.Windows.Forms.Label tareLabel2;
+        private System.Windows.Forms.Label netLabel2;
         private System.Windows.Forms.GroupBox printerGroupBox;
         private System.Windows.Forms.Button feedLabelBtn;
         private System.Windows.Forms.Button printTestLabelBtn;
@@ -722,7 +761,7 @@
         private System.Windows.Forms.Button delButton;
         private System.Windows.Forms.Button sumButton;
         private System.Windows.Forms.Button addItemButton;
-        private System.Windows.Forms.Label weightLabel2;
+        private System.Windows.Forms.Label netLabel1;
         private System.Windows.Forms.ListView dbList;
         private System.Windows.Forms.ColumnHeader colProduct;
         private System.Windows.Forms.ColumnHeader colPrice;
@@ -753,8 +792,11 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label tarraLabel2;
+        private System.Windows.Forms.Label tareLabel1;
         private System.Windows.Forms.Button kbButton;
+        private System.Windows.Forms.Button exitButton;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
     }
 
 }

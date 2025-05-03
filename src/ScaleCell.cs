@@ -64,14 +64,12 @@ namespace MTT
                 }
                 else
                 {
-                    //eventBox.Items.Insert(0, "No access to jida board. Open application as administrator");
                     mtt.logToBox("No access to jida board. Open application as administrator");
                 }
             }
             catch (Exception ex)
             {
                 mtt.logToBox($"Open scale failed {ex.Message}");
-                //eventBox.Items.Insert(0, $"Open scale failed {ex.Message}");
             }
         }
 
@@ -114,32 +112,66 @@ namespace MTT
             mtt.logToBox("Set scale to null");
         }
 
+        private static string NormalizeDecimal(string value)
+        {
+            return System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator == "." ? value.Replace(',', '.') : value.Replace('.', ',');
+        }
+
+
         private static void sp_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
+            int address = _serialPort.ReadByte();
             string data = _serialPort.ReadLine();
             try
             {
-                string nettWeightString = data.Substring(21, 16);
-                string tarraWeightString = data.Substring(38, 16);
+                // example string:
+                // SX  G      0.000 kg  N      0.000 kg  T      0.000 kg
+
+                //more info: https://www.waagen-forum.de/forum/forum/thread/7837-mettler-toledo-uc3-htt-p-mit-eigener-ansteuerung/ 
+
+
+                //int address = (byte) data.Substring(0, 1);
+                string command = data.Substring(0, 3);
+                //mtt.logToBox($"Command: {command}");
+                if (command == "SXI")
+                {
+                    mtt.logToBox("instable");
+                    return;
+                }
+                string nettWeightString = data.Substring(21, 16).Trim();
+                mtt.logToBox($"nettWeightString: {nettWeightString}");
+                string tarraWeightString = data.Substring(38, 16).Trim();
+                mtt.logToBox($"tarraWeightString: {tarraWeightString}");
+
+
                 if (nettWeightString[0]!='N' || tarraWeightString[0]!='T')
                 {
                     throw new Exception("Parse error");
                 }
 
-                nettWeight = float.Parse(nettWeightString.Substring(1,-2));
-                tarraWeight = float.Parse(tarraWeightString.Substring(1,-2));
+                nettWeightString = System.Text.RegularExpressions.Regex.Split(nettWeightString, @"\s+")[1];
+                tarraWeightString = System.Text.RegularExpressions.Regex.Split(tarraWeightString, @"\s+")[1];
 
+                //object weights = new object[]
+                //{
+                //};
+
+                nettWeight = float.Parse(NormalizeDecimal(nettWeightString));
+                tarraWeight = float.Parse(NormalizeDecimal(tarraWeightString));
+                Weights w = new Weights(nettWeight, tarraWeight);
+
+                //mtt.logToBox(data.Trim());
+                mtt.SetWeights(w);
+                //mtt.BeginInvoke(new SetTextDeleg(mtt.si_DataReceived), new object[] { data });
             }
             catch (Exception ex)
             {
-                mtt.logToBox($"Error: parsing weight to string: {ex.Message}");
+                mtt.logToBox($"Error: parsing weight: {ex.Message}");
             }
-            mtt.logToBox(data.Trim());
 
-            mtt.BeginInvoke(new SetTextDeleg(mtt.si_DataReceived), new object[] { data });
         }
 
-        private delegate void SetTextDeleg(string text);
+        //private delegate void SetTextDeleg(string text);
 
         //private void si_DataReceived(string data) {
         //    try

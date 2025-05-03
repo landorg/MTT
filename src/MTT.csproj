@@ -145,6 +145,7 @@
     <Compile Include="ScaleCell.cs" />
     <Compile Include="UcLoadcell.cs" />
     <Compile Include="Utils.cs" />
+    <Compile Include="Weights.cs" />
     <EmbeddedResource Include="MTT.resx">
       <DependentUpon>MTT.cs</DependentUpon>
     </EmbeddedResource>

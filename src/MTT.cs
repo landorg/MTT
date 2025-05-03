@@ -25,6 +25,13 @@ namespace MTT
 
         public MTT()
         {
+
+
+        StreamWriter sw = File.AppendText("C:/MTT/log.txt");
+
+        // this is important
+        sw.AutoFlush = true;
+        Console.SetError(sw);
             InitializeComponent();
         }
 
@@ -41,23 +48,24 @@ namespace MTT
 
         //private delegate void SetTextDeleg(string text);
 
-        internal void si_DataReceived(string data)
-        {
-            //try
-            //{
-            //    string nettWeight = data.Substring(21, 16);
-            //    string tarraWeight = data.Substring(38, 16);
-            //    //weightLabel.Text = nettWeight;
-            //    //weightLabel2.Text = nettWeight;
-            //    //tarraWeightLabel.Text = tarraWeight;
-            //}
-            //catch (Exception ex)
-            //{
-            //    eventBox.Items.Insert(0, "Error: parsing weight to string");
-            //    eventBox.Items.Insert(0, ex.Message);
-            //}
-            //eventBox.Items.Insert(0, data.Trim());
-        }
+        //internal void si_DataReceived(string data)
+        //{
+        //    try
+        //    {
+        //        string nettWeight = data.Substring(21, 16);
+        //        string tarraWeight = data.Substring(38, 16);
+        //        netLabel2.Text = nettWeight;
+        //        netLabel1.Text = nettWeight;
+        //        tareLabel2.Text = tarraWeight;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        this.logToBox($"Error: parsing weight to string: {ex.ToString()}");
+        //        //eventBox.Items.Insert(0, "Error: parsing weight to string");
+        //        //eventBox.Items.Insert(0, ex.Message);
+        //    }
+        //    //eventBox.Items.Insert(0, data.Trim());
+        //}
 
         //private void timer_Tick(object sender, EventArgs e)
         //{
@@ -229,7 +237,7 @@ namespace MTT
                 var evoEndpointReader = _evoLinePrinter.OpenEndpointReader(ReadEndpointID.Ep02);
 
                 // Create label
-                var bitmap = BitmapConverter.CreatTestBitmap(weightLabel.Text, 680);
+                var bitmap = BitmapConverter.CreatTestBitmap(netLabel2.Text, 680);
                 //var bitmap = BitmapConverter.DrawReciept();
                 
                 bitmap.Save("C:/MTT/debug.bmp");
@@ -407,7 +415,27 @@ namespace MTT
 
         public void logToBox(string message, string level = "info")
         {
-            eventBox.Items.Insert(0, $"[{level}] {message}");
+            String ts = DateTime.Now.ToString();
+            String log = $"[{level}] {ts} {message}";
+
+            Console.Error.WriteLine(log);
+
+            // Check if we are on the UI thread
+            if (eventBox.InvokeRequired)
+            {
+                // We are on a worker thread, marshal the call to the UI thread
+                // Using BeginInvoke for asynchronous execution (doesn't block the logger thread)
+                eventBox.BeginInvoke(new Action(() =>
+                {
+                    // This code now runs on the UI thread
+                    eventBox.Items.Insert(0, log);
+                }));
+            }
+            else
+            {
+                // We are already on the UI thread, update directly
+                eventBox.Items.Insert(0, log);
+            }
         }
 
         private void nullButton2_Click(object sender, EventArgs e)
@@ -451,6 +479,42 @@ namespace MTT
                 //pKb = Process.Start(onScreenKeyboardProcess);
                 pid = pKb.Id;
 
+            }
+        }
+
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
+        }
+
+        internal void SetWeights(Weights w)
+        {
+            try
+            {
+
+                if (netLabel1.InvokeRequired)
+                {
+                    // We are on a worker thread, marshal the call to the UI thread
+                    // Using BeginInvoke for asynchronous execution (doesn't block the logger thread)
+                    eventBox.BeginInvoke(new Action(() =>
+                    {
+                        netLabel1.Text = w.net.ToString();
+                        netLabel2.Text = w.net.ToString();
+                        tareLabel1.Text = w.tare.ToString();
+                        tareLabel2.Text = w.tare.ToString();
+                    }));
+                } else {
+                    netLabel1.Text = w.net.ToString();
+                    netLabel2.Text = w.net.ToString();
+                    tareLabel1.Text = w.tare.ToString();
+                    tareLabel2.Text = w.tare.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                this.logToBox($"Error setting weight: {ex.ToString()}");
+                //eventBox.Items.Insert(0, "Error: parsing weight to string");
+                //eventBox.Items.Insert(0, ex.Message);
             }
         }
     }
