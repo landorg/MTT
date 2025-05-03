@@ -15,150 +15,27 @@ namespace MTT
 {
     public partial class MTT : Form
     {
-        //private SerialPort _serialPort = new SerialPort("COM2", 9600, Parity.Even, 7, StopBits.Two);
-
-        //private Timer _timer = new Timer();
-        //private Timer _jidaTimer = new Timer();
-
-        //private UcLoadcell _ucLoadcell;
         private UsbDevice _evoLinePrinter;
 
         public MTT()
         {
+            StreamWriter sw = File.AppendText("C:/MTT/log.txt");
 
+            // this is important
+            sw.AutoFlush = true;
+            Console.SetError(sw);
 
-        StreamWriter sw = File.AppendText("C:/MTT/log.txt");
-
-        // this is important
-        sw.AutoFlush = true;
-        Console.SetError(sw);
             InitializeComponent();
         }
 
-        //
-        // Loadcell
-        //
-
-        //private void sp_DataReceived(object sender, SerialDataReceivedEventArgs e)
-        //{
-        //    //    string data = _serialPort.ReadLine();
-
-        //    this.BeginInvoke(new SetTextDeleg(si_DataReceived), new object[] { data });
-        //}
-
-        //private delegate void SetTextDeleg(string text);
-
-        //internal void si_DataReceived(string data)
-        //{
-        //    try
-        //    {
-        //        string nettWeight = data.Substring(21, 16);
-        //        string tarraWeight = data.Substring(38, 16);
-        //        netLabel2.Text = nettWeight;
-        //        netLabel1.Text = nettWeight;
-        //        tareLabel2.Text = tarraWeight;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        this.logToBox($"Error: parsing weight to string: {ex.ToString()}");
-        //        //eventBox.Items.Insert(0, "Error: parsing weight to string");
-        //        //eventBox.Items.Insert(0, ex.Message);
-        //    }
-        //    //eventBox.Items.Insert(0, data.Trim());
-        //}
-
-        //private void timer_Tick(object sender, EventArgs e)
-        //{
-        //    byte[] bytestosend = { 0x06, 0x53, 0x58, 0x49, 0x0d, 0x0a };
-        //    _serialPort.Write(bytestosend, 0, bytestosend.Length);
-        //}
-
-        //private void jidaTimer_Tick(object sender, EventArgs e)
-        //{
-        //    _ucLoadcell.ReOpenBoardCommunication();
-        //}
-
         private void openScaleBtn_Click(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    // Open serial port
-            //    _serialPort.RtsEnable = false;
-            //    _serialPort.DtrEnable = false;
-            //    _serialPort.Handshake = Handshake.None;
-            //    _serialPort.DataReceived += new SerialDataReceivedEventHandler(sp_DataReceived);
-            //    _serialPort.Open();
-            //    eventBox.Items.Insert(0, "Open serial scale port");
-
-            //    // Open jida board
-            //    var initializeStatus = JiddaWrapper.JidaDllInitialize();
-            //    if (initializeStatus && JiddaWrapper.JidaDllIsAvailable())
-            //    {
-            //        IntPtr handle = IntPtr.Zero;
-            //        JiddaWrapper.JidaBoardOpenByNameA("UUP6", ref handle);
-            //        _ucLoadcell = new UcLoadcell(handle);
-            //        _ucLoadcell.ReOpenBoardCommunication();
-
-            //        // Send inital command for loadcell
-            //        byte[] bytestosend = { 0x16, 0x1B, 0x3F };
-            //        _serialPort.Write(bytestosend, 0, bytestosend.Length);
-
-            //        // Setup weight reading timer
-            //        _timer.Interval = 500;
-            //        _timer.Tick += new EventHandler(timer_Tick);
-            //        _timer.Start();
-
-            //        // Setup jida board reopen timer
-            //        _jidaTimer.Interval = 30000;
-            //        _jidaTimer.Tick += new EventHandler(timer_Tick);
-            //        _jidaTimer.Start();
-
-            //        nullScaleBtn.Enabled = true;
-            //        tarraScaleBtn.Enabled = true;
-            //        closeScaleBtn.Enabled = true;
-            //    }
-            //    else
-            //    {
-            //        eventBox.Items.Insert(0, "No access to jida board. Open application as administrator");
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    eventBox.Items.Insert(0, $"Open scale failed {ex.Message}");
-            //}
             ScaleCell.init();
         }
 
         private void closeScaleBtn_click(object sender, EventArgs e)
         {
             ScaleCell.close();
-            //try
-            //{
-            //    // Stop weight reading
-            //    _timer.Stop();
-            //    _timer.Dispose();                              
-
-            //    // Close Jida
-            //    JiddaWrapper.JidaDllUninitialize();
-            //    _jidaTimer.Stop();
-            //    _jidaTimer.Dispose();
-
-            //    // Close serial port
-            //    _serialPort.DataReceived -= new SerialDataReceivedEventHandler(sp_DataReceived);
-            //    _serialPort.Dispose();
-            //    _serialPort.Close();
-            //    eventBox.Items.Insert(0, "Close serial scale port");
-
-            //    nullScaleBtn.Enabled = false;
-            //    tarraScaleBtn.Enabled = false;
-            //    closeScaleBtn.Enabled = false;
-
-            //}
-            //catch(Exception ex)
-            //{
-            //    eventBox.Items.Insert(0, "Error when closing scale");
-            //    eventBox.Items.Insert(0, ex.Message);
-            //}
         }
 
         //
@@ -318,10 +195,6 @@ namespace MTT
         {
             DB.load();
             refreshDbList();
-            //hereeee
-            //dbList.dataSource =
-            //dbList.Refresh();
-            //dbList.Update();
 
             ScaleCell.init();
         }
