@@ -160,6 +160,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="copy-debug.ps1" />
     <None Include="copy.ps1" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

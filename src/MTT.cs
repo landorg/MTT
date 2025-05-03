@@ -384,6 +384,8 @@ namespace MTT
 
         internal void SetWeights(Weights w)
         {
+            string netString = w == null ? "~" : w.net.ToString();
+            string tareString = w == null ? "~" : w.tare.ToString();
             try
             {
 
@@ -393,16 +395,16 @@ namespace MTT
                     // Using BeginInvoke for asynchronous execution (doesn't block the logger thread)
                     eventBox.BeginInvoke(new Action(() =>
                     {
-                        netLabel1.Text = w.net.ToString();
-                        netLabel2.Text = w.net.ToString();
-                        tareLabel1.Text = w.tare.ToString();
-                        tareLabel2.Text = w.tare.ToString();
+                        netLabel1.Text = netString;
+                        netLabel2.Text = netString;
+                        tareLabel1.Text = tareString;
+                        tareLabel2.Text = tareString;
                     }));
                 } else {
-                    netLabel1.Text = w.net.ToString();
-                    netLabel2.Text = w.net.ToString();
-                    tareLabel1.Text = w.tare.ToString();
-                    tareLabel2.Text = w.tare.ToString();
+                    netLabel1.Text = netString;
+                    netLabel2.Text = netString;
+                    tareLabel1.Text = tareString;
+                    tareLabel2.Text = tareString;
                 }
             }
             catch (Exception ex)

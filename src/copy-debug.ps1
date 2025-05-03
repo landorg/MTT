@@ -1,1 +1,1 @@
-Copy-Item -Path C:\MTT\src\bin -Recurse -Destination \\UC_0182_0031\c\MTT\src\bin -Verbose -Force
+Copy-Item -Path 'C:\MTT\src\bin\Remote Debug\MTT.exe' -Recurse -Destination '\\UC_0182_0031\c\MTT\src\bin\Remote Debug\MTT.exe' -Verbose -Force

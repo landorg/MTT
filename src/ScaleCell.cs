@@ -22,6 +22,8 @@ namespace MTT
         private static UsbDevice _evoLinePrinter;
 
         public static bool enabled = false; 
+
+        public static float grossWeight = -1; 
         public static float netWeight = -1; 
         public static float tareWeight = -1; 
 
@@ -121,52 +123,58 @@ namespace MTT
         {
             int address = _serialPort.ReadByte();
             string data = _serialPort.ReadLine();
+            if (data[0] == 'S')
+            {
+                data = data.Substring(0, data.Length - 1);
+            } else { 
+                data = data.Substring(1, data.Length - 2);
+            }
+            // example string:
+            // SX  G      0.000 kg  N      0.000 kg  T      0.000 kg
+
+            //more info: https://www.waagen-forum.de/forum/forum/thread/7837-mettler-toledo-uc3-htt-p-mit-eigener-ansteuerung/ 
+
+            mtt.logToBox(data);
+
+            Weights w = null;
+
             try
             {
-                // example string:
-                // SX  G      0.000 kg  N      0.000 kg  T      0.000 kg
-
-                //more info: https://www.waagen-forum.de/forum/forum/thread/7837-mettler-toledo-uc3-htt-p-mit-eigener-ansteuerung/ 
-
-
                 //int address = (byte) data.Substring(0, 1);
-                string command = data.Substring(0, 3);
-                //mtt.logToBox($"Command: {command}");
+                string command = data.Substring(0, 3).Trim();
+                mtt.logToBox($"Command: {command}");
+
                 if (command == "SXI" || command == "SXD")
                 {
                     mtt.logToBox("instable");
-                    return;
+
+                } else if (command == "SX") {
+
+                    //string netWeightString = System.Text.RegularExpressions.Regex.Split(data, @"\s+")[1];
+                    //mtt.logToBox($"netWeightString: {netWeightString}");
+                    //string tareWeightString = data.Substring(38, 16).Trim();
+                    //mtt.logToBox($"tareWeightString: {tareWeightString}");
+
+                    //if (netWeightString[0]!='N' || tareWeightString[0]!='T')
+                    //{
+                    //    throw new Exception("Parse error");
+                    //}
+
+                    string grossWeightString = System.Text.RegularExpressions.Regex.Split(data, @"\s+")[5];
+                    string netWeightString = System.Text.RegularExpressions.Regex.Split(data, @"\s+")[5];
+                    string tareWeightString = System.Text.RegularExpressions.Regex.Split(data, @"\s+")[8];
+
+                    netWeight = float.Parse(NormalizeDecimal(netWeightString));
+                    tareWeight = float.Parse(NormalizeDecimal(tareWeightString));
+                    grossWeight = float.Parse(NormalizeDecimal(grossWeightString));
+
+                    w = new Weights(netWeight, tareWeight, grossWeight);
                 }
-                string netWeightString = data.Substring(21, 16).Trim();
-                //mtt.logToBox($"netWeightString: {netWeightString}");
-                string tareWeightString = data.Substring(38, 16).Trim();
-                //mtt.logToBox($"tareWeightString: {tareWeightString}");
 
-
-                if (netWeightString[0]!='N' || tareWeightString[0]!='T')
-                {
-                    throw new Exception("Parse error");
-                }
-
-                netWeightString = System.Text.RegularExpressions.Regex.Split(netWeightString, @"\s+")[1];
-                tareWeightString = System.Text.RegularExpressions.Regex.Split(tareWeightString, @"\s+")[1];
-
-                //object weights = new object[]
-                //{
-                //};
-
-                netWeight = float.Parse(NormalizeDecimal(netWeightString));
-                tareWeight = float.Parse(NormalizeDecimal(tareWeightString));
-                Weights w = new Weights(netWeight, tareWeight);
-
-                mtt.logToBox(data.Trim());
-                mtt.SetWeights(w);
-                //mtt.BeginInvoke(new SetTextDeleg(mtt.si_DataReceived), new object[] { data });
+            } catch (Exception ex) {
+                mtt.logToBox($"Error parsing weight: {ex.Message}");
             }
-            catch (Exception ex)
-            {
-                mtt.logToBox($"Error: parsing weight: {ex.Message}");
-            }
+            mtt.SetWeights(w);
 
         }
 
