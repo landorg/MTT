@@ -209,14 +209,14 @@ namespace MTT
         {
             dbList.Items.Clear();
             dbList2.Items.Clear();
-            int i = 0;
             foreach (Product p in DB.products)
             {
-                ListViewItem item = new ListViewItem(p.Name, i);
-                item.SubItems.Add(p.Price.ToString());
+                ListViewItem item = new ListViewItem(p.name);
+                item.SubItems.Add(p.price.ToString());
+                item.SubItems.Add(p.piecePrice ? "stk" : "kg");
+
                 dbList.Items.Add(item);
                 dbList2.Items.Add((ListViewItem)item.Clone());
-                i++;
             }
         }
 
@@ -230,14 +230,30 @@ namespace MTT
 
         }
 
+        private Product selectedDBProduct;
+
         private void dbList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (dbList.SelectedItems.Count > 0)
+
+            if (dbList.SelectedItems.Count == 1)
             {
+
+                string selectedDBProductName = dbList.SelectedItems[0].Text;
+                selectedDBProduct = DB.products.Find(x => x.name == selectedDBProductName);
+
+                piecePriceCheckbox.Checked = selectedDBProduct.piecePrice;
+                txtName.Text = selectedDBProduct.name;
+                txtPreis.Text = selectedDBProduct.price.ToString();
+
                 removeButton.Enabled = true;
             }
             else
             {
+                selectedDBProduct = null;
+                piecePriceCheckbox.Checked = false;
+                txtName.Text = "";
+                txtPreis.Text = "";
+
                 removeButton.Enabled = false;
             }
 
@@ -262,11 +278,11 @@ namespace MTT
             DB.remove(dbList.SelectedItems[0].Text);
         }
 
-        private void addButton_Click(object sender, EventArgs e)
+        private void saveButton_Click(object sender, EventArgs e)
         {
             try
             {
-                Product p = new Product(txtName.Text, decimal.Parse(txtPreis.Text));
+                Product p = new Product(txtName.Text, piecePriceCheckbox.Checked, decimal.Parse(txtPreis.Text));
                 DB.add(p);
 
             }
@@ -280,14 +296,16 @@ namespace MTT
 
         private void addArticleButton_Click(object sender, EventArgs e)
         {
-            if (dbList2.SelectedItems.Count == 1 && currentWeight != null)
+            if (selectedProduct != null)
             {
-
-                string selectedProductName = dbList2.SelectedItems[0].Text;
-
-                Product p = DB.products.Find(x => x.Name == selectedProductName);
-
-                reciept.add(new Article(p, currentWeight.net));
+                if (selectedProduct.piecePrice)
+                {
+                    reciept.add(new Article(selectedProduct, 1));
+                }
+                else
+                {
+                    reciept.add(new Article(selectedProduct, currentWeight != null ? currentWeight.net : 0));
+                }
             }
         }
 
@@ -402,12 +420,10 @@ namespace MTT
             string netString = w == null ? "~" : w.net.ToString();
             string tareString = w == null ? "~" : w.tare.ToString();
             string priceString = "0.00";
-            if (w != null && dbList2.SelectedItems.Count == 1)
+            if (w != null && selectedProduct != null)
             {
 
-                string selectedProductName = dbList2.SelectedItems[0].Text;
-                Product p = DB.products.Find(x => x.Name == selectedProductName);
-                currentPrice = Math.Round(w.net * p.Price, 2);
+                currentPrice = Math.Round(w.net * selectedProduct.price, 2);
                 priceString = $"{currentPrice:0.00}";
             }
 
@@ -447,9 +463,9 @@ namespace MTT
             recieptList.Items.Clear();
             foreach (Article a in reciept.articles)
             {
-                ListViewItem item = new ListViewItem(a.product.Name);
-                item.SubItems.Add(a.product.Price.ToString());
-                item.SubItems.Add(a.weight.ToString());
+                ListViewItem item = new ListViewItem(a.product.name);
+                item.SubItems.Add(a.product.price.ToString());
+                item.SubItems.Add(a.Weight.ToString());
                 item.SubItems.Add(a.price.ToString());
                 recieptList.Items.Add(item);
             }
@@ -475,6 +491,40 @@ namespace MTT
         private void setWeightButton_Click(object sender, EventArgs e)
         {
             this.SetWeights(new Weights(0.15M, 0, 0.15M));
+
+        }
+
+        private void piecePrice_CheckedChanged(object sender, EventArgs e)
+        {
+            if (piecePriceCheckbox.Checked)
+            {
+                label2.Text = "€/stk";
+            } else { 
+                label2.Text = "€/kg";
+            }
+        }
+
+        private Product selectedProduct;
+        private void dbList2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (dbList2.SelectedItems.Count == 1)
+            {
+
+                string selectedProductName = dbList2.SelectedItems[0].Text;
+                selectedProduct = DB.products.Find(x => x.name == selectedProductName);
+
+                if (selectedProduct.piecePrice)
+                {
+                    addArticleButton.Text = "+ 1 Stück";
+                }
+                else
+                {
+                    addArticleButton.Text = "abwiegen";
+                }
+
+            } else {
+                addArticleButton.Text = "";
+            } 
 
         }
     }

@@ -17,7 +17,7 @@ namespace MTT
 
         public static void remove(string productName)
         {
-            products.Remove(new Product(productName, 0));
+            products.Remove(new Product(productName));
 
             MTT mtt = (MTT)Application.OpenForms["MTT"];
 
@@ -30,7 +30,7 @@ namespace MTT
             bool contains = false;
             foreach (Product p in products)
             {
-                if (product.Name == p.Name)
+                if (product.name == p.name)
                 {
                     contains = true; break;
                 }

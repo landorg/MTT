@@ -32,7 +32,31 @@ namespace MTT
 
         internal void add(Article a)
         {
-            articles.Add(a);
+            if (a.product.piecePrice)
+            {
+                Article existingArticle = null;
+                foreach (Article b in articles )
+                {
+                    if (b.product.name == a.product.name)
+                    {
+                        existingArticle = b;
+                        break;
+                    }
+
+                }
+                if (existingArticle != null)
+                {
+                    existingArticle.Weight += 1;
+                } else
+                {
+                    articles.Add(a);
+                }
+            }
+            else
+            {
+                articles.Add(a);
+            }
+
             this.reSum();
 
             MTT mtt = (MTT)Application.OpenForms["MTT"];

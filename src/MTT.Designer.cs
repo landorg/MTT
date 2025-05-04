@@ -30,9 +30,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
-            "Tomaten",
-            "2.5"}, -1);
             this.eventBox = new System.Windows.Forms.ListBox();
             this.ucLoadcellBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.loadcellGroupBox = new System.Windows.Forms.GroupBox();
@@ -82,11 +79,12 @@
             this.addArticleButton = new System.Windows.Forms.Button();
             this.netLabel1 = new System.Windows.Forms.Label();
             this.tabEdit = new System.Windows.Forms.TabPage();
+            this.piecePriceCheckbox = new System.Windows.Forms.CheckBox();
             this.exitButton = new System.Windows.Forms.Button();
             this.kbButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.removeButton = new System.Windows.Forms.Button();
-            this.addButton = new System.Windows.Forms.Button();
+            this.saveButton = new System.Windows.Forms.Button();
             this.txtPreis = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
             this.dbList = new System.Windows.Forms.ListView();
@@ -94,6 +92,7 @@
             this.colPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabDebug = new System.Windows.Forms.TabPage();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.colPiecePrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.ucLoadcellBindingSource)).BeginInit();
             this.loadcellGroupBox.SuspendLayout();
             this.printerGroupBox.SuspendLayout();
@@ -579,6 +578,7 @@
             this.dbList2.TabIndex = 6;
             this.dbList2.UseCompatibleStateImageBehavior = false;
             this.dbList2.View = System.Windows.Forms.View.Details;
+            this.dbList2.SelectedIndexChanged += new System.EventHandler(this.dbList2_SelectedIndexChanged);
             // 
             // columnHeader1
             // 
@@ -615,7 +615,6 @@
             this.addArticleButton.Name = "addArticleButton";
             this.addArticleButton.Size = new System.Drawing.Size(174, 77);
             this.addArticleButton.TabIndex = 2;
-            this.addArticleButton.Text = "hinzufügen";
             this.addArticleButton.UseVisualStyleBackColor = true;
             this.addArticleButton.Click += new System.EventHandler(this.addArticleButton_Click);
             // 
@@ -631,11 +630,12 @@
             // 
             // tabEdit
             // 
+            this.tabEdit.Controls.Add(this.piecePriceCheckbox);
             this.tabEdit.Controls.Add(this.exitButton);
             this.tabEdit.Controls.Add(this.kbButton);
             this.tabEdit.Controls.Add(this.label2);
             this.tabEdit.Controls.Add(this.removeButton);
-            this.tabEdit.Controls.Add(this.addButton);
+            this.tabEdit.Controls.Add(this.saveButton);
             this.tabEdit.Controls.Add(this.txtPreis);
             this.tabEdit.Controls.Add(this.txtName);
             this.tabEdit.Controls.Add(this.dbList);
@@ -645,6 +645,17 @@
             this.tabEdit.TabIndex = 2;
             this.tabEdit.Text = "Bearbeiten";
             this.tabEdit.UseVisualStyleBackColor = true;
+            // 
+            // piecePriceCheckbox
+            // 
+            this.piecePriceCheckbox.AutoSize = true;
+            this.piecePriceCheckbox.Location = new System.Drawing.Point(639, 54);
+            this.piecePriceCheckbox.Name = "piecePriceCheckbox";
+            this.piecePriceCheckbox.Size = new System.Drawing.Size(145, 33);
+            this.piecePriceCheckbox.TabIndex = 8;
+            this.piecePriceCheckbox.Text = "Stückpreis";
+            this.piecePriceCheckbox.UseVisualStyleBackColor = true;
+            this.piecePriceCheckbox.CheckedChanged += new System.EventHandler(this.piecePrice_CheckedChanged);
             // 
             // exitButton
             // 
@@ -659,7 +670,7 @@
             // 
             // kbButton
             // 
-            this.kbButton.Location = new System.Drawing.Point(635, 103);
+            this.kbButton.Location = new System.Drawing.Point(640, 140);
             this.kbButton.Name = "kbButton";
             this.kbButton.Size = new System.Drawing.Size(149, 41);
             this.kbButton.TabIndex = 6;
@@ -679,7 +690,7 @@
             // removeButton
             // 
             this.removeButton.Enabled = false;
-            this.removeButton.Location = new System.Drawing.Point(635, 54);
+            this.removeButton.Location = new System.Drawing.Point(640, 91);
             this.removeButton.Name = "removeButton";
             this.removeButton.Size = new System.Drawing.Size(149, 43);
             this.removeButton.TabIndex = 4;
@@ -687,15 +698,15 @@
             this.removeButton.UseVisualStyleBackColor = true;
             this.removeButton.Click += new System.EventHandler(this.removeButton_Click);
             // 
-            // addButton
+            // saveButton
             // 
-            this.addButton.Location = new System.Drawing.Point(433, 54);
-            this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(201, 43);
-            this.addButton.TabIndex = 4;
-            this.addButton.Text = "hinzufügen";
-            this.addButton.UseVisualStyleBackColor = true;
-            this.addButton.Click += new System.EventHandler(this.addButton_Click);
+            this.saveButton.Location = new System.Drawing.Point(438, 91);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(201, 43);
+            this.saveButton.TabIndex = 4;
+            this.saveButton.Text = "speichern";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // txtPreis
             // 
@@ -717,14 +728,13 @@
             // 
             this.dbList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colProduct,
-            this.colPrice});
+            this.colPrice,
+            this.colPiecePrice});
             this.dbList.FullRowSelect = true;
             this.dbList.GridLines = true;
             this.dbList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.dbList.HideSelection = false;
-            this.dbList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
-            this.dbList.Location = new System.Drawing.Point(3, 3);
+            this.dbList.Location = new System.Drawing.Point(8, 3);
             this.dbList.MultiSelect = false;
             this.dbList.Name = "dbList";
             this.dbList.Size = new System.Drawing.Size(424, 531);
@@ -736,12 +746,12 @@
             // colProduct
             // 
             this.colProduct.Text = "Produkt";
-            this.colProduct.Width = 260;
+            this.colProduct.Width = 269;
             // 
             // colPrice
             // 
-            this.colPrice.Text = "Preis €/kg";
-            this.colPrice.Width = 160;
+            this.colPrice.Text = "Preis";
+            this.colPrice.Width = 95;
             // 
             // tabDebug
             // 
@@ -763,6 +773,11 @@
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(28, 28);
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // colPiecePrice
+            // 
+            this.colPiecePrice.Text = "pro";
+            this.colPiecePrice.Width = 95;
             // 
             // MTT
             // 
@@ -824,7 +839,7 @@
         private System.Windows.Forms.TextBox txtPreis;
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.Button addButton;
+        private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.Button removeButton;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListView dbList2;
@@ -857,6 +872,8 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label sumLabel;
         private System.Windows.Forms.Button setWeightButton;
+        private System.Windows.Forms.CheckBox piecePriceCheckbox;
+        private System.Windows.Forms.ColumnHeader colPiecePrice;
     }
 
 }
