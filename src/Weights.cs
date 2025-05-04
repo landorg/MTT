@@ -4,15 +4,15 @@ namespace MTT
 {
     public class Weights
     {
-        public Weights(float net, float tare, float gross)
+        public Weights(decimal net, decimal tare, decimal gross)
         {
             this.net = net;
             this.tare = tare;
             this.gross = gross;
         }
 
-        public float net { get; set; }
-        public float tare { get; set; }
-        public float gross { get; set; }
+        public decimal net { get; set; }
+        public decimal tare { get; set; }
+        public decimal gross { get; set; }
     } 
 }

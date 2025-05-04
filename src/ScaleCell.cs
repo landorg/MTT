@@ -10,7 +10,7 @@ namespace MTT
 
     public class ScaleCell
     {
-        public float weight = -1;
+        public decimal weight = -1;
 
         private static MTT mtt = (MTT)Application.OpenForms["MTT"];
         private static SerialPort _serialPort = new SerialPort("COM2", 9600, Parity.Even, 7, StopBits.Two);
@@ -23,9 +23,9 @@ namespace MTT
 
         public static bool enabled = false; 
 
-        public static float grossWeight = -1; 
-        public static float netWeight = -1; 
-        public static float tareWeight = -1; 
+        public static decimal grossWeight = -1; 
+        public static decimal netWeight = -1; 
+        public static decimal tareWeight = -1; 
 
         public static void init()
         {
@@ -164,9 +164,9 @@ namespace MTT
                     string netWeightString = System.Text.RegularExpressions.Regex.Split(data, @"\s+")[5];
                     string tareWeightString = System.Text.RegularExpressions.Regex.Split(data, @"\s+")[8];
 
-                    netWeight = float.Parse(NormalizeDecimal(netWeightString));
-                    tareWeight = float.Parse(NormalizeDecimal(tareWeightString));
-                    grossWeight = float.Parse(NormalizeDecimal(grossWeightString));
+                    netWeight = decimal.Parse(NormalizeDecimal(netWeightString));
+                    tareWeight = decimal.Parse(NormalizeDecimal(tareWeightString));
+                    grossWeight = decimal.Parse(NormalizeDecimal(grossWeightString));
 
                     w = new Weights(netWeight, tareWeight, grossWeight);
                 }

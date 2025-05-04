@@ -2,10 +2,10 @@
 {
     internal class Article
     {
-        public float weight;
+        public decimal weight;
         public Product product;
-        public float price;
-        public Article(Product p, float weight)
+        public decimal price;
+        public Article(Product p, decimal weight)
         {
             this.product = p;
             this.weight = weight;

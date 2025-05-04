@@ -10,7 +10,7 @@ namespace MTT
 {
     internal class Product : IEquatable<Product>
     {
-        public Product(string name, float price = 0)
+        public Product(string name, decimal price = 0)
         {
             //ID = iD;
             Name = name;
@@ -19,7 +19,7 @@ namespace MTT
 
         public int ID { get; set; }
         public string Name { get; set; }
-        public float Price { get; set; }
+        public decimal Price { get; set; }
 
         public bool Equals(Product other)
         {

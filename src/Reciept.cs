@@ -13,16 +13,23 @@ namespace MTT
 
 
         public List<Article> articles;
+        decimal sum;
 
         public Reciept()
         {
             articles = new List<Article>();
-
+            sum = 0;
         }
 
         internal void add(Article a)
         {
             articles.Add(a);
+
+            sum = 0;
+            foreach (Article b in articles)
+            {
+                sum += b.price;
+            }
 
             MTT mtt = (MTT)Application.OpenForms["MTT"];
             mtt.refreshReciept();

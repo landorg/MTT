@@ -266,7 +266,7 @@ namespace MTT
         {
             try
             {
-                Product p = new Product(txtName.Text, float.Parse(txtPreis.Text));
+                Product p = new Product(txtName.Text, decimal.Parse(txtPreis.Text));
                 DB.add(p);
 
             }
@@ -281,7 +281,7 @@ namespace MTT
         private void addArticleButton_Click(object sender, EventArgs e)
         {
             string selectedProductName = dbList2.SelectedItems[0].Text;
-            //float selectedProductKgPrice = float.Parse(dbList2.SelectedItems[0].SubItems[1].Text);
+            //decimal selectedProductKgPrice = decimal.Parse(dbList2.SelectedItems[0].SubItems[1].Text);
 
             Product p = DB.products.Find(x => x.Name == selectedProductName);
 
@@ -439,11 +439,6 @@ namespace MTT
                 recieptList.Items.Add(item);
                 i++;
             }
-        }
-
-        private void recieptList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }
