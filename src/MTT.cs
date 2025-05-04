@@ -393,6 +393,7 @@ namespace MTT
         }
 
         private Weights currentWeight;
+        private decimal currentPrice;
 
         internal void SetWeights(Weights w)
         {
@@ -400,6 +401,16 @@ namespace MTT
 
             string netString = w == null ? "~" : w.net.ToString();
             string tareString = w == null ? "~" : w.tare.ToString();
+            string priceString = "0.00";
+            if (w != null && dbList2.SelectedItems.Count == 1)
+            {
+
+                string selectedProductName = dbList2.SelectedItems[0].Text;
+                Product p = DB.products.Find(x => x.Name == selectedProductName);
+                currentPrice = Math.Round(w.net * p.Price, 2);
+                priceString = $"{currentPrice:0.00}";
+            }
+
             try
             {
 
@@ -413,12 +424,14 @@ namespace MTT
                         netLabel2.Text = netString;
                         tareLabel1.Text = tareString;
                         tareLabel2.Text = tareString;
+                        currentPriceLabel.Text = priceString;
                     }));
                 } else {
                     netLabel1.Text = netString;
                     netLabel2.Text = netString;
                     tareLabel1.Text = tareString;
                     tareLabel2.Text = tareString;
+                    currentPriceLabel.Text = priceString;
                 }
             }
             catch (Exception ex)
@@ -432,7 +445,6 @@ namespace MTT
         internal void refreshReciept()
         {
             recieptList.Items.Clear();
-            int i = 0;
             foreach (Article a in reciept.articles)
             {
                 ListViewItem item = new ListViewItem(a.product.Name);
@@ -440,8 +452,8 @@ namespace MTT
                 item.SubItems.Add(a.weight.ToString());
                 item.SubItems.Add(a.price.ToString());
                 recieptList.Items.Add(item);
-                i++;
             }
+            sumLabel.Text = $"{Math.Round(reciept.sum, 2):0.00}";
         }
 
         private void recieptList_SelectedIndexChanged(object sender, EventArgs e)
@@ -462,7 +474,7 @@ namespace MTT
 
         private void setWeightButton_Click(object sender, EventArgs e)
         {
-            this.SetWeights(new Weights(0.15f, 0, 0.15f));
+            this.SetWeights(new Weights(0.15M, 0, 0.15M));
 
         }
     }

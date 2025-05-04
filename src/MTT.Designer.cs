@@ -30,12 +30,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
             "Tomaten",
             "2.5"}, -1);
             this.eventBox = new System.Windows.Forms.ListBox();
             this.ucLoadcellBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.loadcellGroupBox = new System.Windows.Forms.GroupBox();
+            this.setWeightButton = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.closeScaleBtn = new System.Windows.Forms.Button();
@@ -93,7 +94,6 @@
             this.colPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabDebug = new System.Windows.Forms.TabPage();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.setWeightButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ucLoadcellBindingSource)).BeginInit();
             this.loadcellGroupBox.SuspendLayout();
             this.printerGroupBox.SuspendLayout();
@@ -109,11 +109,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.eventBox.FormattingEnabled = true;
-            this.eventBox.ItemHeight = 24;
             this.eventBox.Location = new System.Drawing.Point(2, 137);
             this.eventBox.Margin = new System.Windows.Forms.Padding(2);
             this.eventBox.Name = "eventBox";
-            this.eventBox.Size = new System.Drawing.Size(787, 388);
+            this.eventBox.Size = new System.Drawing.Size(787, 381);
             this.eventBox.TabIndex = 0;
             // 
             // loadcellGroupBox
@@ -139,6 +138,16 @@
             this.loadcellGroupBox.Text = "UC loadcell";
             this.loadcellGroupBox.Enter += new System.EventHandler(this.loadcellGroupBox_Enter);
             // 
+            // setWeightButton
+            // 
+            this.setWeightButton.Location = new System.Drawing.Point(406, 25);
+            this.setWeightButton.Name = "setWeightButton";
+            this.setWeightButton.Size = new System.Drawing.Size(75, 23);
+            this.setWeightButton.TabIndex = 24;
+            this.setWeightButton.Text = "setWeight";
+            this.setWeightButton.UseVisualStyleBackColor = true;
+            this.setWeightButton.Click += new System.EventHandler(this.setWeightButton_Click);
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -146,7 +155,7 @@
             this.label7.Location = new System.Drawing.Point(322, 64);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(54, 38);
+            this.label7.Size = new System.Drawing.Size(32, 24);
             this.label7.TabIndex = 23;
             this.label7.Text = "kg";
             // 
@@ -157,7 +166,7 @@
             this.label6.Location = new System.Drawing.Point(322, 28);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(54, 38);
+            this.label6.Size = new System.Drawing.Size(32, 24);
             this.label6.TabIndex = 22;
             this.label6.Text = "kg";
             // 
@@ -212,7 +221,7 @@
             this.label12.Location = new System.Drawing.Point(239, 64);
             this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(38, 38);
+            this.label12.Size = new System.Drawing.Size(23, 24);
             this.label12.TabIndex = 17;
             this.label12.Text = "T";
             // 
@@ -223,7 +232,7 @@
             this.label11.Location = new System.Drawing.Point(239, 28);
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(42, 38);
+            this.label11.Size = new System.Drawing.Size(25, 24);
             this.label11.TabIndex = 16;
             this.label11.Text = "N";
             // 
@@ -234,7 +243,7 @@
             this.tareLabel2.Location = new System.Drawing.Point(260, 64);
             this.tareLabel2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.tareLabel2.Name = "tareLabel2";
-            this.tareLabel2.Size = new System.Drawing.Size(29, 38);
+            this.tareLabel2.Size = new System.Drawing.Size(17, 24);
             this.tareLabel2.TabIndex = 17;
             this.tareLabel2.Text = "-";
             // 
@@ -245,7 +254,7 @@
             this.netLabel2.Location = new System.Drawing.Point(260, 28);
             this.netLabel2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.netLabel2.Name = "netLabel2";
-            this.netLabel2.Size = new System.Drawing.Size(29, 38);
+            this.netLabel2.Size = new System.Drawing.Size(17, 24);
             this.netLabel2.TabIndex = 16;
             this.netLabel2.Text = "-";
             // 
@@ -367,7 +376,7 @@
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
             this.label15.Location = new System.Drawing.Point(379, 371);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(43, 48);
+            this.label15.Size = new System.Drawing.Size(26, 29);
             this.label15.TabIndex = 33;
             this.label15.Text = "€";
             // 
@@ -377,7 +386,7 @@
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
             this.label13.Location = new System.Drawing.Point(225, 371);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(164, 48);
+            this.label13.Size = new System.Drawing.Size(96, 29);
             this.label13.TabIndex = 32;
             this.label13.Text = "Summe";
             // 
@@ -387,7 +396,7 @@
             this.sumLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
             this.sumLabel.Location = new System.Drawing.Point(327, 371);
             this.sumLabel.Name = "sumLabel";
-            this.sumLabel.Size = new System.Drawing.Size(101, 48);
+            this.sumLabel.Size = new System.Drawing.Size(58, 29);
             this.sumLabel.TabIndex = 31;
             this.sumLabel.Text = "0,00";
             // 
@@ -397,7 +406,7 @@
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
             this.label10.Location = new System.Drawing.Point(552, 400);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(64, 48);
+            this.label10.Size = new System.Drawing.Size(39, 29);
             this.label10.TabIndex = 30;
             this.label10.Text = "kg";
             // 
@@ -407,7 +416,7 @@
             this.tareLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
             this.tareLabel1.Location = new System.Drawing.Point(488, 400);
             this.tareLabel1.Name = "tareLabel1";
-            this.tareLabel1.Size = new System.Drawing.Size(124, 48);
+            this.tareLabel1.Size = new System.Drawing.Size(71, 29);
             this.tareLabel1.TabIndex = 29;
             this.tareLabel1.Text = "0,000";
             // 
@@ -417,7 +426,7 @@
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
             this.label9.Location = new System.Drawing.Point(453, 400);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(46, 48);
+            this.label9.Size = new System.Drawing.Size(29, 29);
             this.label9.TabIndex = 28;
             this.label9.Text = "T";
             // 
@@ -427,7 +436,7 @@
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
             this.label8.Location = new System.Drawing.Point(451, 371);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(50, 48);
+            this.label8.Size = new System.Drawing.Size(31, 29);
             this.label8.TabIndex = 27;
             this.label8.Text = "N";
             // 
@@ -437,7 +446,7 @@
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
             this.label5.Location = new System.Drawing.Point(542, 429);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(43, 48);
+            this.label5.Size = new System.Drawing.Size(26, 29);
             this.label5.TabIndex = 26;
             this.label5.Text = "€";
             // 
@@ -447,7 +456,7 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
             this.label1.Location = new System.Drawing.Point(552, 371);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(64, 48);
+            this.label1.Size = new System.Drawing.Size(39, 29);
             this.label1.TabIndex = 25;
             this.label1.Text = "kg";
             // 
@@ -478,7 +487,7 @@
             this.statusPritnerLabel.AutoSize = true;
             this.statusPritnerLabel.Location = new System.Drawing.Point(53, 510);
             this.statusPritnerLabel.Name = "statusPritnerLabel";
-            this.statusPritnerLabel.Size = new System.Drawing.Size(50, 48);
+            this.statusPritnerLabel.Size = new System.Drawing.Size(30, 29);
             this.statusPritnerLabel.TabIndex = 11;
             this.statusPritnerLabel.Text = "🖶";
             // 
@@ -487,7 +496,7 @@
             this.statusScaleLabel.AutoSize = true;
             this.statusScaleLabel.Location = new System.Drawing.Point(8, 508);
             this.statusScaleLabel.Name = "statusScaleLabel";
-            this.statusScaleLabel.Size = new System.Drawing.Size(68, 48);
+            this.statusScaleLabel.Size = new System.Drawing.Size(39, 29);
             this.statusScaleLabel.TabIndex = 10;
             this.statusScaleLabel.Text = "⚖";
             // 
@@ -497,7 +506,7 @@
             this.currentPriceLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
             this.currentPriceLabel.Location = new System.Drawing.Point(488, 429);
             this.currentPriceLabel.Name = "currentPriceLabel";
-            this.currentPriceLabel.Size = new System.Drawing.Size(101, 48);
+            this.currentPriceLabel.Size = new System.Drawing.Size(58, 29);
             this.currentPriceLabel.TabIndex = 9;
             this.currentPriceLabel.Text = "0,00";
             // 
@@ -506,7 +515,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(165, 46);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(209, 48);
+            this.label3.Size = new System.Drawing.Size(122, 29);
             this.label3.TabIndex = 8;
             this.label3.Text = "Rechnung";
             // 
@@ -583,7 +592,7 @@
             // 
             // delArticleButton
             // 
-            this.delArticleButton.Location = new System.Drawing.Point(8, 371);
+            this.delArticleButton.Location = new System.Drawing.Point(8, 430);
             this.delArticleButton.Name = "delArticleButton";
             this.delArticleButton.Size = new System.Drawing.Size(142, 77);
             this.delArticleButton.TabIndex = 5;
@@ -616,7 +625,7 @@
             this.netLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
             this.netLabel1.Location = new System.Drawing.Point(488, 371);
             this.netLabel1.Name = "netLabel1";
-            this.netLabel1.Size = new System.Drawing.Size(124, 48);
+            this.netLabel1.Size = new System.Drawing.Size(71, 29);
             this.netLabel1.TabIndex = 1;
             this.netLabel1.Text = "0,000";
             // 
@@ -663,7 +672,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(732, 14);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(99, 48);
+            this.label2.Size = new System.Drawing.Size(59, 29);
             this.label2.TabIndex = 5;
             this.label2.Text = "€/kg";
             // 
@@ -693,7 +702,7 @@
             this.txtPreis.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F);
             this.txtPreis.Location = new System.Drawing.Point(616, 3);
             this.txtPreis.Name = "txtPreis";
-            this.txtPreis.Size = new System.Drawing.Size(114, 74);
+            this.txtPreis.Size = new System.Drawing.Size(114, 45);
             this.txtPreis.TabIndex = 3;
             // 
             // txtName
@@ -701,7 +710,7 @@
             this.txtName.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F);
             this.txtName.Location = new System.Drawing.Point(433, 3);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(177, 74);
+            this.txtName.Size = new System.Drawing.Size(177, 45);
             this.txtName.TabIndex = 2;
             // 
             // dbList
@@ -714,7 +723,7 @@
             this.dbList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.dbList.HideSelection = false;
             this.dbList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem2});
+            listViewItem1});
             this.dbList.Location = new System.Drawing.Point(3, 3);
             this.dbList.MultiSelect = false;
             this.dbList.Name = "dbList";
@@ -755,19 +764,9 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // setWeightButton
-            // 
-            this.setWeightButton.Location = new System.Drawing.Point(406, 25);
-            this.setWeightButton.Name = "setWeightButton";
-            this.setWeightButton.Size = new System.Drawing.Size(75, 23);
-            this.setWeightButton.TabIndex = 24;
-            this.setWeightButton.Text = "setWeight";
-            this.setWeightButton.UseVisualStyleBackColor = true;
-            this.setWeightButton.Click += new System.EventHandler(this.setWeightButton_Click);
-            // 
             // MTT
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 600);
             this.Controls.Add(this.tabControl1);

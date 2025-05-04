@@ -13,7 +13,7 @@ namespace MTT
 
 
         public List<Article> articles;
-        decimal sum;
+        public decimal sum;
 
         public Reciept()
         {
@@ -21,15 +21,19 @@ namespace MTT
             sum = 0;
         }
 
-        internal void add(Article a)
+        private void reSum()
         {
-            articles.Add(a);
-
             sum = 0;
             foreach (Article b in articles)
             {
                 sum += b.price;
             }
+        }
+
+        internal void add(Article a)
+        {
+            articles.Add(a);
+            this.reSum();
 
             MTT mtt = (MTT)Application.OpenForms["MTT"];
             mtt.refreshReciept();
@@ -38,6 +42,8 @@ namespace MTT
         internal void remove(int selectedArticle)
         {
             articles.Remove(articles[selectedArticle]);
+            this.reSum();
+
             MTT mtt = (MTT)Application.OpenForms["MTT"];
             mtt.refreshReciept();
         }
