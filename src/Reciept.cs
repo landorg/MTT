@@ -34,5 +34,12 @@ namespace MTT
             MTT mtt = (MTT)Application.OpenForms["MTT"];
             mtt.refreshReciept();
         }
+
+        internal void remove(int selectedArticle)
+        {
+            articles.Remove(articles[selectedArticle]);
+            MTT mtt = (MTT)Application.OpenForms["MTT"];
+            mtt.refreshReciept();
+        }
     }
 }

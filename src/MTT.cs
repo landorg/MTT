@@ -280,12 +280,15 @@ namespace MTT
 
         private void addArticleButton_Click(object sender, EventArgs e)
         {
-            string selectedProductName = dbList2.SelectedItems[0].Text;
-            //decimal selectedProductKgPrice = decimal.Parse(dbList2.SelectedItems[0].SubItems[1].Text);
+            if (dbList2.SelectedItems.Count == 1 && currentWeight != null)
+            {
 
-            Product p = DB.products.Find(x => x.Name == selectedProductName);
+                string selectedProductName = dbList2.SelectedItems[0].Text;
 
-            reciept.add(new Article(p, currentWeight.net));
+                Product p = DB.products.Find(x => x.Name == selectedProductName);
+
+                reciept.add(new Article(p, currentWeight.net));
+            }
         }
 
         private void itemBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -439,6 +442,28 @@ namespace MTT
                 recieptList.Items.Add(item);
                 i++;
             }
+        }
+
+        private void recieptList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void delArticleButton_Click(object sender, EventArgs e)
+        {
+            if (recieptList.SelectedItems.Count > 0)
+            {
+                int selectedArticle = recieptList.SelectedItems[0].Index;
+                //float selectedProductKgPrice = float.Parse(dbList2.SelectedItems[0].SubItems[1].Text);
+
+                reciept.remove(selectedArticle);
+            }
+        }
+
+        private void setWeightButton_Click(object sender, EventArgs e)
+        {
+            this.SetWeights(new Weights(0.15f, 0, 0.15f));
+
         }
     }
 }

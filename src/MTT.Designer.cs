@@ -30,7 +30,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
             "Tomaten",
             "2.5"}, -1);
             this.eventBox = new System.Windows.Forms.ListBox();
@@ -76,7 +76,7 @@
             this.dbList2 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.delButton = new System.Windows.Forms.Button();
+            this.delArticleButton = new System.Windows.Forms.Button();
             this.sumButton = new System.Windows.Forms.Button();
             this.addArticleButton = new System.Windows.Forms.Button();
             this.netLabel1 = new System.Windows.Forms.Label();
@@ -93,6 +93,7 @@
             this.colPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabDebug = new System.Windows.Forms.TabPage();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.setWeightButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ucLoadcellBindingSource)).BeginInit();
             this.loadcellGroupBox.SuspendLayout();
             this.printerGroupBox.SuspendLayout();
@@ -117,6 +118,7 @@
             // 
             // loadcellGroupBox
             // 
+            this.loadcellGroupBox.Controls.Add(this.setWeightButton);
             this.loadcellGroupBox.Controls.Add(this.label7);
             this.loadcellGroupBox.Controls.Add(this.label6);
             this.loadcellGroupBox.Controls.Add(this.closeScaleBtn);
@@ -320,6 +322,8 @@
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.ItemSize = new System.Drawing.Size(100, 50);
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.MaximumSize = new System.Drawing.Size(800, 600);
+            this.tabControl1.MinimumSize = new System.Drawing.Size(800, 600);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.Padding = new System.Drawing.Point(40, 3);
             this.tabControl1.SelectedIndex = 0;
@@ -345,7 +349,7 @@
             this.tabScale.Controls.Add(this.label3);
             this.tabScale.Controls.Add(this.recieptList);
             this.tabScale.Controls.Add(this.dbList2);
-            this.tabScale.Controls.Add(this.delButton);
+            this.tabScale.Controls.Add(this.delArticleButton);
             this.tabScale.Controls.Add(this.sumButton);
             this.tabScale.Controls.Add(this.addArticleButton);
             this.tabScale.Controls.Add(this.netLabel1);
@@ -577,14 +581,15 @@
             this.columnHeader2.Text = "Preis €/kg";
             this.columnHeader2.Width = 160;
             // 
-            // delButton
+            // delArticleButton
             // 
-            this.delButton.Location = new System.Drawing.Point(3, 428);
-            this.delButton.Name = "delButton";
-            this.delButton.Size = new System.Drawing.Size(142, 77);
-            this.delButton.TabIndex = 5;
-            this.delButton.Text = "löschen";
-            this.delButton.UseVisualStyleBackColor = true;
+            this.delArticleButton.Location = new System.Drawing.Point(8, 371);
+            this.delArticleButton.Name = "delArticleButton";
+            this.delArticleButton.Size = new System.Drawing.Size(142, 77);
+            this.delArticleButton.TabIndex = 5;
+            this.delArticleButton.Text = "löschen";
+            this.delArticleButton.UseVisualStyleBackColor = true;
+            this.delArticleButton.Click += new System.EventHandler(this.delArticleButton_Click);
             // 
             // sumButton
             // 
@@ -627,7 +632,7 @@
             this.tabEdit.Controls.Add(this.dbList);
             this.tabEdit.Location = new System.Drawing.Point(4, 54);
             this.tabEdit.Name = "tabEdit";
-            this.tabEdit.Size = new System.Drawing.Size(793, 542);
+            this.tabEdit.Size = new System.Drawing.Size(792, 542);
             this.tabEdit.TabIndex = 2;
             this.tabEdit.Text = "Bearbeiten";
             this.tabEdit.UseVisualStyleBackColor = true;
@@ -709,7 +714,7 @@
             this.dbList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.dbList.HideSelection = false;
             this.dbList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
+            listViewItem2});
             this.dbList.Location = new System.Drawing.Point(3, 3);
             this.dbList.MultiSelect = false;
             this.dbList.Name = "dbList";
@@ -739,7 +744,7 @@
             this.tabDebug.Name = "tabDebug";
             this.tabDebug.Padding = new System.Windows.Forms.Padding(3);
             this.tabDebug.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tabDebug.Size = new System.Drawing.Size(793, 542);
+            this.tabDebug.Size = new System.Drawing.Size(792, 542);
             this.tabDebug.TabIndex = 1;
             this.tabDebug.Text = "Test";
             this.tabDebug.UseVisualStyleBackColor = true;
@@ -750,6 +755,16 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
+            // setWeightButton
+            // 
+            this.setWeightButton.Location = new System.Drawing.Point(406, 25);
+            this.setWeightButton.Name = "setWeightButton";
+            this.setWeightButton.Size = new System.Drawing.Size(75, 23);
+            this.setWeightButton.TabIndex = 24;
+            this.setWeightButton.Text = "setWeight";
+            this.setWeightButton.UseVisualStyleBackColor = true;
+            this.setWeightButton.Click += new System.EventHandler(this.setWeightButton_Click);
+            // 
             // MTT
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -759,6 +774,8 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.18F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(2);
+            this.MaximumSize = new System.Drawing.Size(800, 600);
+            this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "MTT";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MTT";
@@ -798,7 +815,7 @@
         private System.Windows.Forms.TabPage tabScale;
         private System.Windows.Forms.TabPage tabDebug;
         private System.Windows.Forms.TabPage tabEdit;
-        private System.Windows.Forms.Button delButton;
+        private System.Windows.Forms.Button delArticleButton;
         private System.Windows.Forms.Button sumButton;
         private System.Windows.Forms.Button addArticleButton;
         private System.Windows.Forms.Label netLabel1;
@@ -840,6 +857,7 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label sumLabel;
+        private System.Windows.Forms.Button setWeightButton;
     }
 
 }
