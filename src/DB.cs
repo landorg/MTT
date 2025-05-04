@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Windows.Forms;
 using Newtonsoft.Json;
@@ -12,7 +13,7 @@ namespace MTT
 
         private const String filename = "C:/MTT/products.json";
 
-        public static HashSet<Product> products = new HashSet<Product>();
+        public static List<Product> products = new List<Product>();
 
         public static void remove(string productName)
         {
@@ -26,11 +27,20 @@ namespace MTT
 
         public static void add(Product product)
         {
-            if (!products.Add(product))
+            bool contains = false;
+            foreach (Product p in products)
+            {
+                if (product.Name == p.Name)
+                {
+                    contains = true; break;
+                }
+            }
+
+            if (contains)
             {
                 products.Remove(product);
-                products.Add(product);
             }
+            products.Add(product);
 
             MTT mtt = (MTT)Application.OpenForms["MTT"];
 
@@ -60,7 +70,7 @@ namespace MTT
 
             StreamReader sr = new StreamReader(filename);
             string jsonString = sr.ReadToEnd();
-            products = JsonConvert.DeserializeObject<HashSet<Product>>(jsonString);
+            products = JsonConvert.DeserializeObject<List<Product>>(jsonString);
             sr.Close();
 
             //eventBox.Items.Insert(0, productsList.ToString());

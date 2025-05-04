@@ -30,7 +30,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
             "Tomaten",
             "2.5"}, -1);
             this.eventBox = new System.Windows.Forms.ListBox();
@@ -42,6 +42,8 @@
             this.tareButton = new System.Windows.Forms.Button();
             this.nullButton = new System.Windows.Forms.Button();
             this.openScaleBtn = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.tareLabel2 = new System.Windows.Forms.Label();
             this.netLabel2 = new System.Windows.Forms.Label();
             this.printerGroupBox = new System.Windows.Forms.GroupBox();
@@ -64,16 +66,16 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.recieptList = new System.Windows.Forms.ListView();
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.kg = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.product = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.price1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.count = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.price = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.dbList2 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.delButton = new System.Windows.Forms.Button();
             this.sumButton = new System.Windows.Forms.Button();
-            this.addItemButton = new System.Windows.Forms.Button();
+            this.addArticleButton = new System.Windows.Forms.Button();
             this.netLabel1 = new System.Windows.Forms.Label();
             this.tabEdit = new System.Windows.Forms.TabPage();
             this.exitButton = new System.Windows.Forms.Button();
@@ -88,8 +90,6 @@
             this.colPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabDebug = new System.Windows.Forms.TabPage();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ucLoadcellBindingSource)).BeginInit();
             this.loadcellGroupBox.SuspendLayout();
             this.printerGroupBox.SuspendLayout();
@@ -199,6 +199,28 @@
             this.openScaleBtn.UseVisualStyleBackColor = true;
             this.openScaleBtn.Click += new System.EventHandler(this.openScaleBtn_Click);
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(239, 64);
+            this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(23, 24);
+            this.label12.TabIndex = 17;
+            this.label12.Text = "T";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(239, 28);
+            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(25, 24);
+            this.label11.TabIndex = 16;
+            this.label11.Text = "N";
+            // 
             // tareLabel2
             // 
             this.tareLabel2.AutoSize = true;
@@ -300,7 +322,7 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.Padding = new System.Drawing.Point(40, 3);
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(802, 600);
+            this.tabControl1.Size = new System.Drawing.Size(801, 600);
             this.tabControl1.TabIndex = 22;
             // 
             // tabScale
@@ -321,12 +343,12 @@
             this.tabScale.Controls.Add(this.dbList2);
             this.tabScale.Controls.Add(this.delButton);
             this.tabScale.Controls.Add(this.sumButton);
-            this.tabScale.Controls.Add(this.addItemButton);
+            this.tabScale.Controls.Add(this.addArticleButton);
             this.tabScale.Controls.Add(this.netLabel1);
             this.tabScale.Location = new System.Drawing.Point(4, 54);
             this.tabScale.Name = "tabScale";
             this.tabScale.Padding = new System.Windows.Forms.Padding(3);
-            this.tabScale.Size = new System.Drawing.Size(794, 542);
+            this.tabScale.Size = new System.Drawing.Size(793, 542);
             this.tabScale.TabIndex = 0;
             this.tabScale.Text = "Wiegen";
             this.tabScale.UseVisualStyleBackColor = true;
@@ -393,7 +415,7 @@
             // 
             // tareButton2
             // 
-            this.tareButton2.Location = new System.Drawing.Point(696, 485);
+            this.tareButton2.Location = new System.Drawing.Point(695, 485);
             this.tareButton2.Margin = new System.Windows.Forms.Padding(2);
             this.tareButton2.Name = "tareButton2";
             this.tareButton2.Size = new System.Drawing.Size(89, 50);
@@ -453,10 +475,10 @@
             // recieptList
             // 
             this.recieptList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader3,
-            this.columnHeader4,
-            this.kg,
-            this.columnHeader6});
+            this.product,
+            this.price1,
+            this.count,
+            this.price});
             this.recieptList.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
             this.recieptList.FullRowSelect = true;
             this.recieptList.GridLines = true;
@@ -469,24 +491,25 @@
             this.recieptList.TabIndex = 7;
             this.recieptList.UseCompatibleStateImageBehavior = false;
             this.recieptList.View = System.Windows.Forms.View.Details;
+            this.recieptList.SelectedIndexChanged += new System.EventHandler(this.recieptList_SelectedIndexChanged);
             // 
-            // columnHeader3
+            // product
             // 
-            this.columnHeader3.Text = "Produkt";
-            this.columnHeader3.Width = 190;
+            this.product.Text = "Produkt";
+            this.product.Width = 160;
             // 
-            // columnHeader4
+            // price1
             // 
-            this.columnHeader4.Text = "€/kg";
+            this.price1.Text = "€/kg";
             // 
-            // kg
+            // count
             // 
-            this.kg.Text = "kg";
+            this.count.Text = "Menge";
             // 
-            // columnHeader6
+            // price
             // 
-            this.columnHeader6.Text = "Gesamt";
-            this.columnHeader6.Width = 100;
+            this.price.Text = "Preis";
+            this.price.Width = 100;
             // 
             // dbList2
             // 
@@ -501,7 +524,7 @@
             this.dbList2.Location = new System.Drawing.Point(441, 6);
             this.dbList2.MultiSelect = false;
             this.dbList2.Name = "dbList2";
-            this.dbList2.Size = new System.Drawing.Size(357, 352);
+            this.dbList2.Size = new System.Drawing.Size(343, 352);
             this.dbList2.TabIndex = 6;
             this.dbList2.UseCompatibleStateImageBehavior = false;
             this.dbList2.View = System.Windows.Forms.View.Details;
@@ -534,15 +557,15 @@
             this.sumButton.Text = "Abrechnen";
             this.sumButton.UseVisualStyleBackColor = true;
             // 
-            // addItemButton
+            // addArticleButton
             // 
-            this.addItemButton.Location = new System.Drawing.Point(612, 364);
-            this.addItemButton.Name = "addItemButton";
-            this.addItemButton.Size = new System.Drawing.Size(174, 45);
-            this.addItemButton.TabIndex = 2;
-            this.addItemButton.Text = "hinzufügen";
-            this.addItemButton.UseVisualStyleBackColor = true;
-            this.addItemButton.Click += new System.EventHandler(this.addItemButton_Click);
+            this.addArticleButton.Location = new System.Drawing.Point(610, 371);
+            this.addArticleButton.Name = "addArticleButton";
+            this.addArticleButton.Size = new System.Drawing.Size(174, 77);
+            this.addArticleButton.TabIndex = 2;
+            this.addArticleButton.Text = "hinzufügen";
+            this.addArticleButton.UseVisualStyleBackColor = true;
+            this.addArticleButton.Click += new System.EventHandler(this.addArticleButton_Click);
             // 
             // netLabel1
             // 
@@ -566,7 +589,7 @@
             this.tabEdit.Controls.Add(this.dbList);
             this.tabEdit.Location = new System.Drawing.Point(4, 54);
             this.tabEdit.Name = "tabEdit";
-            this.tabEdit.Size = new System.Drawing.Size(794, 542);
+            this.tabEdit.Size = new System.Drawing.Size(793, 542);
             this.tabEdit.TabIndex = 2;
             this.tabEdit.Text = "Bearbeiten";
             this.tabEdit.UseVisualStyleBackColor = true;
@@ -648,7 +671,7 @@
             this.dbList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.dbList.HideSelection = false;
             this.dbList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3});
+            listViewItem1});
             this.dbList.Location = new System.Drawing.Point(3, 3);
             this.dbList.MultiSelect = false;
             this.dbList.Name = "dbList";
@@ -678,43 +701,22 @@
             this.tabDebug.Name = "tabDebug";
             this.tabDebug.Padding = new System.Windows.Forms.Padding(3);
             this.tabDebug.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tabDebug.Size = new System.Drawing.Size(794, 542);
+            this.tabDebug.Size = new System.Drawing.Size(793, 542);
             this.tabDebug.TabIndex = 1;
             this.tabDebug.Text = "Test";
             this.tabDebug.UseVisualStyleBackColor = true;
             // 
             // contextMenuStrip1
             // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(28, 28);
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(239, 28);
-            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(25, 24);
-            this.label11.TabIndex = 16;
-            this.label11.Text = "N";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(239, 64);
-            this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(23, 24);
-            this.label12.TabIndex = 17;
-            this.label12.Text = "T";
             // 
             // MTT
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 600);
+            this.ClientSize = new System.Drawing.Size(1084, 1050);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.18F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -760,7 +762,7 @@
         private System.Windows.Forms.TabPage tabEdit;
         private System.Windows.Forms.Button delButton;
         private System.Windows.Forms.Button sumButton;
-        private System.Windows.Forms.Button addItemButton;
+        private System.Windows.Forms.Button addArticleButton;
         private System.Windows.Forms.Label netLabel1;
         private System.Windows.Forms.ListView dbList;
         private System.Windows.Forms.ColumnHeader colProduct;
@@ -776,10 +778,10 @@
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ListView recieptList;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.ColumnHeader columnHeader4;
-        private System.Windows.Forms.ColumnHeader kg;
-        private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.ColumnHeader product;
+        private System.Windows.Forms.ColumnHeader price1;
+        private System.Windows.Forms.ColumnHeader count;
+        private System.Windows.Forms.ColumnHeader price;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label statusScaleLabel;
         private System.Windows.Forms.Button tareButton2;

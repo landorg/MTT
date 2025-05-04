@@ -191,6 +191,8 @@ namespace MTT
             }
         }
 
+        private Reciept reciept = new Reciept();
+
         private void MTT_Load(object sender, EventArgs e)
         {
             DB.load();
@@ -276,12 +278,17 @@ namespace MTT
 
         }
 
-        private void itemBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void addArticleButton_Click(object sender, EventArgs e)
         {
+            string selectedProductName = dbList2.SelectedItems[0].Text;
+            //float selectedProductKgPrice = float.Parse(dbList2.SelectedItems[0].SubItems[1].Text);
 
+            Product p = DB.products.Find(x => x.Name == selectedProductName);
+
+            reciept.add(new Article(p, currentWeight.net));
         }
 
-        private void addItemButton_Click(object sender, EventArgs e)
+        private void itemBox_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
@@ -382,8 +389,12 @@ namespace MTT
             Environment.Exit(0);
         }
 
+        private Weights currentWeight;
+
         internal void SetWeights(Weights w)
         {
+            currentWeight = w;
+
             string netString = w == null ? "~" : w.net.ToString();
             string tareString = w == null ? "~" : w.tare.ToString();
             try
@@ -413,6 +424,26 @@ namespace MTT
                 //eventBox.Items.Insert(0, "Error: parsing weight to string");
                 //eventBox.Items.Insert(0, ex.Message);
             }
+        }
+
+        internal void refreshReciept()
+        {
+            recieptList.Items.Clear();
+            int i = 0;
+            foreach (Article a in reciept.articles)
+            {
+                ListViewItem item = new ListViewItem(a.product.Name);
+                item.SubItems.Add(a.product.Price.ToString());
+                item.SubItems.Add(a.weight.ToString());
+                item.SubItems.Add(a.price.ToString());
+                recieptList.Items.Add(item);
+                i++;
+            }
+        }
+
+        private void recieptList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

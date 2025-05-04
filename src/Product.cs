@@ -10,7 +10,7 @@ namespace MTT
 {
     internal class Product : IEquatable<Product>
     {
-        public Product(string name, float price)
+        public Product(string name, float price = 0)
         {
             //ID = iD;
             Name = name;
@@ -28,10 +28,5 @@ namespace MTT
             else
                 return false;
         }
-        public override int GetHashCode()
-        {
-            return Name.GetHashCode();
-        }
-
     }
 }

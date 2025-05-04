@@ -130,6 +130,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Article.cs" />
     <Compile Include="BitmapConverter.cs" />
     <Compile Include="DB.cs" />
     <Compile Include="MTT.cs">
@@ -142,6 +143,7 @@
     <Compile Include="Product.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reciept.cs" />
     <Compile Include="ScaleCell.cs" />
     <Compile Include="UcLoadcell.cs" />
     <Compile Include="Utils.cs" />
