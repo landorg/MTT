@@ -10,11 +10,9 @@ namespace MTT
 {
     public static class BitmapConverter
     {
-        public static Bitmap CreatTestBitmap(string weight, int length)
+        public static Bitmap CreatTestBitmap(ListView table, int length)
         {
             int width = 432;
-            BarcodeLib.Barcode b = new BarcodeLib.Barcode();
-            Image img = b.Encode(BarcodeLib.TYPE.EAN13, "872312898734", Color.Black, Color.White, 290, 80);
 
             Bitmap objBmpImage = new Bitmap(width, length);
 
@@ -37,36 +35,52 @@ namespace MTT
             int w = width - borderSide * 2;
             int h = length - borderTop * 2;
 
+            objGraphics.DrawImage(Image.FromFile("C:/MTT/src/logo.png"), x0 + w/4, y0, w/2, w/2);
 
-            objGraphics.DrawRectangle(
-                new Pen(new SolidBrush(Color.Black), 2),
-                new Rectangle(x0, y0, w, h));
+            int yH = y0 + w / 2;
 
-            // top left
-            objGraphics.DrawRectangle(
-                new Pen(new SolidBrush(Color.Black), 1),
-                new Rectangle(x0, y0, w / 2, h / 2));
-            // top right
-            objGraphics.DrawRectangle(
-                new Pen(new SolidBrush(Color.Black), 1),
-                new Rectangle(x0 + w/2, y0, w / 2, h / 2));
+            StringFormat centered = new StringFormat();
+            centered.LineAlignment = StringAlignment.Center;
+            centered.Alignment = StringAlignment.Center;
 
-            // bottom right
-            objGraphics.DrawRectangle(
-                new Pen(new SolidBrush(Color.Black), 1),
-                new Rectangle(x0 + w / 2, y0 + h/2, w / 2, h / 2));
+            objGraphics.DrawString("Rechnung", titleFont, new SolidBrush(Color.Black), x0 + w / 2, yH + 15, centered);
 
-            // bottom left
-            objGraphics.DrawRectangle(
-                new Pen(new SolidBrush(Color.Black), 1),
-                new Rectangle(x0, y0 + h / 2, w / 2, h / 2));
+            int yR = yH + 25;
+            int hR = h - yH - 20;
 
-            objGraphics.DrawString("h: "+length.ToString(), defaultFont, new SolidBrush(Color.Black), 150, 10);
+            Bitmap bill = new Bitmap(table.Width, table.Height);
+            table.DrawToBitmap(bill, new Rectangle(0, 0, table.Width, table.Height));
+            objGraphics.DrawImage(bill, x0 , yR, w, hR);
 
-            objGraphics.DrawString("Gewicht", defaultFont, new SolidBrush(Color.Black), 50, 150);
-            objGraphics.DrawString("10 kg", titleFont, new SolidBrush(Color.Black), 210, 150);
+            //objGraphics.DrawRectangle(
+            //    new Pen(new SolidBrush(Color.Black), 2),
+            //    new Rectangle(x0, y0, w, h));
+
+            //// top left
+            //objGraphics.DrawRectangle(
+            //    new Pen(new SolidBrush(Color.Black), 1),
+            //    new Rectangle(x0, y0, w / 2, h / 2));
+            //// top right
+            //objGraphics.DrawRectangle(
+            //    new Pen(new SolidBrush(Color.Black), 1),
+            //    new Rectangle(x0 + w/2, y0, w / 2, h / 2));
+
+            //// bottom right
+            //objGraphics.DrawRectangle(
+            //    new Pen(new SolidBrush(Color.Black), 1),
+            //    new Rectangle(x0 + w / 2, y0 + h/2, w / 2, h / 2));
+
+            //// bottom left
+            //objGraphics.DrawRectangle(
+            //    new Pen(new SolidBrush(Color.Black), 1),
+            //    new Rectangle(x0, y0 + h / 2, w / 2, h / 2));
+
+            //objGraphics.DrawString("h: "+length.ToString(), defaultFont, new SolidBrush(Color.Black), 150, 10);
+
+            //objGraphics.DrawString("Gewicht", defaultFont, new SolidBrush(Color.Black), 50, 150);
+            //objGraphics.DrawString("10 kg", titleFont, new SolidBrush(Color.Black), 210, 150);
             
-            objGraphics.DrawImage(img, 80, 280);
+            //objGraphics.DrawImage(img, 80, 280);
             objGraphics.Flush();
 
             return (objBmpImage);

@@ -90,9 +90,9 @@
             this.dbList = new System.Windows.Forms.ListView();
             this.colProduct = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colPiecePrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabDebug = new System.Windows.Forms.TabPage();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.colPiecePrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.ucLoadcellBindingSource)).BeginInit();
             this.loadcellGroupBox.SuspendLayout();
             this.printerGroupBox.SuspendLayout();
@@ -135,7 +135,6 @@
             this.loadcellGroupBox.TabIndex = 20;
             this.loadcellGroupBox.TabStop = false;
             this.loadcellGroupBox.Text = "UC loadcell";
-            this.loadcellGroupBox.Enter += new System.EventHandler(this.loadcellGroupBox_Enter);
             // 
             // setWeightButton
             // 
@@ -271,11 +270,9 @@
             this.printerGroupBox.TabIndex = 19;
             this.printerGroupBox.TabStop = false;
             this.printerGroupBox.Text = "UC Printer";
-            this.printerGroupBox.Enter += new System.EventHandler(this.printerGroupBox_Enter);
             // 
             // feedLabelBtn
             // 
-            this.feedLabelBtn.Enabled = false;
             this.feedLabelBtn.Location = new System.Drawing.Point(98, 56);
             this.feedLabelBtn.Margin = new System.Windows.Forms.Padding(2);
             this.feedLabelBtn.Name = "feedLabelBtn";
@@ -288,7 +285,6 @@
             // 
             // printTestLabelBtn
             // 
-            this.printTestLabelBtn.Enabled = false;
             this.printTestLabelBtn.Location = new System.Drawing.Point(98, 20);
             this.printTestLabelBtn.Margin = new System.Windows.Forms.Padding(2);
             this.printTestLabelBtn.Name = "printTestLabelBtn";
@@ -649,7 +645,7 @@
             // piecePriceCheckbox
             // 
             this.piecePriceCheckbox.AutoSize = true;
-            this.piecePriceCheckbox.Location = new System.Drawing.Point(639, 54);
+            this.piecePriceCheckbox.Location = new System.Drawing.Point(616, 54);
             this.piecePriceCheckbox.Name = "piecePriceCheckbox";
             this.piecePriceCheckbox.Size = new System.Drawing.Size(145, 33);
             this.piecePriceCheckbox.TabIndex = 8;
@@ -753,6 +749,11 @@
             this.colPrice.Text = "Preis";
             this.colPrice.Width = 95;
             // 
+            // colPiecePrice
+            // 
+            this.colPiecePrice.Text = "pro";
+            this.colPiecePrice.Width = 95;
+            // 
             // tabDebug
             // 
             this.tabDebug.Controls.Add(this.eventBox);
@@ -773,11 +774,6 @@
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(28, 28);
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
-            // colPiecePrice
-            // 
-            this.colPiecePrice.Text = "pro";
-            this.colPiecePrice.Width = 95;
             // 
             // MTT
             // 

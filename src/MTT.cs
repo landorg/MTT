@@ -15,7 +15,6 @@ namespace MTT
 {
     public partial class MTT : Form
     {
-        private UsbDevice _evoLinePrinter;
 
         public MTT()
         {
@@ -44,151 +43,23 @@ namespace MTT
 
         private void openPrinterBtn_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _evoLinePrinter = UsbDevice.OpenUsbDevice(new UsbDeviceFinder(0x0EB8, 0x3000));
-                _evoLinePrinter.Open();
-
-                IUsbDevice wholeUsbDevice = _evoLinePrinter as IUsbDevice;
-                if (!ReferenceEquals(wholeUsbDevice, null))
-                {
-                    wholeUsbDevice.SetConfiguration(1);
-
-                    wholeUsbDevice.ClaimInterface(0);
-                }
-
-                eventBox.Items.Add("Open usb device printer");
-
-                printTestLabelBtn.Enabled = true;
-                feedLabelBtn.Enabled = true;
-                closePrinterBtn.Enabled = true;
-            }
-            catch (Exception ex)
-            {
-                eventBox.Items.Add(ex.Message);
-                //File.AppendAllText("log.txt", ex.ToString());
-            }
+            Printer p = Printer.Instance;
         }      
 
         private void feedLabelBtn_Click(object sender, EventArgs e)
         {
-            try
-            {
-                var evoEndpointWriter = _evoLinePrinter.OpenEndpointWriter(WriteEndpointID.Ep02, EndpointType.Bulk);
-                evoEndpointWriter.Write(new byte[] { 0x01, 0x1b, 0x53 }, 1000, out int outer);
-                evoEndpointWriter.Dispose();
-                eventBox.Items.Add("Feed evo line printer");
-            }
-            catch (Exception ex)
-            {
-                eventBox.Items.Add(ex.Message);
-            }
+            Printer.Instance.feedLabel();
         }
 
         private void closePrinterBtn_Click(object sender, EventArgs e)
         {
-            IUsbDevice wholeUsbDevice = _evoLinePrinter as IUsbDevice;
-            if (!ReferenceEquals(wholeUsbDevice, null))
-            {
-                wholeUsbDevice.ReleaseInterface(0);
-            }
-            _evoLinePrinter.Close();
-            UsbDevice.Exit();
-
-            printTestLabelBtn.Enabled = false;
-            feedLabelBtn.Enabled = false;
-            closePrinterBtn.Enabled = false;
+            Printer.Instance.close();
         }
 
         private void printTestLabelBtn_Click(object sender, EventArgs e)
         {
-            int lenght;
-            byte[] data = new byte[1024];
-            ErrorCode errorCode;
-            int timeout = 500;
-
-            try
-            {
-                // Open read and writer endpoint
-                var evoEndpointWriter = _evoLinePrinter.OpenEndpointWriter(WriteEndpointID.Ep02, EndpointType.Bulk);
-                var evoEndpointReader = _evoLinePrinter.OpenEndpointReader(ReadEndpointID.Ep02);
-
-                // Create label
-                var bitmap = BitmapConverter.CreatTestBitmap(netLabel2.Text, 680);
-                //var bitmap = BitmapConverter.DrawReciept();
                 
-                bitmap.Save("C:/MTT/debug.bmp");
-                //bitmap = BitmapConverter.BitmapTo1Bpp2(bitmap);
-                
-                //var command = BitmapConverter.Convert(bitmap);
-
-                //var arrays = Utils.Split(command, 4000);  
-              
-                //errorCode = evoEndpointWriter.Write(new byte[] { 0x01, 0x1b, 0x64, 0x31, 0x31, 0x31, 0x32 }, timeout, out lenght);
-               
-                //evoEndpointReader.Read(data, timeout, out lenght);
-                //eventBox.Items.Add($"Write status: {errorCode} + {Utils.ByteArrayToString(data)}");
-                
-                //errorCode = evoEndpointWriter.Write(new byte[] { 0x02, 0x1b, 0x5d, 0x30, 0x31, 0x36, 0x34, 0x38 }, timeout, out lenght);
-                //evoEndpointReader.Read(data, timeout, out lenght);
-                //eventBox.Items.Add($"Write status: {errorCode} + {Utils.ByteArrayToString(data)}");
-                
-                //errorCode = evoEndpointWriter.Write(new byte[] { 0x03, 0x1b, 0x7e }, timeout, out lenght);
-                //evoEndpointReader.Read(data, timeout, out lenght);
-                //eventBox.Items.Add($"Write status: {errorCode} + {Utils.ByteArrayToString(data)}");
-
-                //errorCode = evoEndpointWriter.Write(new byte[] { 0x04, 0x1b, 0x5a, 0x0d, 0x0a }, timeout, out lenght);
-                //evoEndpointReader.Read(data, timeout, out lenght);
-                //eventBox.Items.Add($"Write status: {errorCode} + {Utils.ByteArrayToString(data)}");
-                
-                //errorCode = evoEndpointWriter.Write(new byte[] { 0x05, 0x1b, 0x5a }, timeout, out lenght);
-                //evoEndpointReader.Read(data, timeout, out lenght);
-                //eventBox.Items.Add($"Write status: {errorCode} + {Utils.ByteArrayToString(data)}");
-                
-                //errorCode = evoEndpointWriter.Write(new byte[] { 0x06, 0x1b, 0x5a }, timeout, out lenght);
-                //evoEndpointReader.Read(data, timeout, out lenght);
-                //eventBox.Items.Add($"Write status: {errorCode} + {Utils.ByteArrayToString(data)}");
-                
-                //errorCode = evoEndpointWriter.Write(new byte[] { 0x07, 0x1b, 0xbe }, timeout, out lenght);
-                //evoEndpointReader.Read(data, timeout, out lenght);
-                //eventBox.Items.Add($"Write status: {errorCode} + {Utils.ByteArrayToString(data)}");
-                //errorCode = evoEndpointWriter.Write(new byte[] { 
-                //        0x08, 0x1b, 0x57, // command code
-                //        0x34, 0x33, 0x32, // width 432
-                //        0x30, 0x36, 0x38, 0x30 // length 680
-                //}, timeout, out lenght);
-                
-
-                //evoEndpointReader.Read(data, timeout, out lenght);
-                //eventBox.Items.Add($"Write status: {errorCode} + {Utils.ByteArrayToString(data)}");
-
-                //foreach (var array in arrays)
-                //{
-                //    errorCode = evoEndpointWriter.Write(array, timeout, out lenght);
-                //    evoEndpointReader.Read(data, timeout, out lenght);
-                //    eventBox.Items.Add($"Write label status: {errorCode} + {Utils.ByteArrayToString(data)}");
-                //    if (errorCode == ErrorCode.IoTimedOut)
-                //    {
-                //        evoEndpointWriter.Reset();
-                //    }
-                //}
-                
-                //// Close writer
-                //evoEndpointWriter.Reset();
-                //evoEndpointWriter.Abort();
-                //evoEndpointWriter.Dispose();
-
-                //// Close reader
-                //evoEndpointReader.Reset();
-                //evoEndpointReader.Abort();
-                //evoEndpointReader.Dispose();
-
-                //eventBox.Items.Add("Print test label evo line printer");
-            }
-            catch (Exception ex)
-            {
-                eventBox.Items.Add(ex.Message);
-            }
+            Printer.Instance.PrintTestLabel(recieptList);
         }
 
         private Reciept reciept = new Reciept();
@@ -218,16 +89,6 @@ namespace MTT
                 dbList.Items.Add(item);
                 dbList2.Items.Add((ListViewItem)item.Clone());
             }
-        }
-
-        private void printerGroupBox_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void loadcellGroupBox_Enter(object sender, EventArgs e)
-        {
-
         }
 
         private Product selectedDBProduct;
@@ -410,7 +271,7 @@ namespace MTT
             Environment.Exit(0);
         }
 
-        private Weights currentWeight;
+        public Weights currentWeight;
         private decimal currentPrice;
 
         internal void SetWeights(Weights w)

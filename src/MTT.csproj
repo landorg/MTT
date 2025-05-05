@@ -140,6 +140,7 @@
       <DependentUpon>MTT.cs</DependentUpon>
     </Compile>
     <Compile Include="JidaWrapper.cs" />
+    <Compile Include="Printer.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -194,6 +195,7 @@
     <Content Include="Jida.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="logo.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\DataSources\" />
