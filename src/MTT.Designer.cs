@@ -68,8 +68,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.recieptList = new System.Windows.Forms.ListView();
             this.product = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.price1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.count = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.a = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.price = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.dbList2 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -369,7 +369,7 @@
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.label15.Location = new System.Drawing.Point(379, 371);
+            this.label15.Location = new System.Drawing.Point(331, 371);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(26, 29);
             this.label15.TabIndex = 33;
@@ -379,7 +379,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.label13.Location = new System.Drawing.Point(225, 371);
+            this.label13.Location = new System.Drawing.Point(177, 371);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(96, 29);
             this.label13.TabIndex = 32;
@@ -389,7 +389,7 @@
             // 
             this.sumLabel.AutoSize = true;
             this.sumLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.sumLabel.Location = new System.Drawing.Point(327, 371);
+            this.sumLabel.Location = new System.Drawing.Point(279, 371);
             this.sumLabel.Name = "sumLabel";
             this.sumLabel.Size = new System.Drawing.Size(58, 29);
             this.sumLabel.TabIndex = 31;
@@ -508,7 +508,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(165, 46);
+            this.label3.Location = new System.Drawing.Point(107, 46);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(122, 29);
             this.label3.TabIndex = 8;
@@ -516,12 +516,13 @@
             // 
             // recieptList
             // 
+            this.recieptList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.recieptList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.product,
-            this.price1,
             this.count,
+            this.a,
             this.price});
-            this.recieptList.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.recieptList.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
             this.recieptList.FullRowSelect = true;
             this.recieptList.GridLines = true;
             this.recieptList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
@@ -529,7 +530,7 @@
             this.recieptList.Location = new System.Drawing.Point(8, 78);
             this.recieptList.MultiSelect = false;
             this.recieptList.Name = "recieptList";
-            this.recieptList.Size = new System.Drawing.Size(427, 280);
+            this.recieptList.Size = new System.Drawing.Size(376, 280);
             this.recieptList.TabIndex = 7;
             this.recieptList.UseCompatibleStateImageBehavior = false;
             this.recieptList.View = System.Windows.Forms.View.Details;
@@ -539,30 +540,31 @@
             this.product.Text = "Produkt";
             this.product.Width = 106;
             // 
-            // price1
-            // 
-            this.price1.Text = "Preis/1";
-            this.price1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.price1.Width = 89;
-            // 
             // count
             // 
             this.count.Text = "Menge";
             this.count.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.count.Width = 95;
             // 
+            // a
+            // 
+            this.a.Text = "à";
+            this.a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.a.Width = 79;
+            // 
             // price
             // 
             this.price.Text = "Preis";
             this.price.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.price.Width = 105;
+            this.price.Width = 96;
             // 
             // dbList2
             // 
+            this.dbList2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.dbList2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2});
-            this.dbList2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.dbList2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
             this.dbList2.FullRowSelect = true;
             this.dbList2.GridLines = true;
             this.dbList2.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
@@ -722,10 +724,12 @@
             // 
             // dbList
             // 
+            this.dbList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.dbList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colProduct,
             this.colPrice,
             this.colPiecePrice});
+            this.dbList.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
             this.dbList.FullRowSelect = true;
             this.dbList.GridLines = true;
             this.dbList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
@@ -844,7 +848,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ListView recieptList;
         private System.Windows.Forms.ColumnHeader product;
-        private System.Windows.Forms.ColumnHeader price1;
+        private System.Windows.Forms.ColumnHeader a;
         private System.Windows.Forms.ColumnHeader count;
         private System.Windows.Forms.ColumnHeader price;
         private System.Windows.Forms.Label currentPriceLabel;

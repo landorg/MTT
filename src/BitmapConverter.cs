@@ -10,7 +10,7 @@ namespace MTT
 {
     public static class BitmapConverter
     {
-        public static Bitmap CreatTestBitmap(ListView table, int length)
+        public static Bitmap CreatTestBitmap(ListView table, decimal sum, int length)
         {
             int width = 432;
 
@@ -43,14 +43,19 @@ namespace MTT
             centered.LineAlignment = StringAlignment.Center;
             centered.Alignment = StringAlignment.Center;
 
-            objGraphics.DrawString("Rechnung", titleFont, new SolidBrush(Color.Black), x0 + w / 2, yH + 15, centered);
+            objGraphics.DrawString("Vielen Dank!", titleFont, new SolidBrush(Color.Black), x0 + w / 2, yH + 15, centered);
 
-            int yR = yH + 25;
-            int hR = h - yH - 20;
+            int yR = yH + 35;
+            int hR = h - yH - 20 - 40;
 
             Bitmap bill = new Bitmap(table.Width, table.Height);
             table.DrawToBitmap(bill, new Rectangle(0, 0, table.Width, table.Height));
             objGraphics.DrawImage(bill, x0 , yR, w, hR);
+
+            int yS = h - 30;
+            int hS = 30;
+
+            objGraphics.DrawString($"Summe: {sum:0.00}€", defaultFont, new SolidBrush(Color.Black), x0 + w / 2, yS + 15, centered);
 
             //objGraphics.DrawRectangle(
             //    new Pen(new SolidBrush(Color.Black), 2),

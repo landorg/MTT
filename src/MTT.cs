@@ -59,7 +59,7 @@ namespace MTT
         private void printTestLabelBtn_Click(object sender, EventArgs e)
         {
                 
-            Printer.Instance.PrintTestLabel(recieptList);
+            Printer.Instance.PrintTestLabel(recieptList, reciept.sum);
         }
 
         private Reciept reciept = new Reciept();
@@ -325,9 +325,15 @@ namespace MTT
             foreach (Article a in reciept.articles)
             {
                 ListViewItem item = new ListViewItem(a.product.name);
-                item.SubItems.Add(a.product.price.ToString());
-                item.SubItems.Add(a.Weight.ToString());
-                item.SubItems.Add(a.price.ToString());
+
+                string weight = a.product.piecePrice ? Math.Round(a.Weight, 0).ToString() : a.Weight.ToString();
+                string amount = $"{weight} {(a.product.piecePrice ? " stk" : " kg")}";
+                item.SubItems.Add(amount);
+
+                item.SubItems.Add($"{Math.Round(a.product.price, 2):0.00}€");
+
+                item.SubItems.Add(a.price.ToString() + "€");
+
                 recieptList.Items.Add(item);
             }
             sumLabel.Text = $"{Math.Round(reciept.sum, 2):0.00}";
@@ -388,5 +394,6 @@ namespace MTT
             } 
 
         }
+
     }
 }
