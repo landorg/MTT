@@ -271,23 +271,27 @@ namespace MTT
             Environment.Exit(0);
         }
 
-        public Weights currentWeight;
+        public Weights currentWeight = new Weights(0,0,0,false);
         private decimal currentPrice;
 
-        internal void SetWeights(Weights w)
+        internal void SetWeights(decimal netWeight, decimal tareWeight, decimal grossWeight, bool instable)
         {
-            currentWeight = w;
+            currentWeight.net = netWeight;
+            currentWeight.tare = tareWeight;
+            currentWeight.gross = grossWeight;
+            currentWeight.instable = instable;
 
-            string netString = w == null ? "~" : w.net.ToString();
-            string tareString = w == null ? "~" : w.tare.ToString();
+            string prefix = instable ? "~ " : "";
+            string netString = $"{prefix}{currentWeight.net}";
+            string tareString = currentWeight.tare.ToString();
             string priceString = "0.00";
-            if (w != null && selectedProduct != null)
+
+            if (currentWeight != null && selectedProduct != null)
             {
 
-                currentPrice = Math.Round(w.net * selectedProduct.price, 2);
+                currentPrice = Decimal.Round(currentWeight.net * selectedProduct.price, 2);
                 priceString = $"{currentPrice:0.00}";
             }
-
             try
             {
 
@@ -326,17 +330,17 @@ namespace MTT
             {
                 ListViewItem item = new ListViewItem(a.product.name);
 
-                string weight = a.product.piecePrice ? Math.Round(a.Weight, 0).ToString() : a.Weight.ToString();
+                string weight = a.product.piecePrice ? Decimal.Round(a.Weight, 0).ToString() : a.Weight.ToString();
                 string amount = $"{weight} {(a.product.piecePrice ? " stk" : " kg")}";
                 item.SubItems.Add(amount);
 
-                item.SubItems.Add($"{Math.Round(a.product.price, 2):0.00}€");
+                item.SubItems.Add($"{Decimal.Round(a.product.price, 2):0.00}€");
 
                 item.SubItems.Add(a.price.ToString() + "€");
 
                 recieptList.Items.Add(item);
             }
-            sumLabel.Text = $"{Math.Round(reciept.sum, 2):0.00}";
+            sumLabel.Text = $"{Decimal.Round(reciept.sum, 2):0.00}";
         }
 
         private void recieptList_SelectedIndexChanged(object sender, EventArgs e)
@@ -357,8 +361,7 @@ namespace MTT
 
         private void setWeightButton_Click(object sender, EventArgs e)
         {
-            this.SetWeights(new Weights(0.15M, 0, 0.15M));
-
+            this.SetWeights(0.15M, 0, 0.15M, false);
         }
 
         private void piecePrice_CheckedChanged(object sender, EventArgs e)
@@ -395,5 +398,17 @@ namespace MTT
 
         }
 
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
+            e.Graphics.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+            base.OnPaint(e);
+        }
+        //private void MTT_Paint(object sender, PaintEventArgs e)
+        //{
+        //    e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
+        //    e.Graphics.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+        //}
     }
 }

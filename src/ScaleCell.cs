@@ -53,13 +53,13 @@ namespace MTT
                     _serialPort.Write(bytestosend, 0, bytestosend.Length);
 
                     // Setup weight reading timer
-                    _timer.Interval = 500;
+                    _timer.Interval = 200;
                     _timer.Tick += new EventHandler(timer_Tick);
                     _timer.Start();
 
                     // Setup jida board reopen timer
                     _jidaTimer.Interval = 30000;
-                    _jidaTimer.Tick += new EventHandler(timer_Tick);
+                    _jidaTimer.Tick += new EventHandler(jidaTimer_Tick);
                     _jidaTimer.Start();
 
                     enabled = true;
@@ -136,45 +136,57 @@ namespace MTT
 
             mtt.logToBox(data);
 
-            Weights w = null;
+            //Weights w = null;
 
             try
             {
                 //int address = (byte) data.Substring(0, 1);
                 string command = data.Substring(0, 3).Trim();
-                mtt.logToBox($"Command: {command}");
+                //mtt.logToBox($"Command: {command}");
 
-                if (command == "SXI" || command == "SXD")
+                bool instable = false;
+
+                if (command == "SXI")
                 {
                     mtt.logToBox("instable");
+                }
+                else
+                {
+                    if (command == "SXD")
+                    {
+                        instable = true;
 
-                } else if (command == "SX") {
+                    }
+                    else if (command == "SX")
+                    {
 
-                    //string netWeightString = System.Text.RegularExpressions.Regex.Split(data, @"\s+")[1];
-                    //mtt.logToBox($"netWeightString: {netWeightString}");
-                    //string tareWeightString = data.Substring(38, 16).Trim();
-                    //mtt.logToBox($"tareWeightString: {tareWeightString}");
+                        //string netWeightString = System.Text.RegularExpressions.Regex.Split(data, @"\s+")[1];
+                        //mtt.logToBox($"netWeightString: {netWeightString}");
+                        //string tareWeightString = data.Substring(38, 16).Trim();
+                        //mtt.logToBox($"tareWeightString: {tareWeightString}");
 
-                    //if (netWeightString[0]!='N' || tareWeightString[0]!='T')
-                    //{
-                    //    throw new Exception("Parse error");
-                    //}
+                        //if (netWeightString[0]!='N' || tareWeightString[0]!='T')
+                        //{
+                        //    throw new Exception("Parse error");
+                        //}
 
-                    string grossWeightString = System.Text.RegularExpressions.Regex.Split(data, @"\s+")[5];
-                    string netWeightString = System.Text.RegularExpressions.Regex.Split(data, @"\s+")[5];
-                    string tareWeightString = System.Text.RegularExpressions.Regex.Split(data, @"\s+")[8];
+                        string grossWeightString = System.Text.RegularExpressions.Regex.Split(data, @"\s+")[5];
+                        string netWeightString = System.Text.RegularExpressions.Regex.Split(data, @"\s+")[5];
+                        string tareWeightString = System.Text.RegularExpressions.Regex.Split(data, @"\s+")[8];
 
-                    netWeight = decimal.Parse(NormalizeDecimal(netWeightString));
-                    tareWeight = decimal.Parse(NormalizeDecimal(tareWeightString));
-                    grossWeight = decimal.Parse(NormalizeDecimal(grossWeightString));
+                        netWeight = decimal.Parse(NormalizeDecimal(netWeightString));
+                        tareWeight = decimal.Parse(NormalizeDecimal(tareWeightString));
+                        grossWeight = decimal.Parse(NormalizeDecimal(grossWeightString));
 
-                    w = new Weights(netWeight, tareWeight, grossWeight);
+                        //w = new Weights(netWeight, tareWeight, grossWeight, instable);
+
+                        mtt.SetWeights(netWeight, tareWeight, grossWeight, instable);
+                    }
                 }
 
             } catch (Exception ex) {
                 mtt.logToBox($"Error parsing weight: {ex.Message}");
             }
-            mtt.SetWeights(w);
 
         }
 
@@ -184,7 +196,7 @@ namespace MTT
             _serialPort.Write(bytestosend, 0, bytestosend.Length);
         }
 
-        private void jidaTimer_Tick(object sender, EventArgs e)
+        private static void jidaTimer_Tick(object sender, EventArgs e)
         {
             _ucLoadcell.ReOpenBoardCommunication();
         }
