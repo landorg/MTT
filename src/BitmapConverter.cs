@@ -17,8 +17,8 @@ namespace MTT
             Bitmap objBmpImage = new Bitmap(width, length);
 
             // Create the Font object for the image text drawing.
-            Font titleFont = new Font("Arial", 28, FontStyle.Bold, GraphicsUnit.Pixel);
             Font defaultFont = new Font("Arial", 21, FontStyle.Bold, GraphicsUnit.Pixel);
+            Font sumFont = new Font("Arial", 32, FontStyle.Bold, GraphicsUnit.Pixel);
 
             // Add the colors to the new bitmap.
             Graphics objGraphics = Graphics.FromImage(objBmpImage);
@@ -28,12 +28,14 @@ namespace MTT
             objGraphics.SmoothingMode = SmoothingMode.AntiAlias;
             objGraphics.TextRenderingHint = TextRenderingHint.AntiAlias;
 
-            int borderTop = 10;
-            int borderSide = 30;
-            int x0 = 0 + borderSide;
+            int borderTop = 40;
+            int borderBottom = 20;
+            int borderLeft = 30;
+            int borderRight = 40;
+            int x0 = 0 + borderLeft;
             int y0 = 0 + borderTop;
-            int w = width - borderSide * 2;
-            int h = length - borderTop * 2;
+            int w = width - borderRight - borderLeft;
+            int h = length - borderTop - borderBottom;
 
             objGraphics.DrawImage(Image.FromFile("C:/MTT/src/logo.png"), x0 + w/4, y0, w/2, w/2);
 
@@ -43,9 +45,9 @@ namespace MTT
             centered.LineAlignment = StringAlignment.Center;
             centered.Alignment = StringAlignment.Center;
 
-            objGraphics.DrawString("Vielen Dank!", titleFont, new SolidBrush(Color.Black), x0 + w / 2, yH + 15, centered);
+            objGraphics.DrawString("Vielen Dank!", defaultFont, new SolidBrush(Color.Black), x0 + w / 2, yH + 25, centered);
 
-            int yR = yH + 35;
+            int yR = yH + 45;
             int hR = h - yH - 20 - 40;
 
             Bitmap bill = new Bitmap(table.Width, table.Height);
@@ -55,7 +57,7 @@ namespace MTT
             int yS = h - 30;
             int hS = 30;
 
-            objGraphics.DrawString($"Summe: {sum:0.00}€", defaultFont, new SolidBrush(Color.Black), x0 + w / 2, yS + 15, centered);
+            objGraphics.DrawString($"Summe: {sum:0.00}€", sumFont, new SolidBrush(Color.Black), x0 + w / 2, yS + 15, centered);
 
             //objGraphics.DrawRectangle(
             //    new Pen(new SolidBrush(Color.Black), 2),
@@ -175,7 +177,7 @@ namespace MTT
                     {
                         destBytes[x / 8] = 0;
                     }
-                    if (c.GetBrightness() >= 0.5)
+                    if (c.GetBrightness() >= 0.8)
                     {
                         destBytes[x / 8] |= (byte)(0x80 >> (x % 8));
                     }

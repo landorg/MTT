@@ -62,8 +62,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tareButton2 = new System.Windows.Forms.Button();
             this.nullButton2 = new System.Windows.Forms.Button();
-            this.statusPritnerLabel = new System.Windows.Forms.Label();
-            this.statusScaleLabel = new System.Windows.Forms.Label();
             this.currentPriceLabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.recieptList = new System.Windows.Forms.ListView();
@@ -74,6 +72,7 @@
             this.dbList2 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.delArticleButton = new System.Windows.Forms.Button();
             this.sumButton = new System.Windows.Forms.Button();
             this.addArticleButton = new System.Windows.Forms.Button();
@@ -347,8 +346,6 @@
             this.tabScale.Controls.Add(this.label1);
             this.tabScale.Controls.Add(this.tareButton2);
             this.tabScale.Controls.Add(this.nullButton2);
-            this.tabScale.Controls.Add(this.statusPritnerLabel);
-            this.tabScale.Controls.Add(this.statusScaleLabel);
             this.tabScale.Controls.Add(this.currentPriceLabel);
             this.tabScale.Controls.Add(this.label3);
             this.tabScale.Controls.Add(this.recieptList);
@@ -379,7 +376,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.label13.Location = new System.Drawing.Point(177, 371);
+            this.label13.Location = new System.Drawing.Point(146, 371);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(96, 29);
             this.label13.TabIndex = 32;
@@ -387,13 +384,14 @@
             // 
             // sumLabel
             // 
-            this.sumLabel.AutoSize = true;
+            this.sumLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.sumLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.sumLabel.Location = new System.Drawing.Point(279, 371);
+            this.sumLabel.Location = new System.Drawing.Point(264, 371);
             this.sumLabel.Name = "sumLabel";
-            this.sumLabel.Size = new System.Drawing.Size(58, 29);
+            this.sumLabel.Size = new System.Drawing.Size(70, 29);
             this.sumLabel.TabIndex = 31;
             this.sumLabel.Text = "0,00";
+            this.sumLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label10
             // 
@@ -477,24 +475,6 @@
             this.nullButton2.UseVisualStyleBackColor = true;
             this.nullButton2.Click += new System.EventHandler(this.nullButton2_Click);
             // 
-            // statusPritnerLabel
-            // 
-            this.statusPritnerLabel.AutoSize = true;
-            this.statusPritnerLabel.Location = new System.Drawing.Point(53, 510);
-            this.statusPritnerLabel.Name = "statusPritnerLabel";
-            this.statusPritnerLabel.Size = new System.Drawing.Size(30, 29);
-            this.statusPritnerLabel.TabIndex = 11;
-            this.statusPritnerLabel.Text = "🖶";
-            // 
-            // statusScaleLabel
-            // 
-            this.statusScaleLabel.AutoSize = true;
-            this.statusScaleLabel.Location = new System.Drawing.Point(8, 508);
-            this.statusScaleLabel.Name = "statusScaleLabel";
-            this.statusScaleLabel.Size = new System.Drawing.Size(39, 29);
-            this.statusScaleLabel.TabIndex = 10;
-            this.statusScaleLabel.Text = "⚖";
-            // 
             // currentPriceLabel
             // 
             this.currentPriceLabel.AutoSize = true;
@@ -563,7 +543,8 @@
             this.dbList2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.dbList2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
-            this.columnHeader2});
+            this.columnHeader2,
+            this.columnHeader3});
             this.dbList2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
             this.dbList2.FullRowSelect = true;
             this.dbList2.GridLines = true;
@@ -581,16 +562,20 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "Produkt";
-            this.columnHeader1.Width = 230;
+            this.columnHeader1.Width = 210;
             // 
             // columnHeader2
             // 
-            this.columnHeader2.Text = "Preis €/kg";
-            this.columnHeader2.Width = 160;
+            this.columnHeader2.Text = "Preis";
+            this.columnHeader2.Width = 80;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "pro";
             // 
             // delArticleButton
             // 
-            this.delArticleButton.Location = new System.Drawing.Point(8, 430);
+            this.delArticleButton.Location = new System.Drawing.Point(8, 457);
             this.delArticleButton.Name = "delArticleButton";
             this.delArticleButton.Size = new System.Drawing.Size(142, 77);
             this.delArticleButton.TabIndex = 5;
@@ -600,7 +585,7 @@
             // 
             // sumButton
             // 
-            this.sumButton.Location = new System.Drawing.Point(151, 429);
+            this.sumButton.Location = new System.Drawing.Point(151, 457);
             this.sumButton.Name = "sumButton";
             this.sumButton.Size = new System.Drawing.Size(222, 77);
             this.sumButton.TabIndex = 4;
@@ -852,10 +837,8 @@
         private System.Windows.Forms.ColumnHeader count;
         private System.Windows.Forms.ColumnHeader price;
         private System.Windows.Forms.Label currentPriceLabel;
-        private System.Windows.Forms.Label statusScaleLabel;
         private System.Windows.Forms.Button tareButton2;
         private System.Windows.Forms.Button nullButton2;
-        private System.Windows.Forms.Label statusPritnerLabel;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label8;
@@ -874,6 +857,7 @@
         private System.Windows.Forms.Button setWeightButton;
         private System.Windows.Forms.CheckBox piecePriceCheckbox;
         private System.Windows.Forms.ColumnHeader colPiecePrice;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
     }
 
 }

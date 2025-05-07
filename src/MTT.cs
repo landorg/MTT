@@ -330,13 +330,18 @@ namespace MTT
             {
                 ListViewItem item = new ListViewItem(a.product.name);
 
-                string weight = a.product.piecePrice ? Decimal.Round(a.Weight, 0).ToString() : a.Weight.ToString();
+                string weight = (
+                    a.product.piecePrice ?
+                    Decimal.Round(a.Weight, 0).ToString() :
+                    Decimal.Round(a.Weight, 2).ToString()
+                );
+
                 string amount = $"{weight} {(a.product.piecePrice ? " stk" : " kg")}";
                 item.SubItems.Add(amount);
 
-                item.SubItems.Add($"{Decimal.Round(a.product.price, 2):0.00}€");
+                item.SubItems.Add($"{Decimal.Round(a.product.price, 2):0.00} €");
 
-                item.SubItems.Add(a.price.ToString() + "€");
+                item.SubItems.Add(Decimal.Round(a.price, 2).ToString() + " €");
 
                 recieptList.Items.Add(item);
             }
@@ -405,6 +410,7 @@ namespace MTT
             e.Graphics.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
             base.OnPaint(e);
         }
+
         //private void MTT_Paint(object sender, PaintEventArgs e)
         //{
         //    e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
