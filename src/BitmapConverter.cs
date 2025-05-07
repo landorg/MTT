@@ -10,7 +10,7 @@ namespace MTT
 {
     public static class BitmapConverter
     {
-        public static Bitmap CreatTestBitmap(ListView table, decimal sum, int length)
+        public static Bitmap DrawReciept(ListView table, decimal sum, int length)
         {
             int width = 432;
 
@@ -88,69 +88,6 @@ namespace MTT
             //objGraphics.DrawString("10 kg", titleFont, new SolidBrush(Color.Black), 210, 150);
             
             //objGraphics.DrawImage(img, 80, 280);
-            objGraphics.Flush();
-
-            return (objBmpImage);
-        }
-
-        public static Bitmap DrawReciept()
-        {
-            int width = 432;
-            int length = 680;
-            BarcodeLib.Barcode b = new BarcodeLib.Barcode();
-            Image img = b.Encode(BarcodeLib.TYPE.EAN13, "872312898734", Color.Black, Color.White, 290, 80);
-
-            Bitmap objBmpImage = new Bitmap(width, length);
-
-            // Create the Font object for the image text drawing.
-            Font titleFont = new Font("Arial", 28, FontStyle.Bold, GraphicsUnit.Pixel);
-            Font defaultFont = new Font("Arial", 21, FontStyle.Bold, GraphicsUnit.Pixel);
-
-            // Add the colors to the new bitmap.
-            Graphics objGraphics = Graphics.FromImage(objBmpImage);
-
-            // Set Background color
-            objGraphics.Clear(Color.White);
-            objGraphics.SmoothingMode = SmoothingMode.AntiAlias;
-            objGraphics.TextRenderingHint = TextRenderingHint.AntiAlias;
-
-            int borderTop = 10;
-            int borderSide = 30;
-            int x0 = 0 + borderSide;
-            int y0 = 0 + borderTop;
-            int w = width - borderSide * 2;
-            int h = length - borderTop * 2;
-
-
-            objGraphics.DrawRectangle(
-                new Pen(new SolidBrush(Color.Black), 2),
-                new Rectangle(x0, y0, w, h));
-
-            // top left
-            objGraphics.DrawRectangle(
-                new Pen(new SolidBrush(Color.Black), 1),
-                new Rectangle(x0, y0, w / 2, h / 2));
-            // top right
-            objGraphics.DrawRectangle(
-                new Pen(new SolidBrush(Color.Black), 1),
-                new Rectangle(x0 + w / 2, y0, w / 2, h / 2));
-
-            // bottom right
-            objGraphics.DrawRectangle(
-                new Pen(new SolidBrush(Color.Black), 1),
-                new Rectangle(x0 + w / 2, y0 + h / 2, w / 2, h / 2));
-
-            // bottom left
-            objGraphics.DrawRectangle(
-                new Pen(new SolidBrush(Color.Black), 1),
-                new Rectangle(x0, y0 + h / 2, w / 2, h / 2));
-
-            objGraphics.DrawString("h: " + length.ToString(), defaultFont, new SolidBrush(Color.Black), 150, 10);
-
-            objGraphics.DrawString("Gewicht", defaultFont, new SolidBrush(Color.Black), 50, 150);
-            objGraphics.DrawString("10 kg", titleFont, new SolidBrush(Color.Black), 210, 150);
-
-            objGraphics.DrawImage(img, 80, 280);
             objGraphics.Flush();
 
             return (objBmpImage);

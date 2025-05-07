@@ -591,6 +591,7 @@
             this.sumButton.TabIndex = 4;
             this.sumButton.Text = "Abrechnen";
             this.sumButton.UseVisualStyleBackColor = true;
+            this.sumButton.Click += new System.EventHandler(this.sumButton_Click);
             // 
             // addArticleButton
             // 

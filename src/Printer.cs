@@ -90,7 +90,7 @@ namespace MTT
             enabled = false;
         }
 
-        internal void PrintTestLabel(ListView table, decimal sum)
+        internal void PrintReciept(ListView table, decimal sum)
         {
             int lenght;
             byte[] data = new byte[1024];
@@ -106,7 +106,7 @@ namespace MTT
                 var evoEndpointReader = _evoLinePrinter.OpenEndpointReader(ReadEndpointID.Ep02);
 
                 // Create label
-                var bitmap = BitmapConverter.CreatTestBitmap(table, sum, 680);
+                var bitmap = BitmapConverter.DrawReciept(table, sum, 680);
                 //var bitmap = BitmapConverter.DrawReciept();
 
                 bitmap.Save("C:/MTT/debug.bmp");

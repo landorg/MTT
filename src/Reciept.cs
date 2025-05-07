@@ -71,5 +71,17 @@ namespace MTT
             MTT mtt = (MTT)Application.OpenForms["MTT"];
             mtt.refreshReciept();
         }
+
+        internal void save()
+        {
+            string filename = $"C:/MTT/Rechnungen/Rechnung-{System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss")}.txt";
+            FileStream fs = System.IO.File.Create(filename);
+            string json = JsonConvert.SerializeObject(this, Formatting.Indented);
+            using (StreamWriter sw = new StreamWriter(fs))
+            {
+                sw.Write(json);
+                sw.Close();
+            }
+        }
     }
 }

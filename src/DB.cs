@@ -51,10 +51,10 @@ namespace MTT
         public static void save()
         {
             FileStream fs = System.IO.File.Create(filename);
-            string json = JsonConvert.SerializeObject(products);
+            string json = JsonConvert.SerializeObject(products, Formatting.Indented);
             using (StreamWriter sw = new StreamWriter(fs))
             {
-                sw.WriteLine(json);
+                sw.Write(json);
                 sw.Close();
             }
         }

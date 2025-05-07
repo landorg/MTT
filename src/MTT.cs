@@ -59,7 +59,7 @@ namespace MTT
         private void printTestLabelBtn_Click(object sender, EventArgs e)
         {
                 
-            Printer.Instance.PrintTestLabel(recieptList, reciept.sum);
+            Printer.Instance.PrintReciept(recieptList, reciept.sum);
         }
 
         private Reciept reciept = new Reciept();
@@ -411,10 +411,14 @@ namespace MTT
             base.OnPaint(e);
         }
 
-        //private void MTT_Paint(object sender, PaintEventArgs e)
-        //{
-        //    e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
-        //    e.Graphics.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
-        //}
+        private void sumButton_Click(object sender, EventArgs e)
+        {
+            Printer.Instance.PrintReciept(recieptList, reciept.sum);
+            reciept.save();
+            reciept = new Reciept();
+
+            refreshReciept();
+        }
+
     }
 }
