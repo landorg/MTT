@@ -1,6 +1,10 @@
 # Mettler Toledo UC retail scale tooling
 
-A Tool to print bitmap labels and read weigth from loacell on a Mettler Toledo UC Retail scale.
+A basic scale application with a product db.
+This is based on the work of @Lg0enga. Thanks a million for your support.
+
+![UC_test_tool](https://github.com/landorg/MTT/blob/main/assets/screen1.png)
+![UC_test_tool](https://github.com/landorg/MTT/blob/main/assets/screen2.png)
 
 ## Setup
 A small setup is required on a clean Windows version on a UC retail scale. The load cell can only be accessed via 'COM2' if the Kontron board is opened using 'jida.dll'. After opening, the board must be 'reopened' every 30 seconds to continue using the serial port on the Kontron board.
