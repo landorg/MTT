@@ -19,7 +19,6 @@ namespace MTT
         private static Timer _jidaTimer = new Timer();
 
         private static UcLoadcell _ucLoadcell;
-        private static UsbDevice _evoLinePrinter;
 
         public static bool enabled = false; 
 

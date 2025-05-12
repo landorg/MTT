@@ -263,6 +263,7 @@ namespace MTT
                 //pKb = Process.Start(onScreenKeyboardProcess);
                 pid = pKb.Id;
 
+
             }
         }
 
@@ -341,7 +342,7 @@ namespace MTT
 
                 item.SubItems.Add($"{Decimal.Round(a.product.price, 2):0.00} €");
 
-                item.SubItems.Add(Decimal.Round(a.price, 2).ToString() + " €");
+                item.SubItems.Add($"{Decimal.Round(a.price, 2):0.00} €");
 
                 recieptList.Items.Add(item);
             }

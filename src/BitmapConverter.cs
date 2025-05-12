@@ -48,14 +48,15 @@ namespace MTT
             objGraphics.DrawString("Vielen Dank!", defaultFont, new SolidBrush(Color.Black), x0 + w / 2, yH + 25, centered);
 
             int yR = yH + 45;
-            int hR = h - yH - 20 - 40;
+
+            int hS = 20;
+            int hR = h - yH - 20 - hS * 2;
 
             Bitmap bill = new Bitmap(table.Width, table.Height);
             table.DrawToBitmap(bill, new Rectangle(0, 0, table.Width, table.Height));
             objGraphics.DrawImage(bill, x0 , yR, w, hR);
 
-            int yS = h - 30;
-            int hS = 30;
+            int yS = h - hS + 20;
 
             objGraphics.DrawString($"Summe: {sum:0.00}€", sumFont, new SolidBrush(Color.Black), x0 + w / 2, yS + 15, centered);
 

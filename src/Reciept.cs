@@ -74,7 +74,12 @@ namespace MTT
 
         internal void save()
         {
+            MTT mtt = (MTT)Application.OpenForms["MTT"];
+
             string filename = $"C:/MTT/Rechnungen/Rechnung-{System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss")}.txt";
+
+            mtt.logToBox(filename);
+
             FileStream fs = System.IO.File.Create(filename);
             string json = JsonConvert.SerializeObject(this, Formatting.Indented);
             using (StreamWriter sw = new StreamWriter(fs))
