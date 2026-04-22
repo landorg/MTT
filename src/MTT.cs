@@ -2,6 +2,7 @@
 using LibUsbDotNet.Main;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.IO;
 using System.IO.Ports;
 using System.Windows.Forms;
@@ -76,19 +77,155 @@ namespace MTT
             ScaleCell.close();
         }
 
+        private string activeGroup = "";
+        private int productPage = 0;
+        private const int ProductPageSize = 8;
+        private List<Product> filteredProducts = new List<Product>();
+
         internal void refreshDbList()
         {
+            var sorted = DB.products.OrderBy(p => p.group).ThenBy(p => p.name).ToList();
+
             dbList.Items.Clear();
-            dbList2.Items.Clear();
-            foreach (Product p in DB.products)
+            string currentGroupText = txtGroup.Text;
+            txtGroup.Items.Clear();
+            foreach (Product p in sorted)
             {
                 ListViewItem item = new ListViewItem(p.name);
                 item.SubItems.Add(p.price.ToString());
                 item.SubItems.Add(p.piecePrice ? "stk" : "kg");
-
+                item.SubItems.Add(p.group ?? "");
                 dbList.Items.Add(item);
-                dbList2.Items.Add((ListViewItem)item.Clone());
+
+                if (!string.IsNullOrEmpty(p.group) && !txtGroup.Items.Contains(p.group))
+                    txtGroup.Items.Add(p.group);
             }
+            txtGroup.Text = currentGroupText;
+
+            RebuildProductButtons();
+        }
+
+        private void RebuildProductButtons()
+        {
+            productGroupPanel.Controls.Clear();
+            productButtonPanel.Controls.Clear();
+            selectedProduct = null;
+            productPage = 0;
+
+            var groups = new List<string> { "" };
+            groups.AddRange(DB.products
+                .Where(p => !string.IsNullOrEmpty(p.group))
+                .Select(p => p.group)
+                .Distinct()
+                .OrderBy(g => g));
+
+            if (groups.Count > 1)
+            {
+                foreach (string g in groups)
+                {
+                    var btn = new System.Windows.Forms.Button();
+                    btn.Text = g == "" ? "Alle" : g;
+                    btn.Size = new Size(g == "" ? 55 : Math.Max(55, g.Length * 11 + 16), 44);
+                    btn.Font = new Font("Microsoft Sans Serif", 11F);
+                    btn.Margin = new Padding(2);
+                    btn.Tag = g;
+                    btn.FlatStyle = FlatStyle.Flat;
+                    if (g == activeGroup)
+                        btn.BackColor = Color.SteelBlue;
+                    btn.Click += GroupBtn_Click;
+                    productGroupPanel.Controls.Add(btn);
+                }
+                productGroupPanel.Visible = true;
+            }
+            else
+            {
+                productGroupPanel.Visible = false;
+            }
+
+            FilterProducts(activeGroup);
+        }
+
+        private void GroupBtn_Click(object sender, EventArgs e)
+        {
+            var btn = (System.Windows.Forms.Button)sender;
+            activeGroup = (string)btn.Tag;
+            productPage = 0;
+            foreach (System.Windows.Forms.Button b in productGroupPanel.Controls)
+                b.BackColor = (string)b.Tag == activeGroup ? Color.SteelBlue : SystemColors.Control;
+            FilterProducts(activeGroup);
+        }
+
+        private void FilterProducts(string group)
+        {
+            filteredProducts = DB.products
+                .Where(p => group == "" || p.group == group)
+                .OrderBy(p => p.group)
+                .ThenBy(p => p.name)
+                .ToList();
+            ShowProductPage();
+        }
+
+        private void ShowProductPage()
+        {
+            productButtonPanel.Controls.Clear();
+            selectedProduct = null;
+            addArticleButton.Text = "";
+
+            int pageCount = Math.Max(1, (filteredProducts.Count + ProductPageSize - 1) / ProductPageSize);
+            productPage = Math.Max(0, Math.Min(productPage, pageCount - 1));
+
+            int start = productPage * ProductPageSize;
+            int end = Math.Min(start + ProductPageSize, filteredProducts.Count);
+
+            for (int i = start; i < end; i++)
+            {
+                Product p = filteredProducts[i];
+                var btn = new System.Windows.Forms.Button();
+                string unit = p.piecePrice ? "stk" : "kg";
+                btn.Text = $"{p.name}\n{p.price:0.00} €/{unit}";
+                btn.Size = new Size(183, 63);
+                btn.Font = new Font("Microsoft Sans Serif", 11F);
+                btn.Margin = new Padding(3);
+                btn.Tag = p;
+                btn.FlatStyle = FlatStyle.Standard;
+                btn.TextAlign = ContentAlignment.MiddleCenter;
+                btn.Click += ProductBtn_Click;
+                productButtonPanel.Controls.Add(btn);
+            }
+
+            bool multiPage = pageCount > 1;
+            btnProductPrev.Visible = multiPage;
+            labelPage.Visible = multiPage;
+            btnProductNext.Visible = multiPage;
+            if (multiPage)
+            {
+                labelPage.Text = $"{productPage + 1} / {pageCount}";
+                btnProductPrev.Enabled = productPage > 0;
+                btnProductNext.Enabled = productPage < pageCount - 1;
+            }
+        }
+
+        private void btnProductPrev_Click(object sender, EventArgs e)
+        {
+            productPage--;
+            ShowProductPage();
+        }
+
+        private void btnProductNext_Click(object sender, EventArgs e)
+        {
+            productPage++;
+            ShowProductPage();
+        }
+
+        private void ProductBtn_Click(object sender, EventArgs e)
+        {
+            var btn = (System.Windows.Forms.Button)sender;
+            foreach (System.Windows.Forms.Button b in productButtonPanel.Controls)
+                b.BackColor = SystemColors.Control;
+            btn.BackColor = Color.LightGreen;
+
+            selectedProduct = (Product)btn.Tag;
+            addArticleButton.Text = selectedProduct.piecePrice ? "+ 1 Stück" : "abwiegen";
         }
 
         private Product selectedDBProduct;
@@ -105,6 +242,7 @@ namespace MTT
                 piecePriceCheckbox.Checked = selectedDBProduct.piecePrice;
                 txtName.Text = selectedDBProduct.name;
                 txtPreis.Text = selectedDBProduct.price.ToString();
+                txtGroup.Text = selectedDBProduct.group ?? "";
 
                 removeButton.Enabled = true;
             }
@@ -114,6 +252,7 @@ namespace MTT
                 piecePriceCheckbox.Checked = false;
                 txtName.Text = "";
                 txtPreis.Text = "";
+                txtGroup.Text = "";
 
                 removeButton.Enabled = false;
             }
@@ -143,7 +282,7 @@ namespace MTT
         {
             try
             {
-                Product p = new Product(txtName.Text, piecePriceCheckbox.Checked, decimal.Parse(txtPreis.Text));
+                Product p = new Product(txtName.Text, piecePriceCheckbox.Checked, decimal.Parse(txtPreis.Text)) { group = txtGroup.Text.Trim() };
                 DB.add(p);
 
             }
@@ -381,28 +520,6 @@ namespace MTT
         }
 
         private Product selectedProduct;
-        private void dbList2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (dbList2.SelectedItems.Count == 1)
-            {
-
-                string selectedProductName = dbList2.SelectedItems[0].Text;
-                selectedProduct = DB.products.Find(x => x.name == selectedProductName);
-
-                if (selectedProduct.piecePrice)
-                {
-                    addArticleButton.Text = "+ 1 Stück";
-                }
-                else
-                {
-                    addArticleButton.Text = "abwiegen";
-                }
-
-            } else {
-                addArticleButton.Text = "";
-            } 
-
-        }
 
 
         protected override void OnPaint(PaintEventArgs e)

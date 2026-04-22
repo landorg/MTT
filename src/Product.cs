@@ -22,6 +22,7 @@ namespace MTT
         public string name { get; set; }
         public decimal price { get; set; }
         public bool piecePrice { get; set; }
+        public string group { get; set; } = "";
 
         public bool Equals(Product other)
         {
