@@ -57,9 +57,9 @@ namespace MTT
             objGraphics.DrawImage(bill, x0 , yR, w, hR);
 
             int yS = h - hS + 20;
-            int yM = yS - 45;
+            int yM = yS - 20;
 
-            objGraphics.DrawString($"MwSt 10%: {mwst:0.00}€", defaultFont, new SolidBrush(Color.Black), x0 + w / 2, yM, centered);
+            objGraphics.DrawString($"MwSt 10%:   {mwst:0.00}€", defaultFont, new SolidBrush(Color.Black), x0 + w / 2, yM, centered);
             objGraphics.DrawString($"Summe: {sum:0.00}€", sumFont, new SolidBrush(Color.Black), x0 + w / 2, yS + 15, centered);
 
             //objGraphics.DrawRectangle(

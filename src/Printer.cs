@@ -12,7 +12,7 @@ namespace MTT
     public class Printer
     {
 
-        private static bool printer_disabled = false;
+        private static bool printer_disabled = true;
 
         private static Printer instance = null;
         private static readonly object padlock = new object();
