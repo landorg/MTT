@@ -98,7 +98,7 @@ namespace MTT
             enabled = false;
         }
 
-        internal void PrintReciept(ListView table, decimal sum)
+        internal void PrintReciept(ListView table, decimal sum, decimal mwst)
         {
             int lenght;
             byte[] data = new byte[1024];
@@ -110,7 +110,7 @@ namespace MTT
             try
             {
                 // Create label
-                var bitmap = BitmapConverter.DrawReciept(table, sum, 680);
+                var bitmap = BitmapConverter.DrawReciept(table, sum, mwst, 680);
                 //var bitmap = BitmapConverter.DrawReciept();
 
                 bitmap.Save("C:/MTT/debug.bmp");

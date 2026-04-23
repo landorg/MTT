@@ -14,11 +14,13 @@ namespace MTT
 
         public List<Article> articles;
         public decimal sum;
+        public decimal mwst;
 
         public Reciept()
         {
             articles = new List<Article>();
             sum = 0;
+            mwst = 0;
         }
 
         private void reSum()
@@ -28,6 +30,7 @@ namespace MTT
             {
                 sum += b.price;
             }
+            mwst = Decimal.Round(sum * 0.1m, 2);
         }
 
         internal void add(Article a)

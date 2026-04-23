@@ -44,6 +44,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.tareLabel2 = new System.Windows.Forms.Label();
             this.netLabel2 = new System.Windows.Forms.Label();
+            this.mwstLabelText = new System.Windows.Forms.Label();
             this.printerGroupBox = new System.Windows.Forms.GroupBox();
             this.feedLabelBtn = new System.Windows.Forms.Button();
             this.printTestLabelBtn = new System.Windows.Forms.Button();
@@ -80,11 +81,11 @@
             this.netLabel1 = new System.Windows.Forms.Label();
             this.tabEdit = new System.Windows.Forms.TabPage();
             this.piecePriceCheckbox = new System.Windows.Forms.CheckBox();
-            this.labelGroup = new System.Windows.Forms.Label();
-            this.txtGroup = new System.Windows.Forms.ComboBox();
             this.exitButton = new System.Windows.Forms.Button();
             this.kbButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.labelGroup = new System.Windows.Forms.Label();
+            this.txtGroup = new System.Windows.Forms.ComboBox();
             this.removeButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.txtPreis = new System.Windows.Forms.TextBox();
@@ -96,6 +97,7 @@
             this.colGroup = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabDebug = new System.Windows.Forms.TabPage();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mwstLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ucLoadcellBindingSource)).BeginInit();
             this.loadcellGroupBox.SuspendLayout();
             this.printerGroupBox.SuspendLayout();
@@ -259,6 +261,15 @@
             this.netLabel2.TabIndex = 16;
             this.netLabel2.Text = "-";
             // 
+            // mwstLabelText
+            // 
+            this.mwstLabelText.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
+            this.mwstLabelText.Location = new System.Drawing.Point(8, 423);
+            this.mwstLabelText.Name = "mwstLabelText";
+            this.mwstLabelText.Size = new System.Drawing.Size(101, 26);
+            this.mwstLabelText.TabIndex = 39;
+            this.mwstLabelText.Text = "MwSt 10%:";
+            // 
             // printerGroupBox
             // 
             this.printerGroupBox.Controls.Add(this.feedLabelBtn);
@@ -339,6 +350,7 @@
             // 
             // tabScale
             // 
+            this.tabScale.Controls.Add(this.mwstLabelText);
             this.tabScale.Controls.Add(this.label15);
             this.tabScale.Controls.Add(this.label13);
             this.tabScale.Controls.Add(this.sumLabel);
@@ -362,6 +374,7 @@
             this.tabScale.Controls.Add(this.sumButton);
             this.tabScale.Controls.Add(this.addArticleButton);
             this.tabScale.Controls.Add(this.netLabel1);
+            this.tabScale.Controls.Add(this.mwstLabel);
             this.tabScale.Location = new System.Drawing.Point(4, 54);
             this.tabScale.Name = "tabScale";
             this.tabScale.Padding = new System.Windows.Forms.Padding(3);
@@ -374,7 +387,7 @@
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.label15.Location = new System.Drawing.Point(244, 414);
+            this.label15.Location = new System.Drawing.Point(365, 415);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(26, 29);
             this.label15.TabIndex = 33;
@@ -384,7 +397,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.label13.Location = new System.Drawing.Point(6, 414);
+            this.label13.Location = new System.Drawing.Point(199, 416);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(96, 29);
             this.label13.TabIndex = 32;
@@ -393,7 +406,7 @@
             // sumLabel
             // 
             this.sumLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.sumLabel.Location = new System.Drawing.Point(110, 412);
+            this.sumLabel.Location = new System.Drawing.Point(231, 413);
             this.sumLabel.Name = "sumLabel";
             this.sumLabel.Size = new System.Drawing.Size(130, 32);
             this.sumLabel.TabIndex = 31;
@@ -412,14 +425,13 @@
             // 
             // tareLabel1
             // 
-            this.tareLabel1.AutoSize = false;
             this.tareLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
             this.tareLabel1.Location = new System.Drawing.Point(420, 406);
             this.tareLabel1.Name = "tareLabel1";
             this.tareLabel1.Size = new System.Drawing.Size(108, 32);
-            this.tareLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.tareLabel1.TabIndex = 29;
             this.tareLabel1.Text = "0,000";
+            this.tareLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label9
             // 
@@ -485,20 +497,20 @@
             // 
             // currentPriceLabel
             // 
-            this.currentPriceLabel.AutoSize = false;
             this.currentPriceLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
             this.currentPriceLabel.Location = new System.Drawing.Point(420, 440);
             this.currentPriceLabel.Name = "currentPriceLabel";
             this.currentPriceLabel.Size = new System.Drawing.Size(108, 32);
-            this.currentPriceLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.currentPriceLabel.TabIndex = 9;
             this.currentPriceLabel.Text = "0,00";
+            this.currentPriceLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(6, 8);
             this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(122, 29);
             this.label3.TabIndex = 8;
             this.label3.Text = "Rechnung";
             // 
@@ -545,59 +557,52 @@
             this.price.Text = "Preis";
             this.price.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.price.Width = 96;
-            //
+            // 
             // productGroupPanel
-            //
+            // 
             this.productGroupPanel.Location = new System.Drawing.Point(396, 6);
             this.productGroupPanel.Name = "productGroupPanel";
             this.productGroupPanel.Size = new System.Drawing.Size(390, 50);
             this.productGroupPanel.TabIndex = 6;
-            this.productGroupPanel.FlowDirection = System.Windows.Forms.FlowDirection.LeftToRight;
-            this.productGroupPanel.WrapContents = true;
-            this.productGroupPanel.AutoScroll = false;
-            this.productGroupPanel.Padding = new System.Windows.Forms.Padding(0);
-            //
+            // 
             // productButtonPanel
-            //
+            // 
             this.productButtonPanel.Location = new System.Drawing.Point(396, 58);
             this.productButtonPanel.Name = "productButtonPanel";
+            this.productButtonPanel.Padding = new System.Windows.Forms.Padding(2);
             this.productButtonPanel.Size = new System.Drawing.Size(390, 276);
             this.productButtonPanel.TabIndex = 35;
-            this.productButtonPanel.FlowDirection = System.Windows.Forms.FlowDirection.LeftToRight;
-            this.productButtonPanel.WrapContents = true;
-            this.productButtonPanel.AutoScroll = false;
-            this.productButtonPanel.Padding = new System.Windows.Forms.Padding(2);
-            //
+            // 
             // btnProductPrev
-            //
+            // 
+            this.btnProductPrev.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
             this.btnProductPrev.Location = new System.Drawing.Point(396, 337);
             this.btnProductPrev.Name = "btnProductPrev";
             this.btnProductPrev.Size = new System.Drawing.Size(70, 30);
             this.btnProductPrev.TabIndex = 36;
             this.btnProductPrev.Text = "◄";
-            this.btnProductPrev.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
             this.btnProductPrev.UseVisualStyleBackColor = true;
             this.btnProductPrev.Visible = false;
             this.btnProductPrev.Click += new System.EventHandler(this.btnProductPrev_Click);
-            //
+            // 
             // labelPage
-            //
+            // 
+            this.labelPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
             this.labelPage.Location = new System.Drawing.Point(470, 337);
             this.labelPage.Name = "labelPage";
             this.labelPage.Size = new System.Drawing.Size(246, 30);
             this.labelPage.TabIndex = 37;
             this.labelPage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.labelPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
             this.labelPage.Visible = false;
-            //
+            // 
             // btnProductNext
-            //
+            // 
+            this.btnProductNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
             this.btnProductNext.Location = new System.Drawing.Point(720, 337);
             this.btnProductNext.Name = "btnProductNext";
             this.btnProductNext.Size = new System.Drawing.Size(66, 30);
             this.btnProductNext.TabIndex = 38;
             this.btnProductNext.Text = "►";
-            this.btnProductNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
             this.btnProductNext.UseVisualStyleBackColor = true;
             this.btnProductNext.Visible = false;
             this.btnProductNext.Click += new System.EventHandler(this.btnProductNext_Click);
@@ -633,14 +638,13 @@
             // 
             // netLabel1
             // 
-            this.netLabel1.AutoSize = false;
             this.netLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
             this.netLabel1.Location = new System.Drawing.Point(420, 370);
             this.netLabel1.Name = "netLabel1";
             this.netLabel1.Size = new System.Drawing.Size(108, 32);
-            this.netLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.netLabel1.TabIndex = 1;
             this.netLabel1.Text = "0,000";
+            this.netLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // tabEdit
             // 
@@ -702,29 +706,29 @@
             this.label2.Size = new System.Drawing.Size(59, 29);
             this.label2.TabIndex = 5;
             this.label2.Text = "€/kg";
-            //
+            // 
             // labelGroup
-            //
+            // 
             this.labelGroup.AutoSize = true;
             this.labelGroup.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
             this.labelGroup.Location = new System.Drawing.Point(436, 106);
             this.labelGroup.Name = "labelGroup";
+            this.labelGroup.Size = new System.Drawing.Size(100, 29);
             this.labelGroup.TabIndex = 9;
             this.labelGroup.Text = "Gruppe:";
-            //
+            // 
             // txtGroup
-            //
-            this.txtGroup.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.txtGroup.Location = new System.Drawing.Point(530, 100);
-            this.txtGroup.Name = "txtGroup";
-            this.txtGroup.Size = new System.Drawing.Size(256, 35);
-            this.txtGroup.TabIndex = 10;
-            this.txtGroup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            // 
             this.txtGroup.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.txtGroup.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            //
+            this.txtGroup.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
+            this.txtGroup.Location = new System.Drawing.Point(542, 100);
+            this.txtGroup.Name = "txtGroup";
+            this.txtGroup.Size = new System.Drawing.Size(244, 37);
+            this.txtGroup.TabIndex = 10;
+            // 
             // removeButton
-            //
+            // 
             this.removeButton.Enabled = false;
             this.removeButton.Location = new System.Drawing.Point(634, 148);
             this.removeButton.Name = "removeButton";
@@ -786,19 +790,19 @@
             // 
             this.colProduct.Text = "Produkt";
             this.colProduct.Width = 165;
-            //
+            // 
             // colPrice
-            //
+            // 
             this.colPrice.Text = "Preis";
             this.colPrice.Width = 80;
-            //
+            // 
             // colPiecePrice
-            //
+            // 
             this.colPiecePrice.Text = "pro";
             this.colPiecePrice.Width = 55;
-            //
+            // 
             // colGroup
-            //
+            // 
             this.colGroup.Text = "Gruppe";
             this.colGroup.Width = 110;
             // 
@@ -822,6 +826,16 @@
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(28, 28);
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // mwstLabel
+            // 
+            this.mwstLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
+            this.mwstLabel.Location = new System.Drawing.Point(85, 423);
+            this.mwstLabel.Name = "mwstLabel";
+            this.mwstLabel.Size = new System.Drawing.Size(101, 26);
+            this.mwstLabel.TabIndex = 39;
+            this.mwstLabel.Text = "0,00 €";
+            this.mwstLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // MTT
             // 
@@ -921,6 +935,8 @@
         private System.Windows.Forms.Button btnProductPrev;
         private System.Windows.Forms.Label labelPage;
         private System.Windows.Forms.Button btnProductNext;
+        private System.Windows.Forms.Label mwstLabelText;
+        private System.Windows.Forms.Label mwstLabel;
     }
 
 }

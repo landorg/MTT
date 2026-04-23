@@ -60,7 +60,7 @@ namespace MTT
         private void printTestLabelBtn_Click(object sender, EventArgs e)
         {
                 
-            Printer.Instance.PrintReciept(recieptList, reciept.sum);
+            Printer.Instance.PrintReciept(recieptList, reciept.sum, reciept.mwst);
         }
 
         private Reciept reciept = new Reciept();
@@ -486,6 +486,7 @@ namespace MTT
                 recieptList.Items.Add(item);
             }
             sumLabel.Text = $"{Decimal.Round(reciept.sum, 2):0.00}";
+            mwstLabel.Text = $"{Decimal.Round(reciept.mwst, 2):0.00} €";
         }
 
         private void recieptList_SelectedIndexChanged(object sender, EventArgs e)
@@ -531,7 +532,7 @@ namespace MTT
 
         private void sumButton_Click(object sender, EventArgs e)
         {
-            Printer.Instance.PrintReciept(recieptList, reciept.sum);
+            Printer.Instance.PrintReciept(recieptList, reciept.sum, reciept.mwst);
             reciept.save();
             reciept = new Reciept();
 

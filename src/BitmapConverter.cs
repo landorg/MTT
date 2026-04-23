@@ -10,7 +10,7 @@ namespace MTT
 {
     public static class BitmapConverter
     {
-        public static Bitmap DrawReciept(ListView table, decimal sum, int length)
+        public static Bitmap DrawReciept(ListView table, decimal sum, decimal mwst, int length)
         {
             int width = 432;
 
@@ -50,14 +50,16 @@ namespace MTT
             int yR = yH + 45;
 
             int hS = 20;
-            int hR = h - yH - 20 - hS * 2;
+            int hR = h - yH - 20 - hS * 4;
 
             Bitmap bill = new Bitmap(table.Width, table.Height);
             table.DrawToBitmap(bill, new Rectangle(0, 0, table.Width, table.Height));
             objGraphics.DrawImage(bill, x0 , yR, w, hR);
 
             int yS = h - hS + 20;
+            int yM = yS - 45;
 
+            objGraphics.DrawString($"MwSt 10%: {mwst:0.00}€", defaultFont, new SolidBrush(Color.Black), x0 + w / 2, yM, centered);
             objGraphics.DrawString($"Summe: {sum:0.00}€", sumFont, new SolidBrush(Color.Black), x0 + w / 2, yS + 15, centered);
 
             //objGraphics.DrawRectangle(
