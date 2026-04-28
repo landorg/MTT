@@ -18,6 +18,7 @@ namespace MTT
 
             // Create the Font object for the image text drawing.
             Font defaultFont = new Font("Arial", 21, FontStyle.Bold, GraphicsUnit.Pixel);
+            Font smallFont = new Font("Arial", 16, FontStyle.Regular, GraphicsUnit.Pixel);
             Font sumFont = new Font("Arial", 32, FontStyle.Bold, GraphicsUnit.Pixel);
 
             // Add the colors to the new bitmap.
@@ -47,10 +48,13 @@ namespace MTT
 
             objGraphics.DrawString("Vielen Dank!", defaultFont, new SolidBrush(Color.Black), x0 + w / 2, yH + 25, centered);
 
-            int yR = yH + 45;
+            string timestamp = DateTime.Now.ToString("dd.MM.yyyy HH:mm");
+            objGraphics.DrawString(timestamp, smallFont, new SolidBrush(Color.Black), x0 + w / 2, yH + 45, centered);
+
+            int yR = yH + 63;
 
             int hS = 20;
-            int hR = h - yH - 20 - hS * 4;
+            int hR = h - yH - 20 - hS * 4 - 18;
 
             Bitmap bill = new Bitmap(table.Width, table.Height);
             table.DrawToBitmap(bill, new Rectangle(0, 0, table.Width, table.Height));

@@ -67,8 +67,11 @@ namespace MTT
 
         private void MTT_Load(object sender, EventArgs e)
         {
+            tabControl1.TabPages.Remove(tabDebug);
+
             DB.load();
             refreshDbList();
+            refreshHistoryList();
 
             ScaleCell.init();
         }
@@ -125,8 +128,8 @@ namespace MTT
                 {
                     var btn = new System.Windows.Forms.Button();
                     btn.Text = g == "" ? "Alle" : g;
-                    btn.Size = new Size(g == "" ? 55 : Math.Max(55, g.Length * 11 + 16), 44);
-                    btn.Font = new Font("Microsoft Sans Serif", 11F);
+                    btn.Size = new Size(g == "" ? 70 : Math.Max(70, g.Length * 14 + 16), 44);
+                    btn.Font = new Font("Microsoft Sans Serif", 14F);
                     btn.Margin = new Padding(2);
                     btn.Tag = g;
                     btn.FlatStyle = FlatStyle.Flat;
@@ -184,7 +187,7 @@ namespace MTT
                 string unit = p.piecePrice ? "stk" : "kg";
                 btn.Text = $"{p.name}\n{p.price:0.00} €/{unit}";
                 btn.Size = new Size(183, 63);
-                btn.Font = new Font("Microsoft Sans Serif", 11F);
+                btn.Font = new Font("Microsoft Sans Serif", 14F);
                 btn.Margin = new Padding(3);
                 btn.Tag = p;
                 btn.FlatStyle = FlatStyle.Standard;
@@ -282,7 +285,8 @@ namespace MTT
         {
             try
             {
-                Product p = new Product(txtName.Text, piecePriceCheckbox.Checked, decimal.Parse(txtPreis.Text)) { group = txtGroup.Text.Trim() };
+                int id = selectedDBProduct?.ID ?? 0;
+                Product p = new Product(txtName.Text, piecePriceCheckbox.Checked, decimal.Parse(txtPreis.Text)) { group = txtGroup.Text.Trim(), ID = id };
                 DB.add(p);
 
             }
@@ -530,13 +534,96 @@ namespace MTT
             base.OnPaint(e);
         }
 
+        private void printButton_Click(object sender, EventArgs e)
+        {
+            if (reciept.articles.Count == 0) return;
+            Printer.Instance.PrintReciept(recieptList, reciept.sum, reciept.mwst);
+        }
+
         private void sumButton_Click(object sender, EventArgs e)
         {
-            Printer.Instance.PrintReciept(recieptList, reciept.sum, reciept.mwst);
             reciept.save();
             reciept = new Reciept();
-
             refreshReciept();
+            refreshHistoryList();
+        }
+
+        // --- History tab ---
+
+        private Reciept selectedHistoryReciept;
+
+        internal void refreshHistoryList()
+        {
+            historyList.Items.Clear();
+            string[] files = System.IO.Directory.GetFiles("C:/MTT/Rechnungen/", "Rechnung-*.txt");
+            System.Array.Sort(files);
+            System.Array.Reverse(files);
+            foreach (string file in files)
+            {
+                string datePart = System.IO.Path.GetFileNameWithoutExtension(file).Substring("Rechnung-".Length);
+                string displayDate = datePart;
+                try
+                {
+                    System.DateTime dt = System.DateTime.ParseExact(datePart, "yyyy-MM-dd_HH-mm-ss", null);
+                    displayDate = dt.ToString("dd.MM.yyyy HH:mm");
+                }
+                catch { }
+
+                decimal fileSum = 0;
+                try
+                {
+                    string json = System.IO.File.ReadAllText(file);
+                    var r = Newtonsoft.Json.JsonConvert.DeserializeObject<Reciept>(json);
+                    fileSum = r != null ? r.sum : 0;
+                }
+                catch { }
+
+                ListViewItem item = new ListViewItem(displayDate);
+                item.SubItems.Add($"{Decimal.Round(fileSum, 2):0.00} €");
+                item.Tag = file;
+                historyList.Items.Add(item);
+            }
+        }
+
+        private void historyList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (historyList.SelectedItems.Count == 0) return;
+            string file = (string)historyList.SelectedItems[0].Tag;
+            try
+            {
+                string json = System.IO.File.ReadAllText(file);
+                Reciept r = Newtonsoft.Json.JsonConvert.DeserializeObject<Reciept>(json);
+                if (r == null) return;
+
+                if (r.mwst == 0 && r.sum > 0)
+                    r.mwst = Decimal.Round(r.sum * 0.1m, 2);
+
+                historyDetailList.Items.Clear();
+                foreach (Article a in r.articles)
+                {
+                    ListViewItem item = new ListViewItem(a.product.name);
+                    string weight = a.product.piecePrice
+                        ? Decimal.Round(a.Weight, 0).ToString()
+                        : Decimal.Round(a.Weight, 2).ToString();
+                    item.SubItems.Add($"{weight} {(a.product.piecePrice ? "stk" : "kg")}");
+                    item.SubItems.Add($"{Decimal.Round(a.product.price, 2):0.00} €");
+                    item.SubItems.Add($"{Decimal.Round(a.price, 2):0.00} €");
+                    historyDetailList.Items.Add(item);
+                }
+
+                historyInfoLabel.Text = $"MwSt 10%: {r.mwst:0.00} €     Summe: {r.sum:0.00} €";
+                selectedHistoryReciept = r;
+            }
+            catch (Exception ex)
+            {
+                logToBox($"Error loading receipt: {ex.Message}", "error");
+            }
+        }
+
+        private void historyPrintBtn_Click(object sender, EventArgs e)
+        {
+            if (selectedHistoryReciept == null) return;
+            Printer.Instance.PrintReciept(historyDetailList, selectedHistoryReciept.sum, selectedHistoryReciept.mwst);
         }
 
     }

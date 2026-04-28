@@ -10,9 +10,10 @@ namespace MTT
 {
     internal class Product : IEquatable<Product>
     {
+        public Product() { }
+
         public Product(string name, bool piecePrice = false, decimal price = 0)
         {
-            //ID = iD;
             this.name = name;
             this.price = price;
             this.piecePrice = piecePrice;

@@ -149,6 +149,9 @@
     <Compile Include="UcLoadcell.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="Weights.cs" />
+    <Compile Include="WideButtonComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <EmbeddedResource Include="MTT.resx">
       <DependentUpon>MTT.cs</DependentUpon>
       <SubType>Designer</SubType>

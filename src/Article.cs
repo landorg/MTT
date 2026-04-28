@@ -2,13 +2,16 @@
 {
     internal class Article
     {
+        public Article() { }
+
         private decimal weight;
         public decimal Weight
         {
             set
             {
                 weight = value;
-                price = weight * product.price;
+                if (product != null)
+                    price = weight * product.price;
             }
             get
             {

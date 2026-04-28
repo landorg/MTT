@@ -76,16 +76,29 @@
             this.labelPage = new System.Windows.Forms.Label();
             this.btnProductNext = new System.Windows.Forms.Button();
             this.delArticleButton = new System.Windows.Forms.Button();
+            this.printButton = new System.Windows.Forms.Button();
             this.sumButton = new System.Windows.Forms.Button();
             this.addArticleButton = new System.Windows.Forms.Button();
             this.netLabel1 = new System.Windows.Forms.Label();
+            this.mwstLabel = new System.Windows.Forms.Label();
+            this.tabRechnungen = new System.Windows.Forms.TabPage();
+            this.historyList = new System.Windows.Forms.ListView();
+            this.historyColDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.historyColSum = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.historyDetailList = new System.Windows.Forms.ListView();
+            this.historyColProduct = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.historyColCount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.historyColA = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.historyColPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.historyPrintBtn = new System.Windows.Forms.Button();
+            this.historyInfoLabel = new System.Windows.Forms.Label();
             this.tabEdit = new System.Windows.Forms.TabPage();
             this.piecePriceCheckbox = new System.Windows.Forms.CheckBox();
             this.exitButton = new System.Windows.Forms.Button();
             this.kbButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.labelGroup = new System.Windows.Forms.Label();
-            this.txtGroup = new System.Windows.Forms.ComboBox();
+            this.txtGroup = new WideButtonComboBox();
             this.removeButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.txtPreis = new System.Windows.Forms.TextBox();
@@ -97,12 +110,12 @@
             this.colGroup = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabDebug = new System.Windows.Forms.TabPage();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mwstLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ucLoadcellBindingSource)).BeginInit();
             this.loadcellGroupBox.SuspendLayout();
             this.printerGroupBox.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabScale.SuspendLayout();
+            this.tabRechnungen.SuspendLayout();
             this.tabEdit.SuspendLayout();
             this.tabDebug.SuspendLayout();
             this.SuspendLayout();
@@ -335,6 +348,7 @@
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabScale);
+            this.tabControl1.Controls.Add(this.tabRechnungen);
             this.tabControl1.Controls.Add(this.tabEdit);
             this.tabControl1.Controls.Add(this.tabDebug);
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -371,6 +385,7 @@
             this.tabScale.Controls.Add(this.labelPage);
             this.tabScale.Controls.Add(this.btnProductNext);
             this.tabScale.Controls.Add(this.delArticleButton);
+            this.tabScale.Controls.Add(this.printButton);
             this.tabScale.Controls.Add(this.sumButton);
             this.tabScale.Controls.Add(this.addArticleButton);
             this.tabScale.Controls.Add(this.netLabel1);
@@ -611,17 +626,27 @@
             // 
             this.delArticleButton.Location = new System.Drawing.Point(6, 456);
             this.delArticleButton.Name = "delArticleButton";
-            this.delArticleButton.Size = new System.Drawing.Size(180, 78);
+            this.delArticleButton.Size = new System.Drawing.Size(120, 78);
             this.delArticleButton.TabIndex = 5;
             this.delArticleButton.Text = "löschen";
             this.delArticleButton.UseVisualStyleBackColor = true;
             this.delArticleButton.Click += new System.EventHandler(this.delArticleButton_Click);
             // 
+            // printButton
+            // 
+            this.printButton.Location = new System.Drawing.Point(130, 456);
+            this.printButton.Name = "printButton";
+            this.printButton.Size = new System.Drawing.Size(120, 78);
+            this.printButton.TabIndex = 40;
+            this.printButton.Text = "Drucken";
+            this.printButton.UseVisualStyleBackColor = true;
+            this.printButton.Click += new System.EventHandler(this.printButton_Click);
+            // 
             // sumButton
             // 
-            this.sumButton.Location = new System.Drawing.Point(190, 456);
+            this.sumButton.Location = new System.Drawing.Point(254, 456);
             this.sumButton.Name = "sumButton";
-            this.sumButton.Size = new System.Drawing.Size(202, 78);
+            this.sumButton.Size = new System.Drawing.Size(138, 78);
             this.sumButton.TabIndex = 4;
             this.sumButton.Text = "Abrechnen";
             this.sumButton.UseVisualStyleBackColor = true;
@@ -646,6 +671,123 @@
             this.netLabel1.Text = "0,000";
             this.netLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // mwstLabel
+            // 
+            this.mwstLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
+            this.mwstLabel.Location = new System.Drawing.Point(85, 423);
+            this.mwstLabel.Name = "mwstLabel";
+            this.mwstLabel.Size = new System.Drawing.Size(101, 26);
+            this.mwstLabel.TabIndex = 39;
+            this.mwstLabel.Text = "0,00 €";
+            this.mwstLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // tabRechnungen
+            // 
+            this.tabRechnungen.Controls.Add(this.historyList);
+            this.tabRechnungen.Controls.Add(this.historyDetailList);
+            this.tabRechnungen.Controls.Add(this.historyPrintBtn);
+            this.tabRechnungen.Controls.Add(this.historyInfoLabel);
+            this.tabRechnungen.Location = new System.Drawing.Point(4, 54);
+            this.tabRechnungen.Name = "tabRechnungen";
+            this.tabRechnungen.Size = new System.Drawing.Size(792, 542);
+            this.tabRechnungen.TabIndex = 3;
+            this.tabRechnungen.Text = "Rechnungen";
+            this.tabRechnungen.UseVisualStyleBackColor = true;
+            // 
+            // historyList
+            // 
+            this.historyList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.historyList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.historyColDate,
+            this.historyColSum});
+            this.historyList.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.historyList.FullRowSelect = true;
+            this.historyList.GridLines = true;
+            this.historyList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.historyList.HideSelection = false;
+            this.historyList.Location = new System.Drawing.Point(6, 6);
+            this.historyList.MultiSelect = false;
+            this.historyList.Name = "historyList";
+            this.historyList.Size = new System.Drawing.Size(380, 530);
+            this.historyList.TabIndex = 0;
+            this.historyList.UseCompatibleStateImageBehavior = false;
+            this.historyList.View = System.Windows.Forms.View.Details;
+            this.historyList.SelectedIndexChanged += new System.EventHandler(this.historyList_SelectedIndexChanged);
+            // 
+            // historyColDate
+            // 
+            this.historyColDate.Text = "Datum";
+            this.historyColDate.Width = 240;
+            // 
+            // historyColSum
+            // 
+            this.historyColSum.Text = "Summe";
+            this.historyColSum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.historyColSum.Width = 130;
+            // 
+            // historyDetailList
+            // 
+            this.historyDetailList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.historyDetailList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.historyColProduct,
+            this.historyColCount,
+            this.historyColA,
+            this.historyColPrice});
+            this.historyDetailList.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.historyDetailList.FullRowSelect = true;
+            this.historyDetailList.GridLines = true;
+            this.historyDetailList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.historyDetailList.HideSelection = false;
+            this.historyDetailList.Location = new System.Drawing.Point(396, 6);
+            this.historyDetailList.MultiSelect = false;
+            this.historyDetailList.Name = "historyDetailList";
+            this.historyDetailList.Size = new System.Drawing.Size(390, 418);
+            this.historyDetailList.TabIndex = 1;
+            this.historyDetailList.UseCompatibleStateImageBehavior = false;
+            this.historyDetailList.View = System.Windows.Forms.View.Details;
+            // 
+            // historyColProduct
+            // 
+            this.historyColProduct.Text = "Produkt";
+            this.historyColProduct.Width = 116;
+            // 
+            // historyColCount
+            // 
+            this.historyColCount.Text = "Menge";
+            this.historyColCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.historyColCount.Width = 95;
+            // 
+            // historyColA
+            // 
+            this.historyColA.Text = "à";
+            this.historyColA.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.historyColA.Width = 79;
+            // 
+            // historyColPrice
+            // 
+            this.historyColPrice.Text = "Preis";
+            this.historyColPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.historyColPrice.Width = 96;
+            // 
+            // historyPrintBtn
+            // 
+            this.historyPrintBtn.Location = new System.Drawing.Point(396, 470);
+            this.historyPrintBtn.Name = "historyPrintBtn";
+            this.historyPrintBtn.Size = new System.Drawing.Size(190, 66);
+            this.historyPrintBtn.TabIndex = 3;
+            this.historyPrintBtn.Text = "Drucken";
+            this.historyPrintBtn.UseVisualStyleBackColor = true;
+            this.historyPrintBtn.Click += new System.EventHandler(this.historyPrintBtn_Click);
+            // 
+            // historyInfoLabel
+            // 
+            this.historyInfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.historyInfoLabel.Location = new System.Drawing.Point(396, 430);
+            this.historyInfoLabel.Name = "historyInfoLabel";
+            this.historyInfoLabel.Size = new System.Drawing.Size(390, 34);
+            this.historyInfoLabel.TabIndex = 2;
+            this.historyInfoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // tabEdit
             // 
             this.tabEdit.Controls.Add(this.piecePriceCheckbox);
@@ -669,7 +811,7 @@
             // piecePriceCheckbox
             // 
             this.piecePriceCheckbox.AutoSize = true;
-            this.piecePriceCheckbox.Location = new System.Drawing.Point(436, 60);
+            this.piecePriceCheckbox.Location = new System.Drawing.Point(651, 55);
             this.piecePriceCheckbox.Name = "piecePriceCheckbox";
             this.piecePriceCheckbox.Size = new System.Drawing.Size(145, 33);
             this.piecePriceCheckbox.TabIndex = 8;
@@ -721,6 +863,7 @@
             // 
             this.txtGroup.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.txtGroup.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.txtGroup.ButtonWidth = 50;
             this.txtGroup.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
             this.txtGroup.Location = new System.Drawing.Point(542, 100);
             this.txtGroup.Name = "txtGroup";
@@ -827,16 +970,6 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // mwstLabel
-            // 
-            this.mwstLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
-            this.mwstLabel.Location = new System.Drawing.Point(85, 423);
-            this.mwstLabel.Name = "mwstLabel";
-            this.mwstLabel.Size = new System.Drawing.Size(101, 26);
-            this.mwstLabel.TabIndex = 39;
-            this.mwstLabel.Text = "0,00 €";
-            this.mwstLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
             // MTT
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -860,6 +993,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tabScale.ResumeLayout(false);
             this.tabScale.PerformLayout();
+            this.tabRechnungen.ResumeLayout(false);
             this.tabEdit.ResumeLayout(false);
             this.tabEdit.PerformLayout();
             this.tabDebug.ResumeLayout(false);
@@ -931,12 +1065,24 @@
         private System.Windows.Forms.ColumnHeader colPiecePrice;
         private System.Windows.Forms.ColumnHeader colGroup;
         private System.Windows.Forms.Label labelGroup;
-        private System.Windows.Forms.ComboBox txtGroup;
+        private WideButtonComboBox txtGroup;
         private System.Windows.Forms.Button btnProductPrev;
         private System.Windows.Forms.Label labelPage;
         private System.Windows.Forms.Button btnProductNext;
         private System.Windows.Forms.Label mwstLabelText;
         private System.Windows.Forms.Label mwstLabel;
+        private System.Windows.Forms.Button printButton;
+        private System.Windows.Forms.TabPage tabRechnungen;
+        private System.Windows.Forms.ListView historyList;
+        private System.Windows.Forms.ColumnHeader historyColDate;
+        private System.Windows.Forms.ColumnHeader historyColSum;
+        private System.Windows.Forms.ListView historyDetailList;
+        private System.Windows.Forms.ColumnHeader historyColProduct;
+        private System.Windows.Forms.ColumnHeader historyColCount;
+        private System.Windows.Forms.ColumnHeader historyColA;
+        private System.Windows.Forms.ColumnHeader historyColPrice;
+        private System.Windows.Forms.Button historyPrintBtn;
+        private System.Windows.Forms.Label historyInfoLabel;
     }
 
 }

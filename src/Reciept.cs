@@ -79,16 +79,38 @@ namespace MTT
         {
             MTT mtt = (MTT)Application.OpenForms["MTT"];
 
-            string filename = $"C:/MTT/Rechnungen/Rechnung-{System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss")}.txt";
+            string ts = System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
+            string basename = $"C:/MTT/Rechnungen/Rechnung-{ts}";
 
-            mtt.logToBox(filename);
+            mtt.logToBox(basename + ".txt");
 
-            FileStream fs = System.IO.File.Create(filename);
+            FileStream fs = System.IO.File.Create(basename + ".txt");
             string json = JsonConvert.SerializeObject(this, Formatting.Indented);
             using (StreamWriter sw = new StreamWriter(fs))
             {
                 sw.Write(json);
                 sw.Close();
+            }
+
+            string dateDisplay = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm");
+            using (StreamWriter sw = new StreamWriter(basename + ".csv", false, new System.Text.UTF8Encoding(true)))
+            {
+                sw.WriteLine("Datum;Produkt;Menge;Einheit;Preis/Einheit;Gesamtpreis");
+                bool first = true;
+                foreach (Article a in articles)
+                {
+                    string datumCol = first ? dateDisplay : "";
+                    string unit = a.product.piecePrice ? "stk" : "kg";
+                    string weightStr = a.product.piecePrice
+                        ? Decimal.Round(a.Weight, 0).ToString()
+                        : Decimal.Round(a.Weight, 2).ToString("0.00").Replace('.', ',');
+                    string unitPrice = Decimal.Round(a.product.price, 2).ToString("0.00").Replace('.', ',');
+                    string linePrice = Decimal.Round(a.price, 2).ToString("0.00").Replace('.', ',');
+                    sw.WriteLine($"{datumCol};{a.product.name};{weightStr};{unit};{unitPrice};{linePrice}");
+                    first = false;
+                }
+                sw.WriteLine($";MwSt 10%;;;;{Decimal.Round(mwst, 2).ToString("0.00").Replace('.', ',')}");
+                sw.WriteLine($";Summe;;;;{Decimal.Round(sum, 2).ToString("0.00").Replace('.', ',')}");
             }
         }
     }
