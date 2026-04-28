@@ -98,11 +98,11 @@
             this.kbButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.labelGroup = new System.Windows.Forms.Label();
-            this.txtGroup = new WideButtonComboBox();
+            this.txtGroup = new MTT.WideButtonComboBox();
             this.removeButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.txtPreis = new System.Windows.Forms.TextBox();
-            this.txtName = new System.Windows.Forms.TextBox();
+            this.txtName = new MTT.WhitespaceTextBox();
             this.dbList = new System.Windows.Forms.ListView();
             this.colProduct = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -811,7 +811,7 @@
             // piecePriceCheckbox
             // 
             this.piecePriceCheckbox.AutoSize = true;
-            this.piecePriceCheckbox.Location = new System.Drawing.Point(651, 55);
+            this.piecePriceCheckbox.Location = new System.Drawing.Point(441, 61);
             this.piecePriceCheckbox.Name = "piecePriceCheckbox";
             this.piecePriceCheckbox.Size = new System.Drawing.Size(145, 33);
             this.piecePriceCheckbox.TabIndex = 8;
@@ -843,7 +843,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(754, 16);
+            this.label2.Location = new System.Drawing.Point(725, 60);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(59, 29);
             this.label2.TabIndex = 5;
@@ -894,7 +894,7 @@
             // txtPreis
             // 
             this.txtPreis.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F);
-            this.txtPreis.Location = new System.Drawing.Point(636, 4);
+            this.txtPreis.Location = new System.Drawing.Point(602, 49);
             this.txtPreis.Name = "txtPreis";
             this.txtPreis.Size = new System.Drawing.Size(114, 45);
             this.txtPreis.TabIndex = 3;
@@ -904,8 +904,11 @@
             this.txtName.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F);
             this.txtName.Location = new System.Drawing.Point(436, 4);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(194, 45);
+            this.txtName.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.txtName.Size = new System.Drawing.Size(348, 45);
             this.txtName.TabIndex = 2;
+            this.txtName.Text = "";
+            this.txtName.WordWrap = false;
             // 
             // dbList
             // 
@@ -918,7 +921,6 @@
             this.dbList.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
             this.dbList.FullRowSelect = true;
             this.dbList.GridLines = true;
-            this.dbList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.dbList.HideSelection = false;
             this.dbList.Location = new System.Drawing.Point(8, 3);
             this.dbList.MultiSelect = false;
@@ -927,6 +929,7 @@
             this.dbList.TabIndex = 1;
             this.dbList.UseCompatibleStateImageBehavior = false;
             this.dbList.View = System.Windows.Forms.View.Details;
+            this.dbList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.dbList_ColumnClick);
             this.dbList.SelectedIndexChanged += new System.EventHandler(this.dbList_SelectedIndexChanged);
             // 
             // colProduct
@@ -1029,7 +1032,7 @@
         private System.Windows.Forms.ColumnHeader colProduct;
         private System.Windows.Forms.ColumnHeader colPrice;
         private System.Windows.Forms.TextBox txtPreis;
-        private System.Windows.Forms.TextBox txtName;
+        private WhitespaceTextBox txtName;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.Button removeButton;

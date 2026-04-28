@@ -68,4 +68,64 @@ namespace MTT
             base.OnMouseDown(e);
         }
     }
+
+    internal class WhitespaceTextBox : RichTextBox
+    {
+        private bool _formatting;
+
+        public WhitespaceTextBox()
+        {
+            ScrollBars = RichTextBoxScrollBars.None;
+            WordWrap = false;
+        }
+
+        // Strip newlines so paste or programmatic sets never produce multiline content
+        public override string Text
+        {
+            get { return base.Text.Replace("\r\n", "").Replace("\r", "").Replace("\n", ""); }
+            set { base.Text = value; }
+        }
+
+        // Let Tab navigate between controls instead of inserting a tab character
+        protected override bool IsInputKey(Keys keyData)
+        {
+            if ((keyData & Keys.KeyCode) == Keys.Tab) return false;
+            return base.IsInputKey(keyData);
+        }
+
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) { e.SuppressKeyPress = true; return; }
+            base.OnKeyDown(e);
+        }
+
+        protected override void OnTextChanged(EventArgs e)
+        {
+            if (!_formatting) HighlightSpaces();
+            base.OnTextChanged(e);
+        }
+
+        private void HighlightSpaces()
+        {
+            if (!IsHandleCreated) return;
+            _formatting = true;
+            int sel = SelectionStart;
+
+            SelectAll();
+            SelectionBackColor = SystemColors.Window;
+
+            string t = Text;
+            for (int i = 0; i < t.Length; i++)
+            {
+                if (t[i] != ' ') continue;
+                SelectionStart = i;
+                SelectionLength = 1;
+                SelectionBackColor = Color.LightSkyBlue;
+            }
+
+            SelectionStart = Math.Min(sel, t.Length);
+            SelectionLength = 0;
+            _formatting = false;
+        }
+    }
 }

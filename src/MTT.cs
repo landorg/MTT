@@ -105,6 +105,12 @@ namespace MTT
             }
             txtGroup.Text = currentGroupText;
 
+            if (_dbSortColumn >= 0)
+            {
+                dbList.ListViewItemSorter = new DbListSorter(_dbSortColumn, _dbSortOrder);
+                dbList.Sort();
+            }
+
             RebuildProductButtons();
         }
 
@@ -232,6 +238,46 @@ namespace MTT
         }
 
         private Product selectedDBProduct;
+        private int _dbSortColumn = -1;
+        private SortOrder _dbSortOrder = SortOrder.None;
+
+        private void dbList_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            if (e.Column == _dbSortColumn)
+                _dbSortOrder = _dbSortOrder == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
+            else
+            {
+                _dbSortColumn = e.Column;
+                _dbSortOrder = SortOrder.Ascending;
+            }
+            dbList.ListViewItemSorter = new DbListSorter(_dbSortColumn, _dbSortOrder);
+            dbList.Sort();
+        }
+
+        private class DbListSorter : System.Collections.IComparer
+        {
+            private readonly int _col;
+            private readonly SortOrder _order;
+            public DbListSorter(int col, SortOrder order) { _col = col; _order = order; }
+            public int Compare(object x, object y)
+            {
+                var lx = (ListViewItem)x;
+                var ly = (ListViewItem)y;
+                string sx = lx.SubItems.Count > _col ? lx.SubItems[_col].Text : "";
+                string sy = ly.SubItems.Count > _col ? ly.SubItems[_col].Text : "";
+                int result;
+                if (_col == 1)
+                {
+                    decimal dx, dy;
+                    decimal.TryParse(sx, out dx);
+                    decimal.TryParse(sy, out dy);
+                    result = dx.CompareTo(dy);
+                }
+                else
+                    result = string.Compare(sx, sy, StringComparison.CurrentCulture);
+                return _order == SortOrder.Descending ? -result : result;
+            }
+        }
 
         private void dbList_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -288,6 +334,15 @@ namespace MTT
                 int id = selectedDBProduct?.ID ?? 0;
                 Product p = new Product(txtName.Text, piecePriceCheckbox.Checked, decimal.Parse(txtPreis.Text)) { group = txtGroup.Text.Trim(), ID = id };
                 DB.add(p);
+                foreach (ListViewItem lvi in dbList.Items)
+                {
+                    if (lvi.Text == p.name)
+                    {
+                        lvi.Selected = true;
+                        lvi.EnsureVisible();
+                        break;
+                    }
+                }
 
             }
             catch (Exception err)
