@@ -87,32 +87,62 @@ namespace MTT
 
         internal void refreshDbList()
         {
-            var sorted = DB.products.OrderBy(p => p.group).ThenBy(p => p.name).ToList();
+            _dbSortedProducts = DB.products.OrderBy(p => p.group).ThenBy(p => p.name).ToList();
+            if (_dbSortColumn >= 0)
+            {
+                bool asc = _dbSortOrder == SortOrder.Ascending;
+                switch (_dbSortColumn)
+                {
+                    case 0: _dbSortedProducts = asc ? _dbSortedProducts.OrderBy(p => p.name).ToList() : _dbSortedProducts.OrderByDescending(p => p.name).ToList(); break;
+                    case 1: _dbSortedProducts = asc ? _dbSortedProducts.OrderBy(p => p.price).ToList() : _dbSortedProducts.OrderByDescending(p => p.price).ToList(); break;
+                    case 2: _dbSortedProducts = asc ? _dbSortedProducts.OrderBy(p => p.piecePrice).ToList() : _dbSortedProducts.OrderByDescending(p => p.piecePrice).ToList(); break;
+                    case 3: _dbSortedProducts = asc ? _dbSortedProducts.OrderBy(p => p.group).ToList() : _dbSortedProducts.OrderByDescending(p => p.group).ToList(); break;
+                }
+            }
 
-            dbList.Items.Clear();
             string currentGroupText = txtGroup.Text;
             txtGroup.Items.Clear();
-            foreach (Product p in sorted)
+            foreach (Product p in _dbSortedProducts)
+                if (!string.IsNullOrEmpty(p.group) && !txtGroup.Items.Contains(p.group))
+                    txtGroup.Items.Add(p.group);
+            txtGroup.Text = currentGroupText;
+
+            ShowDbPage();
+            RebuildProductButtons();
+        }
+
+        private void ShowDbPage()
+        {
+            int pageCount = Math.Max(1, (_dbSortedProducts.Count + DbPageSize - 1) / DbPageSize);
+            _dbPage = Math.Max(0, Math.Min(_dbPage, pageCount - 1));
+
+            dbList.Items.Clear();
+            int start = _dbPage * DbPageSize;
+            int end = Math.Min(start + DbPageSize, _dbSortedProducts.Count);
+            for (int i = start; i < end; i++)
             {
+                var p = _dbSortedProducts[i];
                 ListViewItem item = new ListViewItem(p.name);
                 item.SubItems.Add(p.price.ToString());
                 item.SubItems.Add(p.piecePrice ? "stk" : "kg");
                 item.SubItems.Add(p.group ?? "");
                 dbList.Items.Add(item);
-
-                if (!string.IsNullOrEmpty(p.group) && !txtGroup.Items.Contains(p.group))
-                    txtGroup.Items.Add(p.group);
             }
-            txtGroup.Text = currentGroupText;
 
-            if (_dbSortColumn >= 0)
+            bool multi = pageCount > 1;
+            btnDbPrev.Visible = multi;
+            labelDbPage.Visible = multi;
+            btnDbNext.Visible = multi;
+            if (multi)
             {
-                dbList.ListViewItemSorter = new DbListSorter(_dbSortColumn, _dbSortOrder);
-                dbList.Sort();
+                labelDbPage.Text = $"{_dbPage + 1} / {pageCount}";
+                btnDbPrev.Enabled = _dbPage > 0;
+                btnDbNext.Enabled = _dbPage < pageCount - 1;
             }
-
-            RebuildProductButtons();
         }
+
+        private void btnDbPrev_Click(object sender, EventArgs e) { _dbPage--; ShowDbPage(); }
+        private void btnDbNext_Click(object sender, EventArgs e) { _dbPage++; ShowDbPage(); }
 
         private void RebuildProductButtons()
         {
@@ -240,6 +270,9 @@ namespace MTT
         private Product selectedDBProduct;
         private int _dbSortColumn = -1;
         private SortOrder _dbSortOrder = SortOrder.None;
+        private int _dbPage = 0;
+        private const int DbPageSize = 15;
+        private List<Product> _dbSortedProducts = new List<Product>();
 
         private void dbList_ColumnClick(object sender, ColumnClickEventArgs e)
         {
@@ -250,33 +283,8 @@ namespace MTT
                 _dbSortColumn = e.Column;
                 _dbSortOrder = SortOrder.Ascending;
             }
-            dbList.ListViewItemSorter = new DbListSorter(_dbSortColumn, _dbSortOrder);
-            dbList.Sort();
-        }
-
-        private class DbListSorter : System.Collections.IComparer
-        {
-            private readonly int _col;
-            private readonly SortOrder _order;
-            public DbListSorter(int col, SortOrder order) { _col = col; _order = order; }
-            public int Compare(object x, object y)
-            {
-                var lx = (ListViewItem)x;
-                var ly = (ListViewItem)y;
-                string sx = lx.SubItems.Count > _col ? lx.SubItems[_col].Text : "";
-                string sy = ly.SubItems.Count > _col ? ly.SubItems[_col].Text : "";
-                int result;
-                if (_col == 1)
-                {
-                    decimal dx, dy;
-                    decimal.TryParse(sx, out dx);
-                    decimal.TryParse(sy, out dy);
-                    result = dx.CompareTo(dy);
-                }
-                else
-                    result = string.Compare(sx, sy, StringComparison.CurrentCulture);
-                return _order == SortOrder.Descending ? -result : result;
-            }
+            _dbPage = 0;
+            refreshDbList();
         }
 
         private void dbList_SelectedIndexChanged(object sender, EventArgs e)
@@ -334,13 +342,16 @@ namespace MTT
                 int id = selectedDBProduct?.ID ?? 0;
                 Product p = new Product(txtName.Text, piecePriceCheckbox.Checked, decimal.Parse(txtPreis.Text)) { group = txtGroup.Text.Trim(), ID = id };
                 DB.add(p);
-                foreach (ListViewItem lvi in dbList.Items)
+                int idx = _dbSortedProducts.FindIndex(x => x.name == p.name);
+                if (idx >= 0)
                 {
-                    if (lvi.Text == p.name)
+                    int targetPage = idx / DbPageSize;
+                    if (targetPage != _dbPage) { _dbPage = targetPage; ShowDbPage(); }
+                    int posInPage = idx % DbPageSize;
+                    if (posInPage < dbList.Items.Count)
                     {
-                        lvi.Selected = true;
-                        lvi.EnsureVisible();
-                        break;
+                        dbList.Items[posInPage].Selected = true;
+                        dbList.EnsureVisible(posInPage);
                     }
                 }
 
@@ -606,10 +617,18 @@ namespace MTT
         // --- History tab ---
 
         private Reciept selectedHistoryReciept;
+        private int _histPage = 0;
+        private const int HistPageSize = 14;
+        private struct HistEntry { public string date, sum, file; }
+        private List<HistEntry> _histEntries = new List<HistEntry>();
+        private int _histDetailPage = 0;
+        private const int HistDetailPageSize = 9;
+        private struct HistDetailEntry { public string name, weight, unitPrice, total; }
+        private List<HistDetailEntry> _histDetailEntries = new List<HistDetailEntry>();
 
         internal void refreshHistoryList()
         {
-            historyList.Items.Clear();
+            _histEntries = new List<HistEntry>();
             string[] files = System.IO.Directory.GetFiles("C:/MTT/Rechnungen/", "Rechnung-*.txt");
             System.Array.Sort(files);
             System.Array.Reverse(files);
@@ -633,12 +652,62 @@ namespace MTT
                 }
                 catch { }
 
-                ListViewItem item = new ListViewItem(displayDate);
-                item.SubItems.Add($"{Decimal.Round(fileSum, 2):0.00} €");
-                item.Tag = file;
+                _histEntries.Add(new HistEntry { date = displayDate, sum = $"{Decimal.Round(fileSum, 2):0.00} €", file = file });
+            }
+            _histPage = 0;
+            ShowHistPage();
+        }
+
+        private void ShowHistPage()
+        {
+            int pageCount = Math.Max(1, (_histEntries.Count + HistPageSize - 1) / HistPageSize);
+            _histPage = Math.Max(0, Math.Min(_histPage, pageCount - 1));
+
+            historyList.Items.Clear();
+            int start = _histPage * HistPageSize;
+            int end = Math.Min(start + HistPageSize, _histEntries.Count);
+            for (int i = start; i < end; i++)
+            {
+                var e = _histEntries[i];
+                ListViewItem item = new ListViewItem(e.date);
+                item.SubItems.Add(e.sum);
+                item.Tag = e.file;
                 historyList.Items.Add(item);
             }
+
+            labelHistPage.Text = $"{_histPage + 1} / {pageCount}";
+            btnHistPrev.Enabled = _histPage > 0;
+            btnHistNext.Enabled = _histPage < pageCount - 1;
         }
+
+        private void btnHistPrev_Click(object sender, EventArgs e) { _histPage--; ShowHistPage(); }
+        private void btnHistNext_Click(object sender, EventArgs e) { _histPage++; ShowHistPage(); }
+
+        private void ShowHistDetailPage()
+        {
+            int pageCount = Math.Max(1, (_histDetailEntries.Count + HistDetailPageSize - 1) / HistDetailPageSize);
+            _histDetailPage = Math.Max(0, Math.Min(_histDetailPage, pageCount - 1));
+
+            historyDetailList.Items.Clear();
+            int start = _histDetailPage * HistDetailPageSize;
+            int end = Math.Min(start + HistDetailPageSize, _histDetailEntries.Count);
+            for (int i = start; i < end; i++)
+            {
+                var d = _histDetailEntries[i];
+                ListViewItem item = new ListViewItem(d.name);
+                item.SubItems.Add(d.weight);
+                item.SubItems.Add(d.unitPrice);
+                item.SubItems.Add(d.total);
+                historyDetailList.Items.Add(item);
+            }
+
+            labelHistDetailPage.Text = $"{_histDetailPage + 1} / {pageCount}";
+            btnHistDetailPrev.Enabled = _histDetailPage > 0;
+            btnHistDetailNext.Enabled = _histDetailPage < pageCount - 1;
+        }
+
+        private void btnHistDetailPrev_Click(object sender, EventArgs e) { _histDetailPage--; ShowHistDetailPage(); }
+        private void btnHistDetailNext_Click(object sender, EventArgs e) { _histDetailPage++; ShowHistDetailPage(); }
 
         private void historyList_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -653,18 +722,22 @@ namespace MTT
                 if (r.mwst == 0 && r.sum > 0)
                     r.mwst = Decimal.Round(r.sum * 0.1m, 2);
 
-                historyDetailList.Items.Clear();
+                _histDetailEntries = new List<HistDetailEntry>();
                 foreach (Article a in r.articles)
                 {
-                    ListViewItem item = new ListViewItem(a.product.name);
                     string weight = a.product.piecePrice
                         ? Decimal.Round(a.Weight, 0).ToString()
                         : Decimal.Round(a.Weight, 2).ToString();
-                    item.SubItems.Add($"{weight} {(a.product.piecePrice ? "stk" : "kg")}");
-                    item.SubItems.Add($"{Decimal.Round(a.product.price, 2):0.00} €");
-                    item.SubItems.Add($"{Decimal.Round(a.price, 2):0.00} €");
-                    historyDetailList.Items.Add(item);
+                    _histDetailEntries.Add(new HistDetailEntry
+                    {
+                        name = a.product.name,
+                        weight = $"{weight} {(a.product.piecePrice ? "stk" : "kg")}",
+                        unitPrice = $"{Decimal.Round(a.product.price, 2):0.00} €",
+                        total = $"{Decimal.Round(a.price, 2):0.00} €"
+                    });
                 }
+                _histDetailPage = 0;
+                ShowHistDetailPage();
 
                 historyInfoLabel.Text = $"MwSt 10%: {r.mwst:0.00} €     Summe: {r.sum:0.00} €";
                 selectedHistoryReciept = r;

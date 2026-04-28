@@ -98,11 +98,11 @@
             this.kbButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.labelGroup = new System.Windows.Forms.Label();
-            this.txtGroup = new MTT.WideButtonComboBox();
+            this.txtGroup = new WideButtonComboBox();
             this.removeButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.txtPreis = new System.Windows.Forms.TextBox();
-            this.txtName = new MTT.WhitespaceTextBox();
+            this.txtName = new WhitespaceTextBox();
             this.dbList = new System.Windows.Forms.ListView();
             this.colProduct = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -110,6 +110,15 @@
             this.colGroup = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabDebug = new System.Windows.Forms.TabPage();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.btnDbPrev = new System.Windows.Forms.Button();
+            this.labelDbPage = new System.Windows.Forms.Label();
+            this.btnDbNext = new System.Windows.Forms.Button();
+            this.btnHistPrev = new System.Windows.Forms.Button();
+            this.labelHistPage = new System.Windows.Forms.Label();
+            this.btnHistNext = new System.Windows.Forms.Button();
+            this.btnHistDetailPrev = new System.Windows.Forms.Button();
+            this.labelHistDetailPage = new System.Windows.Forms.Label();
+            this.btnHistDetailNext = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ucLoadcellBindingSource)).BeginInit();
             this.loadcellGroupBox.SuspendLayout();
             this.printerGroupBox.SuspendLayout();
@@ -684,7 +693,13 @@
             // tabRechnungen
             // 
             this.tabRechnungen.Controls.Add(this.historyList);
+            this.tabRechnungen.Controls.Add(this.btnHistPrev);
+            this.tabRechnungen.Controls.Add(this.labelHistPage);
+            this.tabRechnungen.Controls.Add(this.btnHistNext);
             this.tabRechnungen.Controls.Add(this.historyDetailList);
+            this.tabRechnungen.Controls.Add(this.btnHistDetailPrev);
+            this.tabRechnungen.Controls.Add(this.labelHistDetailPage);
+            this.tabRechnungen.Controls.Add(this.btnHistDetailNext);
             this.tabRechnungen.Controls.Add(this.historyPrintBtn);
             this.tabRechnungen.Controls.Add(this.historyInfoLabel);
             this.tabRechnungen.Location = new System.Drawing.Point(4, 54);
@@ -708,7 +723,7 @@
             this.historyList.Location = new System.Drawing.Point(6, 6);
             this.historyList.MultiSelect = false;
             this.historyList.Name = "historyList";
-            this.historyList.Size = new System.Drawing.Size(380, 530);
+            this.historyList.Size = new System.Drawing.Size(380, 428);
             this.historyList.TabIndex = 0;
             this.historyList.UseCompatibleStateImageBehavior = false;
             this.historyList.View = System.Windows.Forms.View.Details;
@@ -741,7 +756,7 @@
             this.historyDetailList.Location = new System.Drawing.Point(396, 6);
             this.historyDetailList.MultiSelect = false;
             this.historyDetailList.Name = "historyDetailList";
-            this.historyDetailList.Size = new System.Drawing.Size(390, 418);
+            this.historyDetailList.Size = new System.Drawing.Size(390, 364);
             this.historyDetailList.TabIndex = 1;
             this.historyDetailList.UseCompatibleStateImageBehavior = false;
             this.historyDetailList.View = System.Windows.Forms.View.Details;
@@ -771,9 +786,9 @@
             // 
             // historyPrintBtn
             // 
-            this.historyPrintBtn.Location = new System.Drawing.Point(396, 470);
+            this.historyPrintBtn.Location = new System.Drawing.Point(396, 468);
             this.historyPrintBtn.Name = "historyPrintBtn";
-            this.historyPrintBtn.Size = new System.Drawing.Size(190, 66);
+            this.historyPrintBtn.Size = new System.Drawing.Size(390, 70);
             this.historyPrintBtn.TabIndex = 3;
             this.historyPrintBtn.Text = "Drucken";
             this.historyPrintBtn.UseVisualStyleBackColor = true;
@@ -782,7 +797,7 @@
             // historyInfoLabel
             // 
             this.historyInfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.historyInfoLabel.Location = new System.Drawing.Point(396, 430);
+            this.historyInfoLabel.Location = new System.Drawing.Point(396, 432);
             this.historyInfoLabel.Name = "historyInfoLabel";
             this.historyInfoLabel.Size = new System.Drawing.Size(390, 34);
             this.historyInfoLabel.TabIndex = 2;
@@ -790,6 +805,9 @@
             // 
             // tabEdit
             // 
+            this.tabEdit.Controls.Add(this.btnDbPrev);
+            this.tabEdit.Controls.Add(this.labelDbPage);
+            this.tabEdit.Controls.Add(this.btnDbNext);
             this.tabEdit.Controls.Add(this.piecePriceCheckbox);
             this.tabEdit.Controls.Add(this.exitButton);
             this.tabEdit.Controls.Add(this.kbButton);
@@ -925,7 +943,7 @@
             this.dbList.Location = new System.Drawing.Point(8, 3);
             this.dbList.MultiSelect = false;
             this.dbList.Name = "dbList";
-            this.dbList.Size = new System.Drawing.Size(424, 531);
+            this.dbList.Size = new System.Drawing.Size(424, 473);
             this.dbList.TabIndex = 1;
             this.dbList.UseCompatibleStateImageBehavior = false;
             this.dbList.View = System.Windows.Forms.View.Details;
@@ -951,7 +969,103 @@
             // 
             this.colGroup.Text = "Gruppe";
             this.colGroup.Width = 110;
-            // 
+            //
+            // btnDbPrev
+            //
+            this.btnDbPrev.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
+            this.btnDbPrev.Location = new System.Drawing.Point(8, 480);
+            this.btnDbPrev.Name = "btnDbPrev";
+            this.btnDbPrev.Size = new System.Drawing.Size(100, 54);
+            this.btnDbPrev.TabIndex = 20;
+            this.btnDbPrev.Text = "◀";
+            this.btnDbPrev.UseVisualStyleBackColor = true;
+            this.btnDbPrev.Visible = false;
+            this.btnDbPrev.Click += new System.EventHandler(this.btnDbPrev_Click);
+            //
+            // labelDbPage
+            //
+            this.labelDbPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.labelDbPage.Location = new System.Drawing.Point(110, 480);
+            this.labelDbPage.Name = "labelDbPage";
+            this.labelDbPage.Size = new System.Drawing.Size(212, 54);
+            this.labelDbPage.TabIndex = 21;
+            this.labelDbPage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelDbPage.Visible = false;
+            //
+            // btnDbNext
+            //
+            this.btnDbNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
+            this.btnDbNext.Location = new System.Drawing.Point(324, 480);
+            this.btnDbNext.Name = "btnDbNext";
+            this.btnDbNext.Size = new System.Drawing.Size(108, 54);
+            this.btnDbNext.TabIndex = 22;
+            this.btnDbNext.Text = "▶";
+            this.btnDbNext.UseVisualStyleBackColor = true;
+            this.btnDbNext.Visible = false;
+            this.btnDbNext.Click += new System.EventHandler(this.btnDbNext_Click);
+            //
+            // btnHistPrev
+            //
+            this.btnHistPrev.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
+            this.btnHistPrev.Location = new System.Drawing.Point(6, 438);
+            this.btnHistPrev.Name = "btnHistPrev";
+            this.btnHistPrev.Size = new System.Drawing.Size(110, 50);
+            this.btnHistPrev.TabIndex = 10;
+            this.btnHistPrev.Text = "◀";
+            this.btnHistPrev.UseVisualStyleBackColor = true;
+            this.btnHistPrev.Click += new System.EventHandler(this.btnHistPrev_Click);
+            //
+            // labelHistPage
+            //
+            this.labelHistPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.labelHistPage.Location = new System.Drawing.Point(118, 438);
+            this.labelHistPage.Name = "labelHistPage";
+            this.labelHistPage.Size = new System.Drawing.Size(152, 50);
+            this.labelHistPage.TabIndex = 11;
+            this.labelHistPage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            //
+            // btnHistNext
+            //
+            this.btnHistNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
+            this.btnHistNext.Location = new System.Drawing.Point(272, 438);
+            this.btnHistNext.Name = "btnHistNext";
+            this.btnHistNext.Size = new System.Drawing.Size(114, 50);
+            this.btnHistNext.TabIndex = 12;
+            this.btnHistNext.Text = "▶";
+            this.btnHistNext.UseVisualStyleBackColor = true;
+            this.btnHistNext.Click += new System.EventHandler(this.btnHistNext_Click);
+            //
+            // btnHistDetailPrev
+            //
+            this.btnHistDetailPrev.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
+            this.btnHistDetailPrev.Location = new System.Drawing.Point(396, 374);
+            this.btnHistDetailPrev.Name = "btnHistDetailPrev";
+            this.btnHistDetailPrev.Size = new System.Drawing.Size(110, 46);
+            this.btnHistDetailPrev.TabIndex = 13;
+            this.btnHistDetailPrev.Text = "◀";
+            this.btnHistDetailPrev.UseVisualStyleBackColor = true;
+            this.btnHistDetailPrev.Click += new System.EventHandler(this.btnHistDetailPrev_Click);
+            //
+            // labelHistDetailPage
+            //
+            this.labelHistDetailPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.labelHistDetailPage.Location = new System.Drawing.Point(508, 374);
+            this.labelHistDetailPage.Name = "labelHistDetailPage";
+            this.labelHistDetailPage.Size = new System.Drawing.Size(170, 46);
+            this.labelHistDetailPage.TabIndex = 14;
+            this.labelHistDetailPage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            //
+            // btnHistDetailNext
+            //
+            this.btnHistDetailNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
+            this.btnHistDetailNext.Location = new System.Drawing.Point(680, 374);
+            this.btnHistDetailNext.Name = "btnHistDetailNext";
+            this.btnHistDetailNext.Size = new System.Drawing.Size(106, 46);
+            this.btnHistDetailNext.TabIndex = 15;
+            this.btnHistDetailNext.Text = "▶";
+            this.btnHistDetailNext.UseVisualStyleBackColor = true;
+            this.btnHistDetailNext.Click += new System.EventHandler(this.btnHistDetailNext_Click);
+            //
             // tabDebug
             // 
             this.tabDebug.Controls.Add(this.eventBox);
@@ -1086,6 +1200,15 @@
         private System.Windows.Forms.ColumnHeader historyColPrice;
         private System.Windows.Forms.Button historyPrintBtn;
         private System.Windows.Forms.Label historyInfoLabel;
+        private System.Windows.Forms.Button btnDbPrev;
+        private System.Windows.Forms.Label labelDbPage;
+        private System.Windows.Forms.Button btnDbNext;
+        private System.Windows.Forms.Button btnHistPrev;
+        private System.Windows.Forms.Label labelHistPage;
+        private System.Windows.Forms.Button btnHistNext;
+        private System.Windows.Forms.Button btnHistDetailPrev;
+        private System.Windows.Forms.Label labelHistDetailPage;
+        private System.Windows.Forms.Button btnHistDetailNext;
     }
 
 }
