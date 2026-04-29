@@ -15,12 +15,13 @@ namespace MTTApp
         private static MTT mtt = (MTT)Application.OpenForms["MTT"];
         private static SerialPort _serialPort = new SerialPort("COM2", 9600, Parity.Even, 7, StopBits.Two);
 
-        private static Timer _timer = new Timer();
-        private static Timer _jidaTimer = new Timer();
+        private static Timer _timer;
+        private static Timer _jidaTimer;
 
         private static UcLoadcell _ucLoadcell;
 
-        public static bool enabled = false; 
+        public static bool enabled = false;
+        private static bool _initialized = false;
 
         public static decimal grossWeight = -1; 
         public static decimal netWeight = -1; 
@@ -28,6 +29,8 @@ namespace MTTApp
 
         public static void init()
         {
+            if (_initialized) return;
+            _initialized = true;
             try
             {
                 // Open serial port
@@ -52,12 +55,12 @@ namespace MTTApp
                     _serialPort.Write(bytestosend, 0, bytestosend.Length);
 
                     // Setup weight reading timer
-                    _timer.Interval = 200;
+                    _timer = new Timer { Interval = 200 };
                     _timer.Tick += new EventHandler(timer_Tick);
                     _timer.Start();
 
                     // Setup jida board reopen timer
-                    _jidaTimer.Interval = 30000;
+                    _jidaTimer = new Timer { Interval = 30000 };
                     _jidaTimer.Tick += new EventHandler(jidaTimer_Tick);
                     _jidaTimer.Start();
 
@@ -77,6 +80,8 @@ namespace MTTApp
 
         public static void close()
         {
+            if (!_initialized) return;
+            _initialized = false;
             try
             {
                 // Stop weight reading
