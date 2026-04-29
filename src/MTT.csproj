@@ -131,6 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Article.cs" />
+    <Compile Include="Updater.cs" />
     <Compile Include="BitmapConverter.cs" />
     <Compile Include="DB.cs" />
     <Compile Include="MTT.cs">

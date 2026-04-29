@@ -68,9 +68,12 @@ namespace MTTApp
         private void MTT_Load(object sender, EventArgs e)
         {
             tabControl1.TabPages.Remove(tabDebug);
+            Text = $"MTT v{Updater.VersionString}";
 
             if (File.Exists(AutoPrintFile))
                 chkAutoPrint.Checked = bool.TryParse(File.ReadAllText(AutoPrintFile), out bool v) && v;
+
+            Updater.CheckAsync(this);
 
             DB.load();
             refreshDbList();
