@@ -12,7 +12,6 @@ namespace MTTApp
     internal static class Updater
     {
         private const string ApiUrl = "https://api.github.com/repos/landorg/MTT/releases/latest";
-        private static readonly string LogFile = "C:/MTT/log.txt";
 
         internal static string VersionString =>
             Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
@@ -26,7 +25,7 @@ namespace MTTApp
             }
         }
 
-        internal static void CheckAsync(Form owner)
+        internal static void CheckAsync(MTT owner)
         {
             var worker = new BackgroundWorker();
             worker.DoWork += (s, e) =>
@@ -39,36 +38,44 @@ namespace MTTApp
                         string json = wc.DownloadString(ApiUrl);
                         var rel = JObject.Parse(json);
                         string tag = (string)rel["tag_name"];
-                        Log($"Update check: latest tag={tag}, current={VersionString}");
-                        if (tag == null) return;
-                        if (!Version.TryParse(tag.TrimStart('v'), out Version latest)) return;
-                        if (latest <= CurrentVersion) return;
+                        if (tag == null) { e.Result = "no tag_name in response"; return; }
+                        if (!Version.TryParse(tag.TrimStart('v'), out Version latest))
+                        { e.Result = $"could not parse version from tag '{tag}'"; return; }
+                        if (latest <= CurrentVersion)
+                        { e.Result = $"up to date (latest={tag}, current={VersionString})"; return; }
                         string downloadUrl = null;
                         foreach (var asset in rel["assets"])
                             if ((string)asset["name"] == "MTT.exe")
                             { downloadUrl = (string)asset["browser_download_url"]; break; }
-                        if (downloadUrl == null) { Log("Update check: no MTT.exe asset found"); return; }
+                        if (downloadUrl == null)
+                        { e.Result = $"update {tag} found but no MTT.exe asset attached"; return; }
                         e.Result = new object[] { latest, downloadUrl };
                     }
                 }
-                catch (Exception ex) { Log($"Update check error: {ex.Message}"); }
+                catch (Exception ex) { e.Result = $"check failed: {ex.Message}"; }
             };
             worker.RunWorkerCompleted += (s, e) =>
             {
+                if (e.Result is string msg)
+                {
+                    owner.logToBox($"[update] {msg}");
+                    return;
+                }
                 if (e.Result == null) return;
                 var res = (object[])e.Result;
                 var latest = (Version)res[0];
                 string url = (string)res[1];
+                owner.logToBox($"[update] version {latest.ToString(3)} available");
                 var ans = MessageBox.Show(
                     $"Version {latest.ToString(3)} verfügbar.\nJetzt aktualisieren?",
                     "Update", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (ans == DialogResult.Yes)
-                    ApplyUpdate(url);
+                    ApplyUpdate(url, owner);
             };
             worker.RunWorkerAsync();
         }
 
-        private static void ApplyUpdate(string downloadUrl)
+        private static void ApplyUpdate(string downloadUrl, MTT owner)
         {
             string exePath = Process.GetCurrentProcess().MainModule.FileName;
             string dir = Path.GetDirectoryName(exePath);
@@ -76,7 +83,7 @@ namespace MTTApp
             string script = Path.Combine(Path.GetTempPath(), "mtt_update.bat");
             try
             {
-                Log($"Downloading update to {updatePath}");
+                owner.logToBox($"[update] downloading to {updatePath}");
                 using (var wc = new WebClient())
                     wc.DownloadFile(downloadUrl, updatePath);
 
@@ -94,15 +101,10 @@ namespace MTTApp
             }
             catch (Exception ex)
             {
-                Log($"Update apply error: {ex.Message}");
+                owner.logToBox($"[update] apply failed: {ex.Message}");
                 MessageBox.Show($"Update fehlgeschlagen: {ex.Message}", "Fehler",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private static void Log(string msg)
-        {
-            try { File.AppendAllText(LogFile, $"[{DateTime.Now:HH:mm:ss}] {msg}\r\n"); } catch { }
         }
     }
 }

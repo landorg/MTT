@@ -409,8 +409,7 @@ namespace MTTApp
             // Check if we are on the UI thread
             if (eventBox.InvokeRequired)
             {
-                // We are on a worker thread, marshal the call to the UI thread
-                // Using BeginInvoke for asynchronous execution (doesn't block the logger thread)
+                if (!IsHandleCreated) return;
                 eventBox.BeginInvoke(new Action(() =>
                 {
                     // This code now runs on the UI thread
@@ -522,8 +521,7 @@ namespace MTTApp
 
                 if (netLabel1.InvokeRequired)
                 {
-                    // We are on a worker thread, marshal the call to the UI thread
-                    // Using BeginInvoke for asynchronous execution (doesn't block the logger thread)
+                    if (!IsHandleCreated) return;
                     eventBox.BeginInvoke(new Action(() =>
                     {
                         netLabel1.Text = netString;
