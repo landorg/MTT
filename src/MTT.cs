@@ -69,6 +69,15 @@ namespace MTTApp
         {
             tabControl1.TabPages.Remove(tabDebug);
             Text = $"MTT v{Updater.VersionString}";
+            var versionLabel = new Label
+            {
+                Text = $"v{Updater.VersionString}",
+                Font = new Font("Microsoft Sans Serif", 11F),
+                ForeColor = SystemColors.GrayText,
+                AutoSize = true,
+                Location = new Point(690, 450)
+            };
+            tabEdit.Controls.Add(versionLabel);
 
             if (File.Exists(AutoPrintFile))
                 chkAutoPrint.Checked = bool.TryParse(File.ReadAllText(AutoPrintFile), out bool v) && v;
