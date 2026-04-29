@@ -12,12 +12,19 @@ namespace MTTApp
     internal static class Updater
     {
         private const string ApiUrl = "https://api.github.com/repos/landorg/MTT/releases/latest";
+        private static readonly string LogFile = "C:/MTT/log.txt";
 
         internal static string VersionString =>
             Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
 
-        private static Version CurrentVersion =>
-            Assembly.GetExecutingAssembly().GetName().Version;
+        private static Version CurrentVersion
+        {
+            get
+            {
+                var v = Assembly.GetExecutingAssembly().GetName().Version;
+                return new Version(v.Major, v.Minor, v.Build);
+            }
+        }
 
         internal static void CheckAsync(Form owner)
         {
@@ -32,6 +39,7 @@ namespace MTTApp
                         string json = wc.DownloadString(ApiUrl);
                         var rel = JObject.Parse(json);
                         string tag = (string)rel["tag_name"];
+                        Log($"Update check: latest tag={tag}, current={VersionString}");
                         if (tag == null) return;
                         if (!Version.TryParse(tag.TrimStart('v'), out Version latest)) return;
                         if (latest <= CurrentVersion) return;
@@ -39,11 +47,11 @@ namespace MTTApp
                         foreach (var asset in rel["assets"])
                             if ((string)asset["name"] == "MTT.exe")
                             { downloadUrl = (string)asset["browser_download_url"]; break; }
-                        if (downloadUrl != null)
-                            e.Result = new object[] { latest, downloadUrl };
+                        if (downloadUrl == null) { Log("Update check: no MTT.exe asset found"); return; }
+                        e.Result = new object[] { latest, downloadUrl };
                     }
                 }
-                catch { }
+                catch (Exception ex) { Log($"Update check error: {ex.Message}"); }
             };
             worker.RunWorkerCompleted += (s, e) =>
             {
@@ -68,6 +76,7 @@ namespace MTTApp
             string script = Path.Combine(Path.GetTempPath(), "mtt_update.bat");
             try
             {
+                Log($"Downloading update to {updatePath}");
                 using (var wc = new WebClient())
                     wc.DownloadFile(downloadUrl, updatePath);
 
@@ -85,9 +94,15 @@ namespace MTTApp
             }
             catch (Exception ex)
             {
+                Log($"Update apply error: {ex.Message}");
                 MessageBox.Show($"Update fehlgeschlagen: {ex.Message}", "Fehler",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private static void Log(string msg)
+        {
+            try { File.AppendAllText(LogFile, $"[{DateTime.Now:HH:mm:ss}] {msg}\r\n"); } catch { }
         }
     }
 }
