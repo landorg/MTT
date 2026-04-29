@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace MTT
+namespace MTTApp
 {
     internal class WideButtonComboBox : ComboBox
     {
@@ -79,14 +79,12 @@ namespace MTT
             WordWrap = false;
         }
 
-        // Strip newlines so paste or programmatic sets never produce multiline content
         public override string Text
         {
             get { return base.Text.Replace("\r\n", "").Replace("\r", "").Replace("\n", ""); }
             set { base.Text = value; }
         }
 
-        // Let Tab navigate between controls instead of inserting a tab character
         protected override bool IsInputKey(Keys keyData)
         {
             if ((keyData & Keys.KeyCode) == Keys.Tab) return false;

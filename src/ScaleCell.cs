@@ -5,7 +5,7 @@ using LibUsbDotNet;
 using System.Windows.Forms;
 using LibUsbDotNet.Main;
 
-namespace MTT
+namespace MTTApp
 {
 
     public class ScaleCell

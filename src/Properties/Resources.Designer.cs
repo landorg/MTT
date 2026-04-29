@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MTT.Properties {
+namespace MTTApp.Properties {
     using System;
     
     

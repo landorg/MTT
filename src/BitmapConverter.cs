@@ -6,7 +6,7 @@ using System.Drawing.Text;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace MTT
+namespace MTTApp
 {
     public static class BitmapConverter
     {

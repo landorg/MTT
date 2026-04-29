@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(dotnet build *)"
+      "Bash(dotnet build *)",
+      "PowerShell(cd C:\\\\MTT\\\\src; & \"C:\\\\Program Files\\\\Microsoft Visual Studio\\\\2022\\\\Professional\\\\MSBuild\\\\Current\\\\Bin\\\\MSBuild.exe\" MTT.csproj /p:Configuration=Debug /t:Build /v:minimal /p:CopyOutputSymbolsToPublishDirectory=false 2>&1 | Where-Object { $_ -match \"error CS|warning CS|Build succeeded|FAILED\" })",
+      "PowerShell(cd C:\\\\MTT\\\\src; & \"C:\\\\Program Files\\\\Microsoft Visual Studio\\\\2022\\\\Professional\\\\MSBuild\\\\Current\\\\Bin\\\\MSBuild.exe\" MTT.csproj /p:Configuration=Debug /t:Build /v:minimal 2>&1 | Where-Object { $_ -match \"error|warning CS\" })"
     ]
   }
 }

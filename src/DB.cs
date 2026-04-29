@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using static System.Windows.Forms.LinkLabel;
 
-namespace MTT
+namespace MTTApp
 {
     internal static class DB
     {

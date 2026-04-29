@@ -12,7 +12,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Drawing;
 using System.Diagnostics;
 
-namespace MTT
+namespace MTTApp
 {
     public partial class MTT : Form
     {

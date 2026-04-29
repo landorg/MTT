@@ -1,4 +1,4 @@
-﻿namespace MTT
+namespace MTTApp
 {
 
     partial class MTT
@@ -85,40 +85,40 @@
             this.historyList = new System.Windows.Forms.ListView();
             this.historyColDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.historyColSum = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnHistPrev = new System.Windows.Forms.Button();
+            this.labelHistPage = new System.Windows.Forms.Label();
+            this.btnHistNext = new System.Windows.Forms.Button();
             this.historyDetailList = new System.Windows.Forms.ListView();
             this.historyColProduct = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.historyColCount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.historyColA = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.historyColPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnHistDetailPrev = new System.Windows.Forms.Button();
+            this.labelHistDetailPage = new System.Windows.Forms.Label();
+            this.btnHistDetailNext = new System.Windows.Forms.Button();
             this.historyPrintBtn = new System.Windows.Forms.Button();
             this.historyInfoLabel = new System.Windows.Forms.Label();
             this.tabEdit = new System.Windows.Forms.TabPage();
+            this.btnDbPrev = new System.Windows.Forms.Button();
+            this.labelDbPage = new System.Windows.Forms.Label();
+            this.btnDbNext = new System.Windows.Forms.Button();
             this.piecePriceCheckbox = new System.Windows.Forms.CheckBox();
             this.exitButton = new System.Windows.Forms.Button();
             this.kbButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.labelGroup = new System.Windows.Forms.Label();
-            this.txtGroup = new WideButtonComboBox();
             this.removeButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.txtPreis = new System.Windows.Forms.TextBox();
-            this.txtName = new WhitespaceTextBox();
             this.dbList = new System.Windows.Forms.ListView();
             this.colProduct = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colPiecePrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colGroup = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.txtGroup = new WideButtonComboBox();
+            this.txtName = new WhitespaceTextBox();
             this.tabDebug = new System.Windows.Forms.TabPage();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.btnDbPrev = new System.Windows.Forms.Button();
-            this.labelDbPage = new System.Windows.Forms.Label();
-            this.btnDbNext = new System.Windows.Forms.Button();
-            this.btnHistPrev = new System.Windows.Forms.Button();
-            this.labelHistPage = new System.Windows.Forms.Label();
-            this.btnHistNext = new System.Windows.Forms.Button();
-            this.btnHistDetailPrev = new System.Windows.Forms.Button();
-            this.labelHistDetailPage = new System.Windows.Forms.Label();
-            this.btnHistDetailNext = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ucLoadcellBindingSource)).BeginInit();
             this.loadcellGroupBox.SuspendLayout();
             this.printerGroupBox.SuspendLayout();
@@ -373,6 +373,8 @@
             // 
             // tabScale
             // 
+            this.tabScale.Controls.Add(this.btnProductPrev);
+            this.tabScale.Controls.Add(this.btnProductNext);
             this.tabScale.Controls.Add(this.mwstLabelText);
             this.tabScale.Controls.Add(this.label15);
             this.tabScale.Controls.Add(this.label13);
@@ -390,9 +392,7 @@
             this.tabScale.Controls.Add(this.recieptList);
             this.tabScale.Controls.Add(this.productGroupPanel);
             this.tabScale.Controls.Add(this.productButtonPanel);
-            this.tabScale.Controls.Add(this.btnProductPrev);
             this.tabScale.Controls.Add(this.labelPage);
-            this.tabScale.Controls.Add(this.btnProductNext);
             this.tabScale.Controls.Add(this.delArticleButton);
             this.tabScale.Controls.Add(this.printButton);
             this.tabScale.Controls.Add(this.sumButton);
@@ -415,7 +415,7 @@
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(26, 29);
             this.label15.TabIndex = 33;
-            this.label15.Text = "€";
+            this.label15.Text = "�";
             // 
             // label13
             // 
@@ -441,7 +441,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.label10.Location = new System.Drawing.Point(531, 410);
+            this.label10.Location = new System.Drawing.Point(527, 446);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(39, 29);
             this.label10.TabIndex = 30;
@@ -450,7 +450,7 @@
             // tareLabel1
             // 
             this.tareLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.tareLabel1.Location = new System.Drawing.Point(420, 406);
+            this.tareLabel1.Location = new System.Drawing.Point(416, 442);
             this.tareLabel1.Name = "tareLabel1";
             this.tareLabel1.Size = new System.Drawing.Size(108, 32);
             this.tareLabel1.TabIndex = 29;
@@ -461,7 +461,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.label9.Location = new System.Drawing.Point(396, 410);
+            this.label9.Location = new System.Drawing.Point(392, 446);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(29, 29);
             this.label9.TabIndex = 28;
@@ -471,7 +471,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.label8.Location = new System.Drawing.Point(396, 376);
+            this.label8.Location = new System.Drawing.Point(392, 412);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(31, 29);
             this.label8.TabIndex = 27;
@@ -481,17 +481,17 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.label5.Location = new System.Drawing.Point(531, 444);
+            this.label5.Location = new System.Drawing.Point(527, 480);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(26, 29);
             this.label5.TabIndex = 26;
-            this.label5.Text = "€";
+            this.label5.Text = "�";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.label1.Location = new System.Drawing.Point(531, 376);
+            this.label1.Location = new System.Drawing.Point(527, 412);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(39, 29);
             this.label1.TabIndex = 25;
@@ -522,7 +522,7 @@
             // currentPriceLabel
             // 
             this.currentPriceLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.currentPriceLabel.Location = new System.Drawing.Point(420, 440);
+            this.currentPriceLabel.Location = new System.Drawing.Point(416, 476);
             this.currentPriceLabel.Name = "currentPriceLabel";
             this.currentPriceLabel.Size = new System.Drawing.Size(108, 32);
             this.currentPriceLabel.TabIndex = 9;
@@ -572,7 +572,7 @@
             // 
             // a
             // 
-            this.a.Text = "à";
+            this.a.Text = "�";
             this.a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.a.Width = 79;
             // 
@@ -602,9 +602,9 @@
             this.btnProductPrev.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
             this.btnProductPrev.Location = new System.Drawing.Point(396, 337);
             this.btnProductPrev.Name = "btnProductPrev";
-            this.btnProductPrev.Size = new System.Drawing.Size(70, 30);
+            this.btnProductPrev.Size = new System.Drawing.Size(80, 43);
             this.btnProductPrev.TabIndex = 36;
-            this.btnProductPrev.Text = "◄";
+            this.btnProductPrev.Text = "?";
             this.btnProductPrev.UseVisualStyleBackColor = true;
             this.btnProductPrev.Visible = false;
             this.btnProductPrev.Click += new System.EventHandler(this.btnProductPrev_Click);
@@ -622,11 +622,11 @@
             // btnProductNext
             // 
             this.btnProductNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
-            this.btnProductNext.Location = new System.Drawing.Point(720, 337);
+            this.btnProductNext.Location = new System.Drawing.Point(708, 337);
             this.btnProductNext.Name = "btnProductNext";
-            this.btnProductNext.Size = new System.Drawing.Size(66, 30);
+            this.btnProductNext.Size = new System.Drawing.Size(78, 43);
             this.btnProductNext.TabIndex = 38;
-            this.btnProductNext.Text = "►";
+            this.btnProductNext.Text = "?";
             this.btnProductNext.UseVisualStyleBackColor = true;
             this.btnProductNext.Visible = false;
             this.btnProductNext.Click += new System.EventHandler(this.btnProductNext_Click);
@@ -637,7 +637,7 @@
             this.delArticleButton.Name = "delArticleButton";
             this.delArticleButton.Size = new System.Drawing.Size(120, 78);
             this.delArticleButton.TabIndex = 5;
-            this.delArticleButton.Text = "löschen";
+            this.delArticleButton.Text = "l�schen";
             this.delArticleButton.UseVisualStyleBackColor = true;
             this.delArticleButton.Click += new System.EventHandler(this.delArticleButton_Click);
             // 
@@ -663,9 +663,9 @@
             // 
             // addArticleButton
             // 
-            this.addArticleButton.Location = new System.Drawing.Point(572, 368);
+            this.addArticleButton.Location = new System.Drawing.Point(572, 406);
             this.addArticleButton.Name = "addArticleButton";
-            this.addArticleButton.Size = new System.Drawing.Size(214, 96);
+            this.addArticleButton.Size = new System.Drawing.Size(214, 58);
             this.addArticleButton.TabIndex = 2;
             this.addArticleButton.UseVisualStyleBackColor = true;
             this.addArticleButton.Click += new System.EventHandler(this.addArticleButton_Click);
@@ -673,7 +673,7 @@
             // netLabel1
             // 
             this.netLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.netLabel1.Location = new System.Drawing.Point(420, 370);
+            this.netLabel1.Location = new System.Drawing.Point(416, 406);
             this.netLabel1.Name = "netLabel1";
             this.netLabel1.Size = new System.Drawing.Size(108, 32);
             this.netLabel1.TabIndex = 1;
@@ -687,7 +687,7 @@
             this.mwstLabel.Name = "mwstLabel";
             this.mwstLabel.Size = new System.Drawing.Size(101, 26);
             this.mwstLabel.TabIndex = 39;
-            this.mwstLabel.Text = "0,00 €";
+            this.mwstLabel.Text = "0,00 �";
             this.mwstLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // tabRechnungen
@@ -740,6 +740,37 @@
             this.historyColSum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.historyColSum.Width = 130;
             // 
+            // btnHistPrev
+            // 
+            this.btnHistPrev.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
+            this.btnHistPrev.Location = new System.Drawing.Point(6, 438);
+            this.btnHistPrev.Name = "btnHistPrev";
+            this.btnHistPrev.Size = new System.Drawing.Size(110, 50);
+            this.btnHistPrev.TabIndex = 10;
+            this.btnHistPrev.Text = "?";
+            this.btnHistPrev.UseVisualStyleBackColor = true;
+            this.btnHistPrev.Click += new System.EventHandler(this.btnHistPrev_Click);
+            // 
+            // labelHistPage
+            // 
+            this.labelHistPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.labelHistPage.Location = new System.Drawing.Point(118, 438);
+            this.labelHistPage.Name = "labelHistPage";
+            this.labelHistPage.Size = new System.Drawing.Size(152, 50);
+            this.labelHistPage.TabIndex = 11;
+            this.labelHistPage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnHistNext
+            // 
+            this.btnHistNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
+            this.btnHistNext.Location = new System.Drawing.Point(272, 438);
+            this.btnHistNext.Name = "btnHistNext";
+            this.btnHistNext.Size = new System.Drawing.Size(114, 50);
+            this.btnHistNext.TabIndex = 12;
+            this.btnHistNext.Text = "?";
+            this.btnHistNext.UseVisualStyleBackColor = true;
+            this.btnHistNext.Click += new System.EventHandler(this.btnHistNext_Click);
+            // 
             // historyDetailList
             // 
             this.historyDetailList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -774,7 +805,7 @@
             // 
             // historyColA
             // 
-            this.historyColA.Text = "à";
+            this.historyColA.Text = "�";
             this.historyColA.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.historyColA.Width = 79;
             // 
@@ -783,6 +814,37 @@
             this.historyColPrice.Text = "Preis";
             this.historyColPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.historyColPrice.Width = 96;
+            // 
+            // btnHistDetailPrev
+            // 
+            this.btnHistDetailPrev.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
+            this.btnHistDetailPrev.Location = new System.Drawing.Point(396, 374);
+            this.btnHistDetailPrev.Name = "btnHistDetailPrev";
+            this.btnHistDetailPrev.Size = new System.Drawing.Size(110, 46);
+            this.btnHistDetailPrev.TabIndex = 13;
+            this.btnHistDetailPrev.Text = "?";
+            this.btnHistDetailPrev.UseVisualStyleBackColor = true;
+            this.btnHistDetailPrev.Click += new System.EventHandler(this.btnHistDetailPrev_Click);
+            // 
+            // labelHistDetailPage
+            // 
+            this.labelHistDetailPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.labelHistDetailPage.Location = new System.Drawing.Point(508, 374);
+            this.labelHistDetailPage.Name = "labelHistDetailPage";
+            this.labelHistDetailPage.Size = new System.Drawing.Size(170, 46);
+            this.labelHistDetailPage.TabIndex = 14;
+            this.labelHistDetailPage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnHistDetailNext
+            // 
+            this.btnHistDetailNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
+            this.btnHistDetailNext.Location = new System.Drawing.Point(680, 374);
+            this.btnHistDetailNext.Name = "btnHistDetailNext";
+            this.btnHistDetailNext.Size = new System.Drawing.Size(106, 46);
+            this.btnHistDetailNext.TabIndex = 15;
+            this.btnHistDetailNext.Text = "?";
+            this.btnHistDetailNext.UseVisualStyleBackColor = true;
+            this.btnHistDetailNext.Click += new System.EventHandler(this.btnHistDetailNext_Click);
             // 
             // historyPrintBtn
             // 
@@ -813,11 +875,11 @@
             this.tabEdit.Controls.Add(this.kbButton);
             this.tabEdit.Controls.Add(this.label2);
             this.tabEdit.Controls.Add(this.labelGroup);
-            this.tabEdit.Controls.Add(this.txtGroup);
             this.tabEdit.Controls.Add(this.removeButton);
             this.tabEdit.Controls.Add(this.saveButton);
             this.tabEdit.Controls.Add(this.txtPreis);
             this.tabEdit.Controls.Add(this.txtName);
+            this.tabEdit.Controls.Add(this.txtGroup);
             this.tabEdit.Controls.Add(this.dbList);
             this.tabEdit.Location = new System.Drawing.Point(4, 54);
             this.tabEdit.Name = "tabEdit";
@@ -826,6 +888,40 @@
             this.tabEdit.Text = "Bearbeiten";
             this.tabEdit.UseVisualStyleBackColor = true;
             // 
+            // btnDbPrev
+            // 
+            this.btnDbPrev.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
+            this.btnDbPrev.Location = new System.Drawing.Point(8, 480);
+            this.btnDbPrev.Name = "btnDbPrev";
+            this.btnDbPrev.Size = new System.Drawing.Size(100, 54);
+            this.btnDbPrev.TabIndex = 20;
+            this.btnDbPrev.Text = "?";
+            this.btnDbPrev.UseVisualStyleBackColor = true;
+            this.btnDbPrev.Visible = false;
+            this.btnDbPrev.Click += new System.EventHandler(this.btnDbPrev_Click);
+            // 
+            // labelDbPage
+            // 
+            this.labelDbPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.labelDbPage.Location = new System.Drawing.Point(110, 480);
+            this.labelDbPage.Name = "labelDbPage";
+            this.labelDbPage.Size = new System.Drawing.Size(212, 54);
+            this.labelDbPage.TabIndex = 21;
+            this.labelDbPage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelDbPage.Visible = false;
+            // 
+            // btnDbNext
+            // 
+            this.btnDbNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
+            this.btnDbNext.Location = new System.Drawing.Point(324, 480);
+            this.btnDbNext.Name = "btnDbNext";
+            this.btnDbNext.Size = new System.Drawing.Size(108, 54);
+            this.btnDbNext.TabIndex = 22;
+            this.btnDbNext.Text = "?";
+            this.btnDbNext.UseVisualStyleBackColor = true;
+            this.btnDbNext.Visible = false;
+            this.btnDbNext.Click += new System.EventHandler(this.btnDbNext_Click);
+            // 
             // piecePriceCheckbox
             // 
             this.piecePriceCheckbox.AutoSize = true;
@@ -833,7 +929,7 @@
             this.piecePriceCheckbox.Name = "piecePriceCheckbox";
             this.piecePriceCheckbox.Size = new System.Drawing.Size(145, 33);
             this.piecePriceCheckbox.TabIndex = 8;
-            this.piecePriceCheckbox.Text = "Stückpreis";
+            this.piecePriceCheckbox.Text = "St�ckpreis";
             this.piecePriceCheckbox.UseVisualStyleBackColor = true;
             this.piecePriceCheckbox.CheckedChanged += new System.EventHandler(this.piecePrice_CheckedChanged);
             // 
@@ -865,7 +961,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(59, 29);
             this.label2.TabIndex = 5;
-            this.label2.Text = "€/kg";
+            this.label2.Text = "�/kg";
             // 
             // labelGroup
             // 
@@ -876,17 +972,6 @@
             this.labelGroup.Size = new System.Drawing.Size(100, 29);
             this.labelGroup.TabIndex = 9;
             this.labelGroup.Text = "Gruppe:";
-            // 
-            // txtGroup
-            // 
-            this.txtGroup.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.txtGroup.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.txtGroup.ButtonWidth = 50;
-            this.txtGroup.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.txtGroup.Location = new System.Drawing.Point(542, 100);
-            this.txtGroup.Name = "txtGroup";
-            this.txtGroup.Size = new System.Drawing.Size(244, 37);
-            this.txtGroup.TabIndex = 10;
             // 
             // removeButton
             // 
@@ -916,17 +1001,6 @@
             this.txtPreis.Name = "txtPreis";
             this.txtPreis.Size = new System.Drawing.Size(114, 45);
             this.txtPreis.TabIndex = 3;
-            // 
-            // txtName
-            // 
-            this.txtName.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F);
-            this.txtName.Location = new System.Drawing.Point(436, 4);
-            this.txtName.Name = "txtName";
-            this.txtName.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.txtName.Size = new System.Drawing.Size(348, 45);
-            this.txtName.TabIndex = 2;
-            this.txtName.Text = "";
-            this.txtName.WordWrap = false;
             // 
             // dbList
             // 
@@ -964,107 +1038,32 @@
             // 
             this.colPiecePrice.Text = "pro";
             this.colPiecePrice.Width = 55;
-            // 
+            //
             // colGroup
-            // 
+            //
             this.colGroup.Text = "Gruppe";
             this.colGroup.Width = 110;
             //
-            // btnDbPrev
+            // txtName
             //
-            this.btnDbPrev.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.btnDbPrev.Location = new System.Drawing.Point(8, 480);
-            this.btnDbPrev.Name = "btnDbPrev";
-            this.btnDbPrev.Size = new System.Drawing.Size(100, 54);
-            this.btnDbPrev.TabIndex = 20;
-            this.btnDbPrev.Text = "◀";
-            this.btnDbPrev.UseVisualStyleBackColor = true;
-            this.btnDbPrev.Visible = false;
-            this.btnDbPrev.Click += new System.EventHandler(this.btnDbPrev_Click);
+            this.txtName.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F);
+            this.txtName.Location = new System.Drawing.Point(436, 4);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(348, 45);
+            this.txtName.TabIndex = 2;
+            this.txtName.Text = "";
             //
-            // labelDbPage
+            // txtGroup
             //
-            this.labelDbPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.labelDbPage.Location = new System.Drawing.Point(110, 480);
-            this.labelDbPage.Name = "labelDbPage";
-            this.labelDbPage.Size = new System.Drawing.Size(212, 54);
-            this.labelDbPage.TabIndex = 21;
-            this.labelDbPage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.labelDbPage.Visible = false;
-            //
-            // btnDbNext
-            //
-            this.btnDbNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.btnDbNext.Location = new System.Drawing.Point(324, 480);
-            this.btnDbNext.Name = "btnDbNext";
-            this.btnDbNext.Size = new System.Drawing.Size(108, 54);
-            this.btnDbNext.TabIndex = 22;
-            this.btnDbNext.Text = "▶";
-            this.btnDbNext.UseVisualStyleBackColor = true;
-            this.btnDbNext.Visible = false;
-            this.btnDbNext.Click += new System.EventHandler(this.btnDbNext_Click);
-            //
-            // btnHistPrev
-            //
-            this.btnHistPrev.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.btnHistPrev.Location = new System.Drawing.Point(6, 438);
-            this.btnHistPrev.Name = "btnHistPrev";
-            this.btnHistPrev.Size = new System.Drawing.Size(110, 50);
-            this.btnHistPrev.TabIndex = 10;
-            this.btnHistPrev.Text = "◀";
-            this.btnHistPrev.UseVisualStyleBackColor = true;
-            this.btnHistPrev.Click += new System.EventHandler(this.btnHistPrev_Click);
-            //
-            // labelHistPage
-            //
-            this.labelHistPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.labelHistPage.Location = new System.Drawing.Point(118, 438);
-            this.labelHistPage.Name = "labelHistPage";
-            this.labelHistPage.Size = new System.Drawing.Size(152, 50);
-            this.labelHistPage.TabIndex = 11;
-            this.labelHistPage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            //
-            // btnHistNext
-            //
-            this.btnHistNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.btnHistNext.Location = new System.Drawing.Point(272, 438);
-            this.btnHistNext.Name = "btnHistNext";
-            this.btnHistNext.Size = new System.Drawing.Size(114, 50);
-            this.btnHistNext.TabIndex = 12;
-            this.btnHistNext.Text = "▶";
-            this.btnHistNext.UseVisualStyleBackColor = true;
-            this.btnHistNext.Click += new System.EventHandler(this.btnHistNext_Click);
-            //
-            // btnHistDetailPrev
-            //
-            this.btnHistDetailPrev.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.btnHistDetailPrev.Location = new System.Drawing.Point(396, 374);
-            this.btnHistDetailPrev.Name = "btnHistDetailPrev";
-            this.btnHistDetailPrev.Size = new System.Drawing.Size(110, 46);
-            this.btnHistDetailPrev.TabIndex = 13;
-            this.btnHistDetailPrev.Text = "◀";
-            this.btnHistDetailPrev.UseVisualStyleBackColor = true;
-            this.btnHistDetailPrev.Click += new System.EventHandler(this.btnHistDetailPrev_Click);
-            //
-            // labelHistDetailPage
-            //
-            this.labelHistDetailPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.labelHistDetailPage.Location = new System.Drawing.Point(508, 374);
-            this.labelHistDetailPage.Name = "labelHistDetailPage";
-            this.labelHistDetailPage.Size = new System.Drawing.Size(170, 46);
-            this.labelHistDetailPage.TabIndex = 14;
-            this.labelHistDetailPage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            //
-            // btnHistDetailNext
-            //
-            this.btnHistDetailNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.btnHistDetailNext.Location = new System.Drawing.Point(680, 374);
-            this.btnHistDetailNext.Name = "btnHistDetailNext";
-            this.btnHistDetailNext.Size = new System.Drawing.Size(106, 46);
-            this.btnHistDetailNext.TabIndex = 15;
-            this.btnHistDetailNext.Text = "▶";
-            this.btnHistDetailNext.UseVisualStyleBackColor = true;
-            this.btnHistDetailNext.Click += new System.EventHandler(this.btnHistDetailNext_Click);
+            this.txtGroup.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txtGroup.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.txtGroup.ButtonWidth = 50;
+            this.txtGroup.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
+            this.txtGroup.FormattingEnabled = true;
+            this.txtGroup.Location = new System.Drawing.Point(542, 100);
+            this.txtGroup.Name = "txtGroup";
+            this.txtGroup.Size = new System.Drawing.Size(244, 37);
+            this.txtGroup.TabIndex = 10;
             //
             // tabDebug
             // 
@@ -1146,7 +1145,6 @@
         private System.Windows.Forms.ColumnHeader colProduct;
         private System.Windows.Forms.ColumnHeader colPrice;
         private System.Windows.Forms.TextBox txtPreis;
-        private WhitespaceTextBox txtName;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.Button removeButton;
@@ -1182,7 +1180,6 @@
         private System.Windows.Forms.ColumnHeader colPiecePrice;
         private System.Windows.Forms.ColumnHeader colGroup;
         private System.Windows.Forms.Label labelGroup;
-        private WideButtonComboBox txtGroup;
         private System.Windows.Forms.Button btnProductPrev;
         private System.Windows.Forms.Label labelPage;
         private System.Windows.Forms.Button btnProductNext;
@@ -1209,6 +1206,8 @@
         private System.Windows.Forms.Button btnHistDetailPrev;
         private System.Windows.Forms.Label labelHistDetailPage;
         private System.Windows.Forms.Button btnHistDetailNext;
+        private WideButtonComboBox txtGroup;
+        private WhitespaceTextBox txtName;
     }
 
 }

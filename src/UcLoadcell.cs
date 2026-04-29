@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MTT
+namespace MTTApp
 {
     public class UcLoadcell
     {

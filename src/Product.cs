@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MTT
+namespace MTTApp
 {
     internal class Product : IEquatable<Product>
     {

@@ -7,7 +7,7 @@ using LibUsbDotNet.Main;
 /// <summary>
 /// Summary description for Class1
 /// </summary>
-namespace MTT
+namespace MTTApp
 {
     public class Printer
     {

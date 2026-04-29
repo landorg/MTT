@@ -1,4 +1,4 @@
-﻿namespace MTT
+﻿namespace MTTApp
 {
     internal class Article
     {
