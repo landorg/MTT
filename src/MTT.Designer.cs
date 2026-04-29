@@ -1,4 +1,4 @@
-namespace MTTApp
+﻿namespace MTTApp
 {
 
     partial class MTT
@@ -76,7 +76,7 @@ namespace MTTApp
             this.labelPage = new System.Windows.Forms.Label();
             this.btnProductNext = new System.Windows.Forms.Button();
             this.delArticleButton = new System.Windows.Forms.Button();
-            this.printButton = new System.Windows.Forms.Button();
+            this.chkAutoPrint = new System.Windows.Forms.CheckBox();
             this.sumButton = new System.Windows.Forms.Button();
             this.addArticleButton = new System.Windows.Forms.Button();
             this.netLabel1 = new System.Windows.Forms.Label();
@@ -394,7 +394,7 @@ namespace MTTApp
             this.tabScale.Controls.Add(this.productButtonPanel);
             this.tabScale.Controls.Add(this.labelPage);
             this.tabScale.Controls.Add(this.delArticleButton);
-            this.tabScale.Controls.Add(this.printButton);
+            this.tabScale.Controls.Add(this.chkAutoPrint);
             this.tabScale.Controls.Add(this.sumButton);
             this.tabScale.Controls.Add(this.addArticleButton);
             this.tabScale.Controls.Add(this.netLabel1);
@@ -415,7 +415,7 @@ namespace MTTApp
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(26, 29);
             this.label15.TabIndex = 33;
-            this.label15.Text = "�";
+            this.label15.Text = "€";
             // 
             // label13
             // 
@@ -485,7 +485,7 @@ namespace MTTApp
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(26, 29);
             this.label5.TabIndex = 26;
-            this.label5.Text = "�";
+            this.label5.Text = "€";
             // 
             // label1
             // 
@@ -572,7 +572,7 @@ namespace MTTApp
             // 
             // a
             // 
-            this.a.Text = "�";
+            this.a.Text = "à";
             this.a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.a.Width = 79;
             // 
@@ -604,7 +604,7 @@ namespace MTTApp
             this.btnProductPrev.Name = "btnProductPrev";
             this.btnProductPrev.Size = new System.Drawing.Size(80, 43);
             this.btnProductPrev.TabIndex = 36;
-            this.btnProductPrev.Text = "?";
+            this.btnProductPrev.Text = "◄";
             this.btnProductPrev.UseVisualStyleBackColor = true;
             this.btnProductPrev.Visible = false;
             this.btnProductPrev.Click += new System.EventHandler(this.btnProductPrev_Click);
@@ -626,7 +626,7 @@ namespace MTTApp
             this.btnProductNext.Name = "btnProductNext";
             this.btnProductNext.Size = new System.Drawing.Size(78, 43);
             this.btnProductNext.TabIndex = 38;
-            this.btnProductNext.Text = "?";
+            this.btnProductNext.Text = "►";
             this.btnProductNext.UseVisualStyleBackColor = true;
             this.btnProductNext.Visible = false;
             this.btnProductNext.Click += new System.EventHandler(this.btnProductNext_Click);
@@ -637,19 +637,22 @@ namespace MTTApp
             this.delArticleButton.Name = "delArticleButton";
             this.delArticleButton.Size = new System.Drawing.Size(120, 78);
             this.delArticleButton.TabIndex = 5;
-            this.delArticleButton.Text = "l�schen";
+            this.delArticleButton.Text = "löschen";
             this.delArticleButton.UseVisualStyleBackColor = true;
             this.delArticleButton.Click += new System.EventHandler(this.delArticleButton_Click);
             // 
-            // printButton
+            // chkAutoPrint
             // 
-            this.printButton.Location = new System.Drawing.Point(130, 456);
-            this.printButton.Name = "printButton";
-            this.printButton.Size = new System.Drawing.Size(120, 78);
-            this.printButton.TabIndex = 40;
-            this.printButton.Text = "Drucken";
-            this.printButton.UseVisualStyleBackColor = true;
-            this.printButton.Click += new System.EventHandler(this.printButton_Click);
+            this.chkAutoPrint.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkAutoPrint.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.chkAutoPrint.Location = new System.Drawing.Point(130, 456);
+            this.chkAutoPrint.Name = "chkAutoPrint";
+            this.chkAutoPrint.Size = new System.Drawing.Size(120, 78);
+            this.chkAutoPrint.TabIndex = 40;
+            this.chkAutoPrint.Text = "Drucken";
+            this.chkAutoPrint.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkAutoPrint.UseVisualStyleBackColor = true;
+            this.chkAutoPrint.CheckedChanged += new System.EventHandler(this.chkAutoPrint_CheckedChanged);
             // 
             // sumButton
             // 
@@ -687,7 +690,7 @@ namespace MTTApp
             this.mwstLabel.Name = "mwstLabel";
             this.mwstLabel.Size = new System.Drawing.Size(101, 26);
             this.mwstLabel.TabIndex = 39;
-            this.mwstLabel.Text = "0,00 �";
+            this.mwstLabel.Text = "0,00 €";
             this.mwstLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // tabRechnungen
@@ -747,7 +750,7 @@ namespace MTTApp
             this.btnHistPrev.Name = "btnHistPrev";
             this.btnHistPrev.Size = new System.Drawing.Size(110, 50);
             this.btnHistPrev.TabIndex = 10;
-            this.btnHistPrev.Text = "?";
+            this.btnHistPrev.Text = "◀";
             this.btnHistPrev.UseVisualStyleBackColor = true;
             this.btnHistPrev.Click += new System.EventHandler(this.btnHistPrev_Click);
             // 
@@ -767,7 +770,7 @@ namespace MTTApp
             this.btnHistNext.Name = "btnHistNext";
             this.btnHistNext.Size = new System.Drawing.Size(114, 50);
             this.btnHistNext.TabIndex = 12;
-            this.btnHistNext.Text = "?";
+            this.btnHistNext.Text = "▶";
             this.btnHistNext.UseVisualStyleBackColor = true;
             this.btnHistNext.Click += new System.EventHandler(this.btnHistNext_Click);
             // 
@@ -805,7 +808,7 @@ namespace MTTApp
             // 
             // historyColA
             // 
-            this.historyColA.Text = "�";
+            this.historyColA.Text = "à";
             this.historyColA.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.historyColA.Width = 79;
             // 
@@ -822,7 +825,7 @@ namespace MTTApp
             this.btnHistDetailPrev.Name = "btnHistDetailPrev";
             this.btnHistDetailPrev.Size = new System.Drawing.Size(110, 46);
             this.btnHistDetailPrev.TabIndex = 13;
-            this.btnHistDetailPrev.Text = "?";
+            this.btnHistDetailPrev.Text = "◀";
             this.btnHistDetailPrev.UseVisualStyleBackColor = true;
             this.btnHistDetailPrev.Click += new System.EventHandler(this.btnHistDetailPrev_Click);
             // 
@@ -842,7 +845,7 @@ namespace MTTApp
             this.btnHistDetailNext.Name = "btnHistDetailNext";
             this.btnHistDetailNext.Size = new System.Drawing.Size(106, 46);
             this.btnHistDetailNext.TabIndex = 15;
-            this.btnHistDetailNext.Text = "?";
+            this.btnHistDetailNext.Text = "▶";
             this.btnHistDetailNext.UseVisualStyleBackColor = true;
             this.btnHistDetailNext.Click += new System.EventHandler(this.btnHistDetailNext_Click);
             // 
@@ -895,7 +898,7 @@ namespace MTTApp
             this.btnDbPrev.Name = "btnDbPrev";
             this.btnDbPrev.Size = new System.Drawing.Size(100, 54);
             this.btnDbPrev.TabIndex = 20;
-            this.btnDbPrev.Text = "?";
+            this.btnDbPrev.Text = "◀";
             this.btnDbPrev.UseVisualStyleBackColor = true;
             this.btnDbPrev.Visible = false;
             this.btnDbPrev.Click += new System.EventHandler(this.btnDbPrev_Click);
@@ -917,7 +920,7 @@ namespace MTTApp
             this.btnDbNext.Name = "btnDbNext";
             this.btnDbNext.Size = new System.Drawing.Size(108, 54);
             this.btnDbNext.TabIndex = 22;
-            this.btnDbNext.Text = "?";
+            this.btnDbNext.Text = "▶";
             this.btnDbNext.UseVisualStyleBackColor = true;
             this.btnDbNext.Visible = false;
             this.btnDbNext.Click += new System.EventHandler(this.btnDbNext_Click);
@@ -929,7 +932,7 @@ namespace MTTApp
             this.piecePriceCheckbox.Name = "piecePriceCheckbox";
             this.piecePriceCheckbox.Size = new System.Drawing.Size(145, 33);
             this.piecePriceCheckbox.TabIndex = 8;
-            this.piecePriceCheckbox.Text = "St�ckpreis";
+            this.piecePriceCheckbox.Text = "Stückpreis";
             this.piecePriceCheckbox.UseVisualStyleBackColor = true;
             this.piecePriceCheckbox.CheckedChanged += new System.EventHandler(this.piecePrice_CheckedChanged);
             // 
@@ -961,7 +964,7 @@ namespace MTTApp
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(59, 29);
             this.label2.TabIndex = 5;
-            this.label2.Text = "�/kg";
+            this.label2.Text = "€/kg";
             // 
             // labelGroup
             // 
@@ -1185,7 +1188,7 @@ namespace MTTApp
         private System.Windows.Forms.Button btnProductNext;
         private System.Windows.Forms.Label mwstLabelText;
         private System.Windows.Forms.Label mwstLabel;
-        private System.Windows.Forms.Button printButton;
+        private System.Windows.Forms.CheckBox chkAutoPrint;
         private System.Windows.Forms.TabPage tabRechnungen;
         private System.Windows.Forms.ListView historyList;
         private System.Windows.Forms.ColumnHeader historyColDate;

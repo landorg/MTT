@@ -69,6 +69,9 @@ namespace MTTApp
         {
             tabControl1.TabPages.Remove(tabDebug);
 
+            if (File.Exists(AutoPrintFile))
+                chkAutoPrint.Checked = bool.TryParse(File.ReadAllText(AutoPrintFile), out bool v) && v;
+
             DB.load();
             refreshDbList();
             refreshHistoryList();
@@ -600,14 +603,17 @@ namespace MTTApp
             base.OnPaint(e);
         }
 
-        private void printButton_Click(object sender, EventArgs e)
+        private static readonly string AutoPrintFile = "C:/MTT/autoPrint.txt";
+
+        private void chkAutoPrint_CheckedChanged(object sender, EventArgs e)
         {
-            if (reciept.articles.Count == 0) return;
-            Printer.Instance.PrintReciept(recieptList, reciept.sum, reciept.mwst);
+            File.WriteAllText(AutoPrintFile, chkAutoPrint.Checked.ToString());
         }
 
         private void sumButton_Click(object sender, EventArgs e)
         {
+            if (chkAutoPrint.Checked)
+                Printer.Instance.PrintReciept(recieptList, reciept.sum, reciept.mwst);
             reciept.save();
             reciept = new Reciept();
             refreshReciept();
