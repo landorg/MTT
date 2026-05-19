@@ -522,7 +522,7 @@ namespace MTTApp
                 if (netLabel1.InvokeRequired)
                 {
                     if (!IsHandleCreated) return;
-                    eventBox.BeginInvoke(new Action(() =>
+                    this.BeginInvoke(new Action(() =>
                     {
                         netLabel1.Text = netString;
                         netLabel2.Text = netString;
@@ -543,6 +543,33 @@ namespace MTTApp
                 this.logToBox($"Error setting weight: {ex.ToString()}");
                 //eventBox.Items.Insert(0, "Error: parsing weight to string");
                 //eventBox.Items.Insert(0, ex.Message);
+            }
+        }
+
+        internal void SetWeightError(string text)
+        {
+            try
+            {
+                if (netLabel1.InvokeRequired)
+                {
+                    if (!IsHandleCreated) return;
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        netLabel1.Text = text;
+                        netLabel2.Text = text;
+                        currentPriceLabel.Text = "0.00";
+                    }));
+                }
+                else
+                {
+                    netLabel1.Text = text;
+                    netLabel2.Text = text;
+                    currentPriceLabel.Text = "0.00";
+                }
+            }
+            catch (Exception ex)
+            {
+                this.logToBox($"Error setting weight error: {ex.ToString()}");
             }
         }
 

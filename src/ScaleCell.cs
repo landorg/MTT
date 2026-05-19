@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO.Ports;
 using System.IO;
 using LibUsbDotNet;
@@ -23,9 +23,9 @@ namespace MTTApp
         public static bool enabled = false;
         private static bool _initialized = false;
 
-        public static decimal grossWeight = -1; 
-        public static decimal netWeight = -1; 
-        public static decimal tareWeight = -1; 
+        public static decimal grossWeight = -1;
+        public static decimal netWeight = -1;
+        public static decimal tareWeight = -1;
 
         public static void init()
         {
@@ -39,7 +39,6 @@ namespace MTTApp
                 _serialPort.Handshake = Handshake.None;
                 _serialPort.DataReceived += new SerialDataReceivedEventHandler(sp_DataReceived);
                 _serialPort.Open();
-                //eventBox.Items.Insert(0, "Open serial scale port");
 
                 // Open jida board
                 var initializeStatus = JiddaWrapper.JidaDllInitialize();
@@ -86,7 +85,7 @@ namespace MTTApp
             {
                 // Stop weight reading
                 _timer.Stop();
-                _timer.Dispose();                              
+                _timer.Dispose();
 
                 // Close Jida
                 JiddaWrapper.JidaDllUninitialize();
@@ -98,20 +97,15 @@ namespace MTTApp
                 _serialPort.Dispose();
                 _serialPort.Close();
                 mtt.logToBox("Close serial scale port");
-                //eventBox.Items.Insert(0, "Close serial scale port");
-
-                //mtt.nullScaleBtn.Enabled = false;
-                //mtt.tareScaleBtn.Enabled = false;
-                //mtt.closeScaleBtn.Enabled = false;
-
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 mtt.logToBox($"Error when closing scale: {ex.Message}");
             }
         }
 
-        public static void nullIt() {
+        public static void nullIt()
+        {
             byte[] bytestosend = { 0x06, 0x5A, 0x0d, 0x0a };
             _serialPort.Write(bytestosend, 0, bytestosend.Length);
             mtt.logToBox("Set scale to null");
@@ -122,76 +116,64 @@ namespace MTTApp
             return System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator == "." ? value.Replace(',', '.') : value.Replace('.', ',');
         }
 
-
+        // Response format: SX  G      1.600 kg  N      1.600 kg  T      0.000 kg  (stable)
+        //                  SXD G      1.600 kg  N      1.600 kg  T      0.000 kg  (dynamic/instable)
+        //                  SXI   — invalid value
+        //                  SXI-  — underload (scale below zero range)
+        //                  SXI+  — overload
         private static void sp_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             int address = _serialPort.ReadByte();
             string data = _serialPort.ReadLine();
+
             if (data[0] == 'S')
             {
                 data = data.Substring(0, data.Length - 1);
-            } else { 
+            }
+            else
+            {
+                if (data.Length < 3) return;
                 data = data.Substring(1, data.Length - 2);
             }
-            // example string:
-            // SX  G      0.000 kg  N      0.000 kg  T      0.000 kg
-
-            //more info: https://www.waagen-forum.de/forum/forum/thread/7837-mettler-toledo-uc3-htt-p-mit-eigener-ansteuerung/ 
 
             mtt.logToBox(data);
 
-            //Weights w = null;
-
             try
             {
-                //int address = (byte) data.Substring(0, 1);
+                if (data.Length < 3) return;
                 string command = data.Substring(0, 3).Trim();
-                //mtt.logToBox($"Command: {command}");
 
-                bool instable = false;
-
-                if (command == "SXI")
+                if (command == "SX" || command == "SXD")
                 {
-                    mtt.logToBox("instable");
+                    bool instable = command == "SXD";
+                    var parts = System.Text.RegularExpressions.Regex.Split(data, @"\s+");
+                    if (parts.Length < 9) return;
+
+                    grossWeight = decimal.Parse(NormalizeDecimal(parts[2]));
+                    netWeight = decimal.Parse(NormalizeDecimal(parts[5]));
+                    tareWeight = decimal.Parse(NormalizeDecimal(parts[8]));
+
+                    mtt.SetWeights(netWeight, tareWeight, grossWeight, instable);
                 }
-                else
+                else if (command == "SXI")
                 {
-                    if (command == "SXD")
+                    if (data.Length > 3 && data[3] == '-')
                     {
-                        instable = true;
-
+                        mtt.logToBox("underload");
+                        mtt.SetWeightError("-");
                     }
-                    else if (command == "SX")
+                    else if (data.Length > 3 && data[3] == '+')
                     {
-
-                        //string netWeightString = System.Text.RegularExpressions.Regex.Split(data, @"\s+")[1];
-                        //mtt.logToBox($"netWeightString: {netWeightString}");
-                        //string tareWeightString = data.Substring(38, 16).Trim();
-                        //mtt.logToBox($"tareWeightString: {tareWeightString}");
-
-                        //if (netWeightString[0]!='N' || tareWeightString[0]!='T')
-                        //{
-                        //    throw new Exception("Parse error");
-                        //}
-
-                        string grossWeightString = System.Text.RegularExpressions.Regex.Split(data, @"\s+")[5];
-                        string netWeightString = System.Text.RegularExpressions.Regex.Split(data, @"\s+")[5];
-                        string tareWeightString = System.Text.RegularExpressions.Regex.Split(data, @"\s+")[8];
-
-                        netWeight = decimal.Parse(NormalizeDecimal(netWeightString));
-                        tareWeight = decimal.Parse(NormalizeDecimal(tareWeightString));
-                        grossWeight = decimal.Parse(NormalizeDecimal(grossWeightString));
-
-                        //w = new Weights(netWeight, tareWeight, grossWeight, instable);
-
-                        mtt.SetWeights(netWeight, tareWeight, grossWeight, instable);
+                        mtt.logToBox("overload");
+                        mtt.SetWeightError("+");
                     }
+                    else mtt.logToBox("invalid");
                 }
-
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 mtt.logToBox($"Error parsing weight: {ex.Message}");
             }
-
         }
 
         private static void timer_Tick(object sender, EventArgs e)
