@@ -98,13 +98,14 @@ namespace MTTApp
                 _serialPort.Close();
                 mtt.logToBox("Close serial scale port");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 mtt.logToBox($"Error when closing scale: {ex.Message}");
             }
         }
 
-        public static void nullIt() {
+        public static void nullIt()
+        {
             byte[] bytestosend = { 0x06, 0x5A, 0x0d, 0x0a };
             _serialPort.Write(bytestosend, 0, bytestosend.Length);
             mtt.logToBox("Set scale to null");
