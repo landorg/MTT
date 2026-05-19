@@ -91,7 +91,7 @@ namespace MTTApp
             ScaleCell.init();
 
             mwstLabelText.Cursor = Cursors.Hand;
-            mwstLabelText.Click += (s, ev) =>
+            mwstLabelText.Click += (s, e) =>
             {
                 reciept.mwstRate = reciept.mwstRate == 0.10m ? 0.13m : 0.10m;
                 reciept.RecalcMwst();

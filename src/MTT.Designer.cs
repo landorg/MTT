@@ -289,7 +289,7 @@
             this.mwstLabelText.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
             this.mwstLabelText.Location = new System.Drawing.Point(8, 413);
             this.mwstLabelText.Name = "mwstLabelText";
-            this.mwstLabelText.Size = new System.Drawing.Size(118, 41);
+            this.mwstLabelText.Size = new System.Drawing.Size(116, 41);
             this.mwstLabelText.TabIndex = 39;
             this.mwstLabelText.Text = "MwSt 10%:";
             this.mwstLabelText.UseVisualStyleBackColor = true;
@@ -447,11 +447,11 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.label13.Location = new System.Drawing.Point(199, 416);
+            this.label13.Location = new System.Drawing.Point(220, 415);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(96, 29);
+            this.label13.Size = new System.Drawing.Size(68, 29);
             this.label13.TabIndex = 32;
-            this.label13.Text = "Summe";
+            this.label13.Text = "Total";
             // 
             // sumLabel
             // 
@@ -687,10 +687,10 @@
             // 
             // mwstLabel
             // 
-            this.mwstLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
-            this.mwstLabel.Location = new System.Drawing.Point(85, 423);
+            this.mwstLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mwstLabel.Location = new System.Drawing.Point(130, 416);
             this.mwstLabel.Name = "mwstLabel";
-            this.mwstLabel.Size = new System.Drawing.Size(101, 26);
+            this.mwstLabel.Size = new System.Drawing.Size(84, 26);
             this.mwstLabel.TabIndex = 39;
             this.mwstLabel.Text = "0,00 €";
             this.mwstLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;

@@ -32,6 +32,7 @@ namespace MTTApp
             {
                 try
                 {
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11;
                     using (var wc = new WebClient())
                     {
                         wc.Headers.Add("User-Agent", "MTT-Updater");
