@@ -44,7 +44,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.tareLabel2 = new System.Windows.Forms.Label();
             this.netLabel2 = new System.Windows.Forms.Label();
-            this.mwstLabelText = new System.Windows.Forms.Label();
+            this.mwstLabelText = new System.Windows.Forms.Button();
             this.printerGroupBox = new System.Windows.Forms.GroupBox();
             this.feedLabelBtn = new System.Windows.Forms.Button();
             this.printTestLabelBtn = new System.Windows.Forms.Button();
@@ -52,6 +52,8 @@
             this.openPrinterBtn = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabScale = new System.Windows.Forms.TabPage();
+            this.btnProductPrev = new System.Windows.Forms.Button();
+            this.btnProductNext = new System.Windows.Forms.Button();
             this.label15 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.sumLabel = new System.Windows.Forms.Label();
@@ -72,9 +74,7 @@
             this.price = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.productGroupPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.productButtonPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnProductPrev = new System.Windows.Forms.Button();
             this.labelPage = new System.Windows.Forms.Label();
-            this.btnProductNext = new System.Windows.Forms.Button();
             this.delArticleButton = new System.Windows.Forms.Button();
             this.chkAutoPrint = new System.Windows.Forms.CheckBox();
             this.sumButton = new System.Windows.Forms.Button();
@@ -110,13 +110,13 @@
             this.removeButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.txtPreis = new System.Windows.Forms.TextBox();
+            this.txtName = new MTTApp.WhitespaceTextBox();
+            this.txtGroup = new MTTApp.WideButtonComboBox();
             this.dbList = new System.Windows.Forms.ListView();
             this.colProduct = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colPiecePrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colGroup = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.txtGroup = new WideButtonComboBox();
-            this.txtName = new WhitespaceTextBox();
             this.tabDebug = new System.Windows.Forms.TabPage();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.ucLoadcellBindingSource)).BeginInit();
@@ -285,12 +285,14 @@
             // 
             // mwstLabelText
             // 
+            this.mwstLabelText.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.mwstLabelText.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
-            this.mwstLabelText.Location = new System.Drawing.Point(8, 423);
+            this.mwstLabelText.Location = new System.Drawing.Point(8, 413);
             this.mwstLabelText.Name = "mwstLabelText";
-            this.mwstLabelText.Size = new System.Drawing.Size(101, 26);
+            this.mwstLabelText.Size = new System.Drawing.Size(118, 41);
             this.mwstLabelText.TabIndex = 39;
             this.mwstLabelText.Text = "MwSt 10%:";
+            this.mwstLabelText.UseVisualStyleBackColor = true;
             // 
             // printerGroupBox
             // 
@@ -406,6 +408,30 @@
             this.tabScale.TabIndex = 0;
             this.tabScale.Text = "Wiegen";
             this.tabScale.UseVisualStyleBackColor = true;
+            // 
+            // btnProductPrev
+            // 
+            this.btnProductPrev.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
+            this.btnProductPrev.Location = new System.Drawing.Point(396, 337);
+            this.btnProductPrev.Name = "btnProductPrev";
+            this.btnProductPrev.Size = new System.Drawing.Size(80, 43);
+            this.btnProductPrev.TabIndex = 36;
+            this.btnProductPrev.Text = "◄";
+            this.btnProductPrev.UseVisualStyleBackColor = true;
+            this.btnProductPrev.Visible = false;
+            this.btnProductPrev.Click += new System.EventHandler(this.btnProductPrev_Click);
+            // 
+            // btnProductNext
+            // 
+            this.btnProductNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
+            this.btnProductNext.Location = new System.Drawing.Point(708, 337);
+            this.btnProductNext.Name = "btnProductNext";
+            this.btnProductNext.Size = new System.Drawing.Size(78, 43);
+            this.btnProductNext.TabIndex = 38;
+            this.btnProductNext.Text = "►";
+            this.btnProductNext.UseVisualStyleBackColor = true;
+            this.btnProductNext.Visible = false;
+            this.btnProductNext.Click += new System.EventHandler(this.btnProductNext_Click);
             // 
             // label15
             // 
@@ -597,18 +623,6 @@
             this.productButtonPanel.Size = new System.Drawing.Size(390, 276);
             this.productButtonPanel.TabIndex = 35;
             // 
-            // btnProductPrev
-            // 
-            this.btnProductPrev.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
-            this.btnProductPrev.Location = new System.Drawing.Point(396, 337);
-            this.btnProductPrev.Name = "btnProductPrev";
-            this.btnProductPrev.Size = new System.Drawing.Size(80, 43);
-            this.btnProductPrev.TabIndex = 36;
-            this.btnProductPrev.Text = "◄";
-            this.btnProductPrev.UseVisualStyleBackColor = true;
-            this.btnProductPrev.Visible = false;
-            this.btnProductPrev.Click += new System.EventHandler(this.btnProductPrev_Click);
-            // 
             // labelPage
             // 
             this.labelPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
@@ -619,23 +633,11 @@
             this.labelPage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.labelPage.Visible = false;
             // 
-            // btnProductNext
-            // 
-            this.btnProductNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
-            this.btnProductNext.Location = new System.Drawing.Point(708, 337);
-            this.btnProductNext.Name = "btnProductNext";
-            this.btnProductNext.Size = new System.Drawing.Size(78, 43);
-            this.btnProductNext.TabIndex = 38;
-            this.btnProductNext.Text = "►";
-            this.btnProductNext.UseVisualStyleBackColor = true;
-            this.btnProductNext.Visible = false;
-            this.btnProductNext.Click += new System.EventHandler(this.btnProductNext_Click);
-            // 
             // delArticleButton
             // 
-            this.delArticleButton.Location = new System.Drawing.Point(6, 456);
+            this.delArticleButton.Location = new System.Drawing.Point(6, 468);
             this.delArticleButton.Name = "delArticleButton";
-            this.delArticleButton.Size = new System.Drawing.Size(120, 78);
+            this.delArticleButton.Size = new System.Drawing.Size(120, 66);
             this.delArticleButton.TabIndex = 5;
             this.delArticleButton.Text = "löschen";
             this.delArticleButton.UseVisualStyleBackColor = true;
@@ -645,9 +647,9 @@
             // 
             this.chkAutoPrint.Appearance = System.Windows.Forms.Appearance.Button;
             this.chkAutoPrint.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.chkAutoPrint.Location = new System.Drawing.Point(130, 456);
+            this.chkAutoPrint.Location = new System.Drawing.Point(130, 468);
             this.chkAutoPrint.Name = "chkAutoPrint";
-            this.chkAutoPrint.Size = new System.Drawing.Size(120, 78);
+            this.chkAutoPrint.Size = new System.Drawing.Size(120, 66);
             this.chkAutoPrint.TabIndex = 40;
             this.chkAutoPrint.Text = "Drucken";
             this.chkAutoPrint.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -656,9 +658,9 @@
             // 
             // sumButton
             // 
-            this.sumButton.Location = new System.Drawing.Point(254, 456);
+            this.sumButton.Location = new System.Drawing.Point(254, 468);
             this.sumButton.Name = "sumButton";
-            this.sumButton.Size = new System.Drawing.Size(138, 78);
+            this.sumButton.Size = new System.Drawing.Size(138, 66);
             this.sumButton.TabIndex = 4;
             this.sumButton.Text = "Abrechnen";
             this.sumButton.UseVisualStyleBackColor = true;
@@ -1005,6 +1007,29 @@
             this.txtPreis.Size = new System.Drawing.Size(114, 45);
             this.txtPreis.TabIndex = 3;
             // 
+            // txtName
+            // 
+            this.txtName.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F);
+            this.txtName.Location = new System.Drawing.Point(436, 4);
+            this.txtName.Name = "txtName";
+            this.txtName.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.txtName.Size = new System.Drawing.Size(348, 45);
+            this.txtName.TabIndex = 2;
+            this.txtName.Text = "";
+            this.txtName.WordWrap = false;
+            // 
+            // txtGroup
+            // 
+            this.txtGroup.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txtGroup.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.txtGroup.ButtonWidth = 50;
+            this.txtGroup.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
+            this.txtGroup.FormattingEnabled = true;
+            this.txtGroup.Location = new System.Drawing.Point(542, 100);
+            this.txtGroup.Name = "txtGroup";
+            this.txtGroup.Size = new System.Drawing.Size(244, 37);
+            this.txtGroup.TabIndex = 10;
+            // 
             // dbList
             // 
             this.dbList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -1041,33 +1066,12 @@
             // 
             this.colPiecePrice.Text = "pro";
             this.colPiecePrice.Width = 55;
-            //
+            // 
             // colGroup
-            //
+            // 
             this.colGroup.Text = "Gruppe";
             this.colGroup.Width = 110;
-            //
-            // txtName
-            //
-            this.txtName.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F);
-            this.txtName.Location = new System.Drawing.Point(436, 4);
-            this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(348, 45);
-            this.txtName.TabIndex = 2;
-            this.txtName.Text = "";
-            //
-            // txtGroup
-            //
-            this.txtGroup.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.txtGroup.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.txtGroup.ButtonWidth = 50;
-            this.txtGroup.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.txtGroup.FormattingEnabled = true;
-            this.txtGroup.Location = new System.Drawing.Point(542, 100);
-            this.txtGroup.Name = "txtGroup";
-            this.txtGroup.Size = new System.Drawing.Size(244, 37);
-            this.txtGroup.TabIndex = 10;
-            //
+            // 
             // tabDebug
             // 
             this.tabDebug.Controls.Add(this.eventBox);
@@ -1186,7 +1190,7 @@
         private System.Windows.Forms.Button btnProductPrev;
         private System.Windows.Forms.Label labelPage;
         private System.Windows.Forms.Button btnProductNext;
-        private System.Windows.Forms.Label mwstLabelText;
+        private System.Windows.Forms.Button mwstLabelText;
         private System.Windows.Forms.Label mwstLabel;
         private System.Windows.Forms.CheckBox chkAutoPrint;
         private System.Windows.Forms.TabPage tabRechnungen;
