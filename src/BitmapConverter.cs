@@ -10,7 +10,7 @@ namespace MTTApp
 {
     public static class BitmapConverter
     {
-        public static Bitmap DrawReciept(ListView table, decimal sum, decimal mwst, int length)
+        public static Bitmap DrawReciept(ListView table, decimal sum, decimal mwst, int length, decimal mwstRate = 0.10m)
         {
             int width = 432;
 
@@ -63,7 +63,7 @@ namespace MTTApp
             int yS = h - hS + 20;
             int yM = yS - 20;
 
-            objGraphics.DrawString($"MwSt 10%:   {mwst:0.00}€", defaultFont, new SolidBrush(Color.Black), x0 + w / 2, yM, centered);
+            objGraphics.DrawString($"MwSt {(int)(mwstRate * 100)}%:   {mwst:0.00}€", defaultFont, new SolidBrush(Color.Black), x0 + w / 2, yM, centered);
             objGraphics.DrawString($"Summe: {sum:0.00}€", sumFont, new SolidBrush(Color.Black), x0 + w / 2, yS + 15, centered);
 
             //objGraphics.DrawRectangle(

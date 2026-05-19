@@ -15,12 +15,18 @@ namespace MTTApp
         public List<Article> articles;
         public decimal sum;
         public decimal mwst;
+        public decimal mwstRate = 0.10m;
 
         public Reciept()
         {
             articles = new List<Article>();
             sum = 0;
             mwst = 0;
+        }
+
+        internal void RecalcMwst()
+        {
+            mwst = Decimal.Round(sum * mwstRate, 2);
         }
 
         private void reSum()
@@ -30,7 +36,7 @@ namespace MTTApp
             {
                 sum += b.price;
             }
-            mwst = Decimal.Round(sum * 0.1m, 2);
+            mwst = Decimal.Round(sum * mwstRate, 2);
         }
 
         internal void add(Article a)
@@ -109,7 +115,7 @@ namespace MTTApp
                     sw.WriteLine($"{datumCol};{a.product.name};{weightStr};{unit};{unitPrice};{linePrice}");
                     first = false;
                 }
-                sw.WriteLine($";MwSt 10%;;;;{Decimal.Round(mwst, 2).ToString("0.00").Replace('.', ',')}");
+                sw.WriteLine($";MwSt {(int)(mwstRate * 100)}%;;;;{Decimal.Round(mwst, 2).ToString("0.00").Replace('.', ',')}");
                 sw.WriteLine($";Summe;;;;{Decimal.Round(sum, 2).ToString("0.00").Replace('.', ',')}");
             }
         }

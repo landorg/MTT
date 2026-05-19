@@ -60,7 +60,7 @@ namespace MTTApp
         private void printTestLabelBtn_Click(object sender, EventArgs e)
         {
                 
-            Printer.Instance.PrintReciept(recieptList, reciept.sum, reciept.mwst);
+            Printer.Instance.PrintReciept(recieptList, reciept.sum, reciept.mwst, reciept.mwstRate);
         }
 
         private Reciept reciept = new Reciept();
@@ -89,6 +89,14 @@ namespace MTTApp
             refreshHistoryList();
 
             ScaleCell.init();
+
+            mwstLabelText.Cursor = Cursors.Hand;
+            mwstLabelText.Click += (s, ev) =>
+            {
+                reciept.mwstRate = reciept.mwstRate == 0.10m ? 0.13m : 0.10m;
+                reciept.RecalcMwst();
+                refreshReciept();
+            };
         }
         private void MTT_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -522,7 +530,7 @@ namespace MTTApp
                 if (netLabel1.InvokeRequired)
                 {
                     if (!IsHandleCreated) return;
-                    eventBox.BeginInvoke(new Action(() =>
+                    this.BeginInvoke(new Action(() =>
                     {
                         netLabel1.Text = netString;
                         netLabel2.Text = netString;
@@ -543,6 +551,33 @@ namespace MTTApp
                 this.logToBox($"Error setting weight: {ex.ToString()}");
                 //eventBox.Items.Insert(0, "Error: parsing weight to string");
                 //eventBox.Items.Insert(0, ex.Message);
+            }
+        }
+
+        internal void SetWeightError(string text)
+        {
+            try
+            {
+                if (netLabel1.InvokeRequired)
+                {
+                    if (!IsHandleCreated) return;
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        netLabel1.Text = text;
+                        netLabel2.Text = text;
+                        currentPriceLabel.Text = "0.00";
+                    }));
+                }
+                else
+                {
+                    netLabel1.Text = text;
+                    netLabel2.Text = text;
+                    currentPriceLabel.Text = "0.00";
+                }
+            }
+            catch (Exception ex)
+            {
+                this.logToBox($"Error setting weight error: {ex.ToString()}");
             }
         }
 
@@ -570,6 +605,7 @@ namespace MTTApp
             }
             sumLabel.Text = $"{Decimal.Round(reciept.sum, 2):0.00}";
             mwstLabel.Text = $"{Decimal.Round(reciept.mwst, 2):0.00} €";
+            mwstLabelText.Text = $"MwSt {(int)(reciept.mwstRate * 100)}%:";
         }
 
         private void recieptList_SelectedIndexChanged(object sender, EventArgs e)
@@ -623,7 +659,7 @@ namespace MTTApp
         private void sumButton_Click(object sender, EventArgs e)
         {
             if (chkAutoPrint.Checked)
-                Printer.Instance.PrintReciept(recieptList, reciept.sum, reciept.mwst);
+                Printer.Instance.PrintReciept(recieptList, reciept.sum, reciept.mwst, reciept.mwstRate);
             reciept.save();
             reciept = new Reciept();
             refreshReciept();
